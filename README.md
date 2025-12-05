@@ -66,3 +66,15 @@ gsutil cors get gs://spotted-train-221024.firebasestorage.app/
 - Bucket Storage: `gs://spotted-train-221024.firebasestorage.app/`.
 - Callable Cloud Function: `orchestrateStation` (region `europe-west1`).
 - Variabili runtime per il proxy CORS: `window.FORCE_STORAGE_PROXY`, `window.STORAGE_PROXY_BASE`, `VITE_FORCE_STORAGE_PROXY`, `VITE_STORAGE_PROXY_BASE`.
+
+## Avviare il sito (rapido)
+1. Installa Docker.
+2. Da root del repo lancia: `docker-compose -f docker-compose.dev.yml up`
+3. Apri `http://localhost:8080` per vedere il sito servito da Nginx con i file in `frontend/`.
+4. Se vuoi testare anche il proxy teleindicatori, in un secondo terminale:
+   ```bash
+   cd server
+   npm install   # prima volta
+   npm start     # espone http://127.0.0.1:4000/api/trains
+   ```
+   Puoi puntare il frontend al proxy impostando `window.STORAGE_PROXY_BASE` se ti serve un proxy per CORS.
