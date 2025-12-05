@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotted Train - Acquista Biglietti</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="app-body bg-light">
+  <nav class="topbar">
+    <div class="container d-flex align-items-center justify-content-between gap-3">
+      <a class="brand" href="/index.html"><span class="dot"></span>EAV Treni</a>
+      <div class="nav-links d-none d-md-flex">
+        <a href="/index.html">Ricerca orari</a>
+        <a href="/pages/tracking.html">Tracking live</a>
+        <a class="active" href="/pages/acquista.html">Biglietti</a>
+        <a href="/pages/avvisi.html">Avvisi</a>
+      </div>
+      <div class="nav-actions d-flex align-items-center gap-2">
+        <span class="pill pill-soft">Dati live</span>
+        <a class="btn btn-sm btn-outline-light" href="/pages/utente.html">Area utente</a>
+      </div>
+    </div>
+  </nav>
+  <main class="container page-shell py-4 py-md-5">
+    <section class="page-hero-card mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+      <div>
+        <p class="eyebrow mb-1">Ticketing</p>
+        <h1 class="h4 mb-1">Calcola e compra</h1>
+        <p class="muted mb-0">Stessa esperienza visiva delle altre pagine, con focus su biglietti e abbonamenti.</p>
+      </div>
+      <span class="pill pill-ghost">Prezzi live</span>
+    </section>
+    <section class="row g-3 align-items-stretch justify-content-center">
+      <div class="col-lg-10 col-xl-9">
+        <div class="card search-card h-100 shadow-lg surface-card">
+          <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+            <div>
+              <p class="eyebrow mb-1">Calcola tariffa</p>
+              <h1 class="h4 mb-1">Biglietti e abbonamenti</h1>
+              <p class="muted mb-0">Inserisci origine e destinazione: recuperiamo il prezzo e mostriamo le opzioni.</p>
+            </div>
+            <span class="pill pill-live">Live</span>
+          </div>
+
+          <form id="ticket-form" class="row g-3">
+            <div class="col-md-6">
+              <label for="origine" class="form-label fw-semibold small-label">Origine</label>
+              <input type="text" id="origine" name="origine" placeholder="Es. NAPOLI" list="station-options" required class="form-control input-glow">
+            </div>
+            <div class="col-md-6">
+              <label for="destinazione" class="form-label fw-semibold small-label">Destinazione</label>
+              <input type="text" id="destinazione" name="destinazione" placeholder="Es. AVERSA" list="station-options" required class="form-control input-glow">
+            </div>
+            <div class="col-12 d-flex align-items-center gap-2">
+              <input class="form-check-input" type="checkbox" id="ppn" name="ppn">
+              <label class="form-check-label" for="ppn">PPN (passaggio su Napoli)</label>
+            </div>
+            <div class="col-12 d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary px-4" id="ticket-submit">Calcola tariffa</button>
+            </div>
+          </form>
+
+          <div id="ticket-status" class="alert alert-info mt-3" role="status" aria-live="polite"></div>
+
+          <div id="ticket-result" class="tickets-layout mt-3"></div>
+        </div>
+      </div>
+    </section>
+    <datalist id="station-options"></datalist>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../js/tickets.js"></script>
+</body>
+</html>

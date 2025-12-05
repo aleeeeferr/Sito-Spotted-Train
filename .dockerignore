@@ -1,0 +1,10 @@
+frontend/node_modules
+frontend/dist
+frontend/.vite
+frontend/.DS_Store
+frontend/npm-debug.log
+api/__pycache__
+api/*.pyc
+api/.DS_Store
+api/.venv
+.git

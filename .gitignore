@@ -1,0 +1,24 @@
+# OS metadata
+.DS_Store
+
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment and editor settings
+.env
+.env.*
+.vscode/
+.idea/
+
+# Build output
+dist/
+build/
+coverage/
+
+# Local SDKs and configs not meant for source control
+google_cloud/
+.gcloud/

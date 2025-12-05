@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Area utente</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="app-body">
+  <nav class="topbar">
+    <div class="container d-flex align-items-center justify-content-between gap-3">
+      <a class="brand" href="/index.html"><span class="dot"></span>EAV Treni</a>
+      <div class="nav-links d-none d-md-flex">
+        <a href="/index.html">Ricerca orari</a>
+        <a href="/pages/tracking.html">Tracking live</a>
+        <a href="/pages/acquista.html">Biglietti</a>
+        <a href="/pages/avvisi.html">Avvisi</a>
+      </div>
+      <div class="nav-actions d-flex align-items-center gap-2">
+        <span class="pill pill-soft">Dati live</span>
+        <a class="btn btn-sm btn-outline-light" href="/pages/utente.html">Area utente</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container page page-shell pt-3 pb-5">
+    <section class="page-hero-card mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+      <div>
+        <p class="eyebrow mb-1">Area utente</p>
+        <h1 class="h4 mb-1">Profilo, notifiche e preferiti</h1>
+        <p class="muted mb-0">Interfaccia coerente con le altre pagine per gestire impostazioni e storico.</p>
+      </div>
+      <span class="pill pill-ghost">Demo locale</span>
+    </section>
+    <section class="row g-4 justify-content-center">
+      <div class="col-lg-10 col-xl-9">
+        <div class="card search-card h-100 shadow-lg">
+          <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+            <div>
+              <p class="eyebrow mb-1">Area utente</p>
+              <h1 class="h4 mb-1">Profilo e preferenze</h1>
+              <p class="muted mb-0">Gestisci dati, notifiche e preferiti. Salviamo tutto in locale per questa demo.</p>
+            </div>
+            <span class="pill pill-live">Local</span>
+          </div>
+
+          <form id="user-profile-form" class="row g-3 user-grid">
+            <div class="col-md-6">
+              <label for="user-name" class="form-label fw-semibold small-label">Nome</label>
+              <input type="text" id="user-name" class="form-control input-glow" placeholder="Es. Mario Rossi">
+            </div>
+            <div class="col-md-6">
+              <label for="user-email" class="form-label fw-semibold small-label">Email</label>
+              <input type="email" id="user-email" class="form-control input-glow" placeholder="nome@email.com">
+            </div>
+            <div class="col-md-4">
+              <label for="user-lang" class="form-label fw-semibold small-label">Lingua</label>
+              <select id="user-lang" class="form-select input-glow">
+                <option value="it">Italiano</option>
+                <option value="en">English</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="user-theme" class="form-label fw-semibold small-label">Tema</label>
+              <select id="user-theme" class="form-select input-glow">
+                <option value="auto">Automatico</option>
+                <option value="light">Chiaro</option>
+                <option value="dark">Scuro</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="user-home" class="form-label fw-semibold small-label">Stazione preferita</label>
+              <input type="text" id="user-home" class="form-control input-glow" placeholder="Es. Napoli Garibaldi">
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-semibold small-label">Notifiche</label>
+              <div class="toggle-row">
+                <label class="toggle">
+                  <input type="checkbox" id="notif-ritardi">
+                  <span class="toggle-slider"></span>
+                  <span class="toggle-label">Ritardi / Soppressioni</span>
+                </label>
+                <label class="toggle">
+                  <input type="checkbox" id="notif-scadenze">
+                  <span class="toggle-slider"></span>
+                  <span class="toggle-label">Promemoria abbonamento</span>
+                </label>
+                <label class="toggle">
+                  <input type="checkbox" id="notif-mail">
+                  <span class="toggle-slider"></span>
+                  <span class="toggle-label">Email riepilogo</span>
+                </label>
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="user-favs" class="form-label fw-semibold small-label">Linee / stazioni preferite</label>
+              <input type="text" id="user-favs" class="form-control input-glow" placeholder="Es. L1 Napoli-Sorrento; NA5" />
+              <div class="form-text">Separate da punto e virgola per salvare più preferiti.</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="row g-4 mt-2 justify-content-center">
+      <div class="col-lg-10 col-xl-9">
+        <div class="card panel h-100">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow mb-1">Biglietti e abbonamenti</p>
+              <h3 class="h5 mb-0">Storico rapido</h3>
+              <small class="text-muted">Dati demo caricati localmente</small>
+            </div>
+          </div>
+          <div class="ticket-history" id="ticket-history"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="row g-4 mt-2 justify-content-center">
+      <div class="col-lg-10 col-xl-9">
+        <div class="card panel h-100">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow mb-1">Tracking salvati</p>
+              <h3 class="h5 mb-0">Ultime ricerche</h3>
+            </div>
+          </div>
+          <div class="tag-list" id="tracking-saved">Nessun tracking salvato.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../js/user.js"></script>
+</body>
+</html>
