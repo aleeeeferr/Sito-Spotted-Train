@@ -1,85 +1,68 @@
 # Sito-Spotted-Train-Demo
 
-## Spotted Train – Appunti rapidi (Firebase Storage + CORS + App Check)
+Demo statica di Spotted Train: orari e avvisi letti da Firebase (Storage + Firestore), aggiornamento live tramite una Cloud Function, e un piccolo proxy Node per i teleindicatori EAV come fallback.
 
-Repo: static frontend che legge file JSON da Firebase Storage e usa alcune callable Functions.
+## Architettura in breve
+- Frontend statico in `frontend/`, servibile con Nginx (`docker-compose.dev.yml`) o con qualsiasi web server.
+- Firebase Storage: bucket `spotted-train-221024.firebasestorage.app` con `manifest.json`, `meta/station_data.json` e per ogni stazione `stations/<id>/departures.json`, `_live.json`, `_live_arrivals.json`.
+- Cloud Functions: callable `orchestrateStation` (region `europe-west1`) che forza l'aggiornamento dei file live della stazione prima di leggerli.
+- Firestore: collezione `avvisi` (documento `avvisi/latest` come fonte principale) per gli avvisi pubblici.
+- App Check: reCAPTCHA V3 in produzione, token di debug attivato automaticamente su `localhost`.
+- Proxy opzionale in `server/`: espone `/api/trains` per leggere i teleindicatori EAV e fornire un JSON pronto all'uso (con fallback simulato).
+- Tariffe statiche in `frontend/js/tariffs.js`, generate da `scripts/generate_tariffs.py` a partire da `frontend/tariffario/schema_tariffario.xlsx`.
 
-## Cosa succede nel frontend
-- I file statici stanno in `frontend/` e vengono serviti con Nginx (docker-compose.dev o build Vite).
-- Gli script principali che parlano con Firebase Storage:
-  - `frontend/js/stationsMeta.js` (demo selezione stazioni)
-  - `frontend/js/tracking.js` (tracking live)
-  - `frontend/js/firebaseApi.js` (API condivise per departures/arrivals)
-  - `frontend/js/home.js` (home semplice)
-- Tutti usano `frontend/js/storageProxy.js` per fare fetch ai file di Storage. Di default il proxy è DISATTIVATO: le fetch vanno dirette alla URL firmata di Firebase Storage. Puoi forzare il proxy (solo per debug CORS) con `window.FORCE_STORAGE_PROXY=true` o `VITE_FORCE_STORAGE_PROXY=true` e cambiare base del proxy con `window.STORAGE_PROXY_BASE` o `VITE_STORAGE_PROXY_BASE`.
-- App Check:
-  - In dev (localhost) l’app imposta `self.FIREBASE_APPCHECK_DEBUG_TOKEN` usando `VITE_APPCHECK_DEBUG_TOKEN` (da `.env.development`) oppure `window.APP_CHECK_DEBUG_TOKEN`.
-  - In prod nessun debug token: App Check usa reCAPTCHA V3.
-- Le fetch ai file Storage funzionano perché ogni file ha un download token (`token=...`) e la SDK genera un URL firmato con `getDownloadURL`.
+## Flussi dati principali
+### Stazioni
+`fetchStations()` (in `frontend/js/firebaseApi.js`) legge `manifest.json` dal bucket, risolve i nomi delle stazioni da `meta/station_data.json` e popola i menu a tendina.
 
-## CORS su Firebase Storage
-Perché serve: le fetch dal browser devono ricevere `Access-Control-Allow-Origin` dal bucket. Se manca, il browser blocca la risposta.
+### Partenze e arrivi live
+- `fetchDepartures(stationId, { destinationId })` chiama `orchestrateStation` per forzare la generazione dei file live, poi scarica `stations/<id>/departures.json` (cache) e `stations/<id>/_live.json` (live, opzionale). I dati vengono normalizzati e uniti; l'interfaccia mostra sia la sezione Live sia Cache con etichette chiare.
+- `storageProxy.js` gestisce il CORS su Storage: di default prova la fetch diretta; se fallisce per CORS o se forzato con `VITE_FORCE_STORAGE_PROXY` / `window.FORCE_STORAGE_PROXY`, usa un proxy (AllOrigins o quello definito da `VITE_STORAGE_PROXY_BASE` / `window.STORAGE_PROXY_BASE`).
 
-Bucket di progetto: `gs://spotted-train-221024.firebasestorage.app/`
+### Tracking in tempo reale
+`frontend/js/tracking.js` legge `_live.json` e `_live_arrivals.json` per la stazione selezionata e ricostruisce la tratta. Usa:
+- App Check reCAPTCHA V3 (chiave in codice) con token di debug su `localhost` da `VITE_APPCHECK_DEBUG_TOKEN` o `window.APP_CHECK_DEBUG_TOKEN`.
+- Tabelle locali di mapping linea/stazione per collegare i codici EAV alle stazioni leggibili.
 
-Policy consigliata (già nel repo come `cors.json`):
-```json
-[
-  {
-    "origin": [
-      "http://localhost:5173",
-      "http://localhost:8080",
-      "https://spotted-train-221024.web.app",
-      "https://spotted-train-221024.firebaseapp.com",
-      "*"
-    ],
-    "method": ["GET", "HEAD", "OPTIONS"],
-    "responseHeader": ["Content-Type", "Access-Control-Allow-Origin"],
-    "maxAgeSeconds": 3600
-  }
-]
+### Avvisi
+`fetchAlerts()` legge `avvisi/latest` su Firestore; se il documento manca, fa fallback alla collezione `avvisi` intera. I risultati popolano `frontend/pages/avvisi.html`.
+
+### Tariffe
+`frontend/js/tariffs.js` contiene il tariffario precompilato. Se modifichi `frontend/tariffario/schema_tariffario.xlsx`, rigenera con:
+```bash
+python scripts/generate_tariffs.py
 ```
+e committa il nuovo file JS.
 
-Come applicarla:
+### Proxy teleindicatori EAV
+`server/index.js` espone:
+- `GET /healthz`
+- `GET /api/trains?stazione=<id>&tipo=P|A` (P=partenze, A=arrivi). Effettua un POST a `https://example.com/teleindicatori/ws_getData.php`, estrae i treni dalla tabella HTML e restituisce JSON. Se il feed è vuoto o in errore, genera un elenco realistico di fallback.
+
+Avvio rapido del proxy:
+```bash
+cd server
+npm install   # se necessario
+npm start     # ascolta su http://127.0.0.1:4000
+```
+Il frontend può puntare qui impostando `window.STORAGE_PROXY_BASE` se vuoi testare fetch via proxy per CORS.
+
+## CORS e App Check su Firebase Storage
+- Applica la policy CORS del file `cors.json` al bucket `spotted-train-221024.firebasestorage.app`:
 ```bash
 gcloud auth login
 gcloud config set project spotted-train-221024
 gsutil cors set cors.json gs://spotted-train-221024.firebasestorage.app/
 gsutil cors get gs://spotted-train-221024.firebasestorage.app/
 ```
-Attendere qualche minuto perché la policy sia visibile.
+- In produzione App Check usa reCAPTCHA V3. In sviluppo su `localhost` il token di debug viene applicato automaticamente se presenti `VITE_APPCHECK_DEBUG_TOKEN` o `window.APP_CHECK_DEBUG_TOKEN`.
 
-## Come funzionano le fetch in JS
-1) Inizializzazione Firebase: ogni modulo importa la SDK da CDN e crea l’app con `firebaseConfig`.
-2) App Check: se sei su localhost, setta `FIREBASE_APPCHECK_DEBUG_TOKEN` prima di `initializeAppCheck`. Questo fa emettere token debug per Storage/Functions.
-3) Download file:
-   - La SDK `getDownloadURL(ref(storage, "meta/station_data.json"))` produce una URL firmata con query `token=...`.
-   - `fetchStorage(url)` esegue la fetch con `cache: "no-store"`. Se hai forzato il proxy, incapsula la URL; altrimenti va diretta.
-4) Callable Functions: in `stationsMeta.js` e `firebaseApi.js` c’è `orchestrateStation` chiamato via `httpsCallable`. Anche qui App Check applica la protezione; in dev il token debug evita blocchi.
+## Come provarlo in locale
+- Frontend statico: `docker-compose -f docker-compose.dev.yml up` e apri `http://localhost:8080` (serve i file di `frontend/` con Nginx).
+- Proxy teleindicatori (opzionale): avvialo come sopra e punta il frontend all'endpoint se vuoi testare dati live o fallback.
+- Nessuna build Vite richiesta: gli asset JS/CSS sono già pronti e caricati via CDN (Firebase SDK).
 
-## Variabili utili
-- `VITE_APPCHECK_DEBUG_TOKEN` (in `.env.development`): token debug App Check per dev.
-- `VITE_FORCE_STORAGE_PROXY` (opzionale): se `true` forza l’uso del proxy CORS; di default è `false` in locale perché il bucket ha CORS.
-- `VITE_STORAGE_PROXY_BASE` (opzionale): base del proxy CORS (es. `https://api.allorigins.win/raw?url=`).
-- `window.FORCE_STORAGE_PROXY` / `window.STORAGE_PROXY_BASE`: override a runtime per il proxy.
-
-## Avvio rapido con Vite (porta fissa 5173)
-Porta configurata in `frontend/vite.config.js` con `strictPort: true` (se 5173 è occupata, Vite fallisce invece di cambiare porta).
-```bash
-cd frontend
-npm install            # solo la prima volta
-npm run local:vite     # serve su http://localhost:5173
-```
-Interrompi con Ctrl+C.
-
-## Uso rapido in locale
-```bash
-cd frontend
-npm run local          # alza nginx statico su :8080 via docker-compose.dev
-```
-Poi apri `http://localhost:8080`. App Check debug si attiva da solo grazie al token in `.env.development`.
-
-## Quando vedi ancora CORS
-- Verifica di aver applicato la CORS policy sul bucket corretto.
-- Assicurati che la URL usata sia `https://firebasestorage.googleapis.com/v0/b/spotted-train-221024.firebasestorage.app/...`.
-- In dev ora il proxy non è forzato: abilitalo con `VITE_FORCE_STORAGE_PROXY=true` solo se il bucket non risponde con CORS. Se il proxy AllOrigins è down, imposta `VITE_STORAGE_PROXY_BASE` (o `window.STORAGE_PROXY_BASE`) verso un proxy diverso.
+## Note utili
+- Bucket Storage: `gs://spotted-train-221024.firebasestorage.app/`.
+- Callable Cloud Function: `orchestrateStation` (region `europe-west1`).
+- Variabili runtime per il proxy CORS: `window.FORCE_STORAGE_PROXY`, `window.STORAGE_PROXY_BASE`, `VITE_FORCE_STORAGE_PROXY`, `VITE_STORAGE_PROXY_BASE`.
