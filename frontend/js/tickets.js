@@ -154,6 +154,7 @@ const cartState = {
 };
 let lastTrip = { origine: "", destinazione: "" };
 let pendingTrip = { origine: "", destinazione: "" };
+const WALLET_STORAGE_KEY = "spotted-demo-wallet";
 
 if (paymentForm) {
   paymentForm.addEventListener("submit", handlePaymentSubmit);
@@ -357,6 +358,79 @@ function formatValue(value) {
   if (value === null || value === undefined) return "-";
   if (typeof value === "object") return JSON.stringify(value);
   return value;
+}
+
+function loadWallet() {
+  try {
+    const raw = localStorage.getItem(WALLET_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (err) {
+    console.warn("Impossibile leggere il wallet locale:", err);
+    return [];
+  }
+}
+
+function saveWallet(entries = []) {
+  try {
+    localStorage.setItem(WALLET_STORAGE_KEY, JSON.stringify(entries));
+  } catch (err) {
+    console.warn("Impossibile salvare il wallet locale:", err);
+  }
+}
+
+function addTicketsToWallet(items = []) {
+  if (!items.length) return;
+  const wallet = loadWallet();
+  const purchaseAt = Date.now();
+  const routeLabel = formatRouteLabel();
+  const newEntries = items.map((item) => {
+    const id = `demo-${purchaseAt}-${Math.random().toString(16).slice(2, 8)}`;
+    const qrPayload = `${item.label}|${item.variant}|${item.tariff}|${purchaseAt}`;
+    return {
+      id,
+      label: item.label,
+      variant: item.variant,
+      scope: item.scope,
+      tariff: item.tariff,
+      price: item.price,
+      origin: item.origine || routeLabel.split("→")[0]?.trim() || "",
+      destination: item.destinazione || routeLabel.split("→")[1]?.trim() || "",
+      purchaseAt,
+      qr: generateFakeQr(qrPayload),
+      demo: false,
+    };
+  });
+  const merged = [...newEntries, ...wallet].slice(0, 25);
+  saveWallet(merged);
+}
+
+function generateFakeQr(text = "DEMO") {
+  const size = 240;
+  const cells = 18;
+  const cell = size / cells;
+  let rects = "";
+  let seed = 0;
+  for (let i = 0; i < text.length; i += 1) seed += text.charCodeAt(i);
+  for (let y = 0; y < cells; y += 1) {
+    for (let x = 0; x < cells; x += 1) {
+      const noise = Math.sin(x * 37 + y * 71 + seed) * 10000;
+      const on = Math.abs(noise % 1) > 0.55;
+      if (on || (x < 3 && y < 3) || (x > cells - 4 && y < 3) || (x < 3 && y > cells - 4)) {
+        rects += `<rect x="${x * cell}" y="${y * cell}" width="${cell}" height="${cell}" fill="${on ? "#0f172a" : "#0f172a"}" />`;
+      }
+    }
+  }
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+      <rect width="100%" height="100%" fill="#fff"/>
+      ${rects}
+      <rect x="0" y="0" width="${size}" height="${size}" fill="none" stroke="#0f172a" stroke-width="6" rx="16" ry="16"/>
+      <text x="50%" y="50%" text-anchor="middle" fill="#22c55e" font-size="32" font-family="Inter, Arial, sans-serif" dy="12">DEMO</text>
+    </svg>
+  `;
+  return `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svg)))}`;
 }
 
 function escapeHtml(str = "") {
@@ -586,6 +660,7 @@ function renderCategoryTabs(scope) {
 function renderEntryCard(scopeKey, entry, isActive, exclusive, tariffCode) {
   const variants = buildVariants(entry.data);
   if (!variants.length) return "";
+  const variantGridClass = variants.length === 2 ? " ticket-variant-grid--duo" : "";
 
   const classes = ["ticket-detail-card"];
   if (exclusive) {
@@ -601,7 +676,7 @@ function renderEntryCard(scopeKey, entry, isActive, exclusive, tariffCode) {
         <p class="ticket-detail-tag">${scopeKey === "passes" ? "ABBONAMENTO" : "BIGLIETTO"}</p>
         <h5>${entry.label}</h5>
       </header>
-      <div class="ticket-variant-grid">
+      <div class="ticket-variant-grid${variantGridClass}">
         ${variants
           .map((variant) => renderVariantCard({ scopeKey, entry, variant, tariffCode }))
           .join("")}
@@ -673,7 +748,7 @@ function normalizeStationInput(value) {
 
 function handleAddToCart(button) {
   const price = Number(button.getAttribute("data-price"));
-  if (!Number.isFinite(price)) return;
+  const priceValue = Number.isFinite(price) ? price : 0;
 
   const item = {
     tariff: button.getAttribute("data-tariff") || "",
@@ -681,14 +756,22 @@ function handleAddToCart(button) {
     category: button.getAttribute("data-category") || "",
     label: button.getAttribute("data-label") || "",
     variant: button.getAttribute("data-variant") || "",
-    price,
+    price: priceValue,
+    priceFormatted: formatEuroValue(priceValue),
     origine: lastTrip.origine,
     destinazione: lastTrip.destinazione,
+    timestamp: new Date().toISOString(),
   };
 
-  cartState.items.push(item);
-  renderCart();
-  renderPreview(item);
+  addTicketsToWallet([item]);
+
+  try {
+    sessionStorage.setItem("spotted-last-ticket", JSON.stringify(item));
+  } catch (error) {
+    console.warn("Impossibile salvare il ticket in sessione", error);
+  }
+
+  window.location.href = "/pages/biglietto-successo.html";
 }
 
 function handleRemoveFromCart(index) {
@@ -838,7 +921,9 @@ async function handlePaymentSubmit(event) {
   // Simulazione di una chiamata verso il backend / Firebase per registrare il pagamento
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
-  setPaymentFeedback("Pagamento registrato! Invio ricevuta in corso...", "success");
+  addTicketsToWallet(cartState.items);
+
+  setPaymentFeedback("Pagamento registrato! Ticket demo salvati nell'area utente.", "success");
 
   cartState.items = [];
   renderCart();

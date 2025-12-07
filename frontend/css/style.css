@@ -952,11 +952,11 @@ a {
 }
 
 .ticket-detail-card {
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e4e9ff;
   border-radius: 16px;
-  padding: 14px;
-  background: #fff;
-  box-shadow: 0 12px 30px -22px rgba(15, 23, 42, 0.4);
+  padding: 18px;
+  background: #f7f9ff;
+  box-shadow: 0 14px 36px -26px rgba(15, 23, 42, 0.4);
 }
 
 .ticket-detail-card--exclusive {
@@ -975,32 +975,43 @@ a {
 
 .ticket-detail-tag {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   letter-spacing: 0.1em;
   color: #94a3b8;
   text-transform: uppercase;
 }
 
 .ticket-detail-card h5 {
-  margin: 4px 0 10px;
-  font-size: 1.05rem;
+  margin: 2px 0 14px;
+  font-size: 1.1rem;
   color: #0f172a;
 }
 
 .ticket-variant-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.ticket-variant-grid--duo {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+@media (min-width: 600px) {
+  .ticket-variant-grid--duo {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .ticket-variant-card {
   border: 1px solid #e2e8f0;
   border-radius: 14px;
-  padding: 12px;
-  background: #f9fbff;
+  padding: 14px 16px;
+  background: #fff;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  box-shadow: 0 10px 28px -22px rgba(15, 23, 42, 0.35);
 }
 
 .ticket-variant-label {
@@ -1013,7 +1024,7 @@ a {
 
 .ticket-variant-price {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: #0f172a;
 }
@@ -1022,10 +1033,11 @@ a {
   margin-top: auto;
   border: none;
   border-radius: 12px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   background: #22c55e;
   color: #fff;
   font-weight: 700;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
@@ -1102,6 +1114,99 @@ a {
   gap: 10px;
 }
 
+.wallet-card {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 16px;
+  padding: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f7f9ff 0%, #ffffff 70%);
+  box-shadow: 0 14px 32px -26px rgba(15, 23, 42, 0.35);
+}
+
+.wallet-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wallet-eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.wallet-title {
+  margin: 0;
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.wallet-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.wallet-route {
+  margin: 4px 0;
+  color: #334155;
+  font-weight: 600;
+}
+
+.wallet-footer {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.wallet-price {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.wallet-date {
+  color: #475569;
+  font-weight: 600;
+}
+
+.wallet-qr {
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.wallet-qr img,
+.wallet-qr-placeholder {
+  width: 150px;
+  height: 150px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  object-fit: contain;
+  padding: 6px;
+}
+
+.wallet-qr-placeholder {
+  display: grid;
+  place-items: center;
+  color: #334155;
+  font-weight: 700;
+}
+
+.wallet-qr-caption {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
 .history-card {
   display: grid;
   grid-template-columns: 1fr auto auto;
@@ -1136,5 +1241,14 @@ a {
   .search-card,
   .hero-card {
     box-shadow: 0 16px 40px -32px rgba(15, 23, 42, 0.7);
+  }
+}
+
+@media (max-width: 640px) {
+  .wallet-card {
+    grid-template-columns: 1fr;
+  }
+  .wallet-qr {
+    justify-self: start;
   }
 }
