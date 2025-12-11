@@ -6,6 +6,7 @@
   <title>Tariffe EAV</title>
   <link rel="stylesheet" href="../css/static.css" />
   <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/nav-links.js" defer></script>
 </head>
 <body class="app-body">
   <nav class="topbar">
@@ -14,6 +15,7 @@
       <div class="nav-links d-none d-md-flex">
         <a href="/index.html">Ricerca orari</a>
         <a href="/pages/tracking.html">Tracking live</a>
+        <a href="/pages/mappa.html">Mappa linee</a>
         <a href="/pages/acquista.html">Biglietti</a>
         <a href="/pages/avvisi.html">Avvisi</a>
       </div>
@@ -30,18 +32,52 @@
         <p class="eyebrow mb-1">Tariffe</p>
         <h1 class="h4 mb-1">Panoramica prezzi</h1>
         <p class="muted mb-0">Stile allineato alle altre pagine, con importi di riferimento aggiornati.</p>
+        <div class="d-flex align-items-center gap-2 flex-wrap mt-2">
+          <span class="pill-contrast is-ghost">Tabella TARIFFS</span>
+          <span class="pill-contrast is-ghost">Ricerca istantanea</span>
+        </div>
+        <div class="list-soft mt-2">
+          <div class="item">
+            <span class="meta-chip text-muted">Fonte</span>
+            <span class="small text-muted">Tabella static disponibile in frontend/js/tariffs.js.</span>
+          </div>
+          <div class="item">
+            <span class="meta-chip text-muted">Ricerca</span>
+            <span class="small text-muted">Digita parte del codice per filtrare subito la lista.</span>
+          </div>
+        </div>
       </div>
-      <span class="pill pill-ghost">Statico</span>
+      <div class="hero-kpis">
+        <div class="hero-kpi">
+          <small>Titoli</small>
+          <strong>Biglietti</strong>
+          <div class="muted small">Importi di riferimento</div>
+        </div>
+        <div class="hero-kpi">
+          <small>Abbonamenti</small>
+          <strong>Inclusi</strong>
+          <div class="muted small">Per ogni codice</div>
+        </div>
+      </div>
     </section>
 
-    <section class="tariffe-static">
-      <header class="tariffe-static-header">
-        <h3>Titoli disponibili</h3>
-        <p>
-          Questi importi vengono aggiornati direttamente dal Consorzio Unico Campania. Li riportiamo qui come riferimento rapido,
-          proprio come nella pagina ufficiale: scegli il titolo più adatto dopo aver ricavato la sigla tariffaria con il form qui sopra.
-        </p>
-      </header>
+    <section class="static-card">
+      <div class="tariff-toolbar mb-2">
+        <div>
+          <p class="eyebrow mb-1">Catalogo tariffe</p>
+          <h3 class="h5 mb-1">Ricerca rapida</h3>
+          <p class="section-subtitle">Digita il codice (es. U1, AC1) o una parte del nome.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <input id="tariff-search" class="form-control input-glow" type="search" placeholder="Cerca codice tariffa">
+          <span class="pill pill-soft" id="tariff-count">0 tariffe</span>
+        </div>
+      </div>
+      <p class="tariff-note mb-3">Questi importi vengono aggiornati dal Consorzio Unico Campania. Li riportiamo come riferimento rapido: trova il codice e scegli il titolo più adatto.</p>
+      <div id="tariff-list" class="tariff-list"></div>
+    </section>
+
+  </main>
 
   <script type="module">
     import { TARIFFS } from "../js/tariffs.js";

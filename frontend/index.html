@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spotted Train        11</title>
+  <title>Spotted Train</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/nav-links.js" defer></script>
 </head>
 <body class="app-body">
   <nav class="topbar">
@@ -14,6 +15,7 @@
       <div class="nav-links d-none d-md-flex">
         <a class="active" href="index.html">Ricerca orari</a>
         <a href="/pages/tracking.html">Tracking live</a>
+        <a href="/pages/mappa.html">Mappa linee</a>
         <a href="/pages/acquista.html">Biglietti</a>
         <a href="/pages/avvisi.html">Avvisi</a>
       </div>
@@ -25,40 +27,78 @@
   </nav>
 
   <main class="container page page-shell pt-4 pb-5">
-    <section class="row g-4 align-items-stretch">
-      <div class="col-lg-6">
-        <div class="page-hero-card h-100">
-          <div class="d-flex align-items-center gap-3 mb-3 flex-wrap">
+    <section class="page-hero-card mb-4">
+      <div class="row align-items-center g-3">
+        <div class="col-lg-7">
+          <div class="d-flex align-items-center gap-2 flex-wrap mb-2">
+            <span class="pill-ghost">Rete EAV</span>
             <span class="pill-ghost">Live Firebase</span>
-            <span class="pill-ghost">App Check attivo</span>
             <span class="pill-ghost">Proxy CORS</span>
           </div>
-          <h1 class="display-6 mb-2" style="letter-spacing:-0.02em;">Orari, linee e tracking in un'unica vista</h1>
-          <p class="lead mb-4">Cerca partenza e arrivo, filtra per linea o orario e apri il tracking live con un clic.</p>
-          <div class="row g-3">
-            <div class="col-6">
-              <div class="surface-card">
-                <p class="eyebrow mb-1">Stazioni</p>
-                <h3 class="h4 mb-0">85</h3>
-                <p class="muted mb-0 small">Mappate e filtrabili.</p>
-              </div>
+          <h1 class="display-6 mb-2" style="letter-spacing:-0.02em;">Orari, linee e tracking in un'unica interfaccia</h1>
+          <p class="lead mb-3">Cerca una tratta, scopri le linee possibili e passa al tracking live senza cambiare ecosistema.</p>
+          <div class="list-soft">
+            <div class="item">
+              <span class="meta-chip text-muted">App Check</span>
+              <span class="small text-muted">reCAPTCHA v3 in produzione, token debug già attivo su localhost.</span>
             </div>
-            <div class="col-6">
-              <div class="surface-card">
-                <p class="eyebrow mb-1">Tracking</p>
-                <h3 class="h4 mb-0">Live</h3>
-                <p class="muted mb-0 small">Binari e ritardi in tempo reale.</p>
-              </div>
+            <div class="item">
+              <span class="meta-chip text-muted">Storage</span>
+              <span class="small text-muted">Fetch dirette con fallback automatico su proxy CORS.</span>
+            </div>
+            <div class="item">
+              <span class="meta-chip text-muted">Funzioni</span>
+              <span class="small text-muted">Callable orchestrateStation per generare i file live prima della lettura.</span>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-2 flex-wrap mt-3">
+            <a class="btn btn-outline-light btn-sm" href="/pages/tracking.html">Vai al tracking</a>
+            <span class="pill-contrast is-ghost">Linee pre-mappate</span>
+            <span class="pill-contrast is-ghost">Stazioni filtrabili</span>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="hero-kpis mb-2">
+            <div class="hero-kpi">
+              <small>Stazioni</small>
+              <strong>85</strong>
+              <div class="muted small">Mappate e filtrabili</div>
+            </div>
+            <div class="hero-kpi">
+              <small>Tracking</small>
+              <strong>Live</strong>
+              <div class="muted small">Binari e ritardi</div>
+            </div>
+            <div class="hero-kpi">
+              <small>Proxy</small>
+              <strong>Attivo</strong>
+              <div class="muted small">CORS gestito</div>
+            </div>
+          </div>
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <small>Manifest</small>
+              <strong>Storage</strong>
+              <span class="small d-block">manifest.json + station_data.json</span>
+            </div>
+            <div class="metric-card">
+              <small>Live update</small>
+              <strong>30s</strong>
+              <span class="small d-block">Finestra di polling</span>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
+    </section>
+
+    <section class="row g-4 align-items-start">
+      <div class="col-xl-7">
         <div class="card search-card h-100 shadow-lg surface-card">
-          <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+          <div class="section-heading mb-2">
             <div>
-              <p class="eyebrow mb-1">Ricerca tratta</p>
+              <p class="eyebrow mb-1 text-uppercase">Ricerca tratta</p>
               <h2 class="h5 mb-1">Stazioni e linee compatibili</h2>
+              <p class="section-subtitle">Partenza, arrivo, linea e orario: tutto nella stessa card.</p>
             </div>
             <span class="pill pill-live">Live</span>
           </div>
@@ -111,23 +151,69 @@
             <span class="pill pill-soft mb-0">Filtra per linea o orario</span>
           </div>
 
-          <div class="mt-3">
-            <div class="section-title">
-              <p class="eyebrow mb-0">Linee compatibili</p>
-              <span class="pill pill-soft">Mappa aggiornata</span>
+          <div class="divider-soft"></div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="section-title">
+                <p class="eyebrow mb-0">Linee compatibili</p>
+                <span class="pill pill-soft">Mappa aggiornata</span>
+              </div>
+              <div id="linesResult" class="tag-list">
+                Seleziona le stazioni per vedere le linee possibili.
+              </div>
             </div>
-            <div id="linesResult" class="tag-list">
-              Seleziona le stazioni per vedere le linee possibili.
+            <div class="col-md-6">
+              <div class="section-title">
+                <p class="eyebrow mb-0">Stazioni della linea</p>
+                <span class="pill pill-soft">Percorso</span>
+              </div>
+              <div id="lineStations" class="tag-list">
+                Seleziona una linea per vedere le stazioni.
+              </div>
             </div>
           </div>
-          <div class="mt-3">
-            <div class="section-title">
-              <p class="eyebrow mb-0">Stazioni della linea</p>
-              <span class="pill pill-soft">Percorso</span>
+        </div>
+      </div>
+      <div class="col-xl-5">
+        <div class="surface-card h-100">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow mb-1">Stato backend</p>
+              <h3 class="h5 mb-0">Live readiness</h3>
             </div>
-            <div id="lineStations" class="tag-list">
-              Seleziona una linea per vedere le stazioni.
+            <span class="pill pill-soft">Demo</span>
+          </div>
+          <div class="metrics-grid mb-2">
+            <div class="metric-card">
+              <small>App Check</small>
+              <strong>On</strong>
+              <span class="small d-block">reCAPTCHA v3</span>
             </div>
+            <div class="metric-card">
+              <small>Proxy</small>
+              <strong>AllOrigins</strong>
+              <span class="small d-block">Forzato in locale</span>
+            </div>
+            <div class="metric-card">
+              <small>Functions</small>
+              <strong>orchestrateStation</strong>
+              <span class="small d-block">EU-west1</span>
+            </div>
+          </div>
+          <div class="list-soft">
+            <div class="item">
+              <span class="meta-chip text-muted">Tracking</span>
+              <span class="small text-muted">Apri il live dal risultato per vedere binari, ritardi e percorso.</span>
+            </div>
+            <div class="item">
+              <span class="meta-chip text-muted">Proxy</span>
+              <span class="small text-muted">window.FORCE_STORAGE_PROXY = true; base URL impostato sulla pagina.</span>
+            </div>
+          </div>
+          <div class="d-flex gap-2 flex-wrap mt-3">
+            <a class="btn btn-primary" href="/pages/acquista.html">Compra biglietto</a>
+            <a class="btn btn-outline-secondary" href="/pages/tracking.html">Vedi tracking live</a>
           </div>
         </div>
       </div>
@@ -140,11 +226,14 @@
             <div>
               <p class="eyebrow mb-1">Risultati</p>
               <h3 class="h5 mb-0">Treni trovati sulla tratta</h3>
+              <small class="text-muted">Clicca “Segui” per aprire il tracking live.</small>
             </div>
-            <span class="pill pill-soft">Clicca “Segui” per aprire la pagina tracking</span>
+            <span class="pill pill-soft">Anteprima corsa</span>
           </div>
           <div id="searchResults" class="panel-body">
-            <div class="alert alert-secondary mb-0">Avvia una ricerca per vedere i treni disponibili.</div>
+            <div class="empty-state">
+              Avvia una ricerca per vedere i treni disponibili.
+            </div>
           </div>
         </div>
       </div>
@@ -153,12 +242,12 @@
     <section class="grid-features mt-4">
       <div class="feature glass">
         <p class="eyebrow mb-1">Sicurezza</p>
-        <h4>App Check + token debug in dev</h4>
-        <p class="muted mb-0">Token già impostati in locale: fetch a Storage e Functions senza blocchi.</p>
+        <h4>App Check + token debug</h4>
+        <p class="muted mb-0">Su localhost è già attivo il token di debug: fetch a Storage e Functions senza blocchi.</p>
       </div>
       <div class="feature glass">
         <p class="eyebrow mb-1">CORS gestito</p>
-        <h4>Proxy attivo</h4>
+        <h4>Proxy automatico</h4>
         <p class="muted mb-0">Se il bucket non risponde con CORS, il proxy applica l’header e gli URL restano raggiungibili.</p>
       </div>
       <div class="feature glass">

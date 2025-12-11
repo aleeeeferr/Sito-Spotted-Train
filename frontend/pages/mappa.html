@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mappa linee Vesuviana</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/nav-links.js" defer></script>
+  </head>
+  <body class="app-body map-page">
+    <nav class="topbar">
+      <div class="container d-flex align-items-center justify-content-between gap-3">
+        <a class="brand" href="/index.html"><span class="dot"></span>EAV Treni</a>
+        <div class="nav-links d-none d-md-flex">
+          <a href="/index.html">Ricerca orari</a>
+          <a href="/pages/tracking.html">Tracking live</a>
+          <a class="active" href="/pages/mappa.html">Mappa linee</a>
+          <a href="/pages/acquista.html">Biglietti</a>
+          <a href="/pages/avvisi.html">Avvisi</a>
+        </div>
+        <div class="nav-actions d-flex align-items-center gap-2">
+          <span class="pill pill-soft">Leaflet</span>
+          <a class="btn btn-sm btn-outline-light" href="/pages/utente.html">Area utente</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container page page-shell pt-4 pb-5">
+      <section class="page-hero-card map-hero mb-4">
+        <div class="row g-3 align-items-center">
+          <div class="col-lg-7">
+            <p class="eyebrow mb-1 text-uppercase text-gradient">Rete Vesuviana</p>
+            <h1 class="display-6 mb-2" style="letter-spacing:-0.02em;">Linee, fermate e indicazioni in una sola vista</h1>
+            <p class="lead mb-3 text-light">
+              Mappa interattiva con percorsi colorati, marker densi e link diretti a Google Maps. Cambia basemap, esplora e apri la fermata che ti serve.
+            </p>
+            <div class="d-flex align-items-center gap-2 flex-wrap mt-2">
+              <span class="pill-contrast is-ghost">6 linee pre-mappate</span>
+              <span class="pill-contrast is-ghost">Marker cliccabili</span>
+              <span class="pill-contrast is-ghost">Basemap multiple</span>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="map-hero-panel">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="pill pill-live">Live-ready</span>
+                <span class="pill pill-soft">Leaflet</span>
+              </div>
+              <div class="map-metrics">
+                <div>
+                  <p class="small text-muted mb-1">Linee</p>
+                  <h3 class="h4 mb-0">6</h3>
+                  <span class="small text-muted">Percorsi tracciati</span>
+                </div>
+                <div>
+                  <p class="small text-muted mb-1">Fermate</p>
+                  <h3 class="h4 mb-0" id="stations-count">--</h3>
+                  <span class="small text-muted">Marker cliccabili</span>
+                </div>
+                <div>
+                  <p class="small text-muted mb-1">Indicazioni</p>
+                  <h3 class="h6 mb-0">Google Maps</h3>
+                  <span class="small text-muted">Driving by default</span>
+                </div>
+              </div>
+              <div class="map-legend-chips">
+                <span class="badge rounded-pill text-bg-light border">Carto Voyager</span>
+                <span class="badge rounded-pill text-bg-light border">OSM Standard</span>
+                <span class="badge rounded-pill text-bg-light border">Esri Imagery</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="row g-4 align-items-start">
+        <div class="col-lg-8">
+          <div class="surface-card h-100 map-card shadow-lg">
+            <div class="section-heading map-toolbar">
+              <div>
+                <p class="eyebrow mb-1">Leaflet</p>
+                <h3 class="h5 mb-1">Mappa linee Vesuviana</h3>
+                <p class="section-subtitle mb-0">Pallini cliccabili: aprono subito il percorso per raggiungere la fermata.</p>
+              </div>
+              <div class="d-flex align-items-center gap-2 flex-wrap">
+                <span class="pill pill-live">Interattiva</span>
+                <span class="pill pill-soft">Layer switch</span>
+              </div>
+            </div>
+            <div id="vesuviana-map" class="mb-3"></div>
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+              <small class="text-muted" id="map-status">Basemap colorata (Carto Voyager), puoi cambiarla dal controllo in alto a destra.</small>
+              <div class="d-flex align-items-center gap-2 flex-wrap">
+                <span class="badge rounded-pill text-bg-light border">Drag per muoverti</span>
+                <span class="badge rounded-pill text-bg-light border">Zoom con la rotellina</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="surface-card map-sidecard">
+            <div class="section-heading mb-2">
+              <div>
+                <p class="eyebrow mb-1">Legenda linee</p>
+                <h3 class="h6 mb-0">Colore per percorso</h3>
+              </div>
+              <span class="pill pill-soft">Polylines</span>
+            </div>
+            <div id="lines-legend" class="line-legend mb-3"></div>
+            <div class="divider-soft"></div>
+            <p class="small text-muted mb-1">Suggerimenti</p>
+            <ul class="small mb-0 ps-3">
+              <li>Clicca un pallino per aprire le indicazioni su Maps.</li>
+              <li>Ogni linea ha un colore dedicato: segue la polyline.</li>
+              <li>I marker condivisi mostrano tutte le linee servite.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="../js/vesuviana-map.js"></script>
+  </body>
+</html>

@@ -6,14 +6,16 @@
   <title>Spotted Train - Acquista Biglietti</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/nav-links.js" defer></script>
 </head>
-<body class="app-body bg-light">
+<body class="app-body">
   <nav class="topbar">
     <div class="container d-flex align-items-center justify-content-between gap-3">
       <a class="brand" href="/index.html"><span class="dot"></span>EAV Treni</a>
       <div class="nav-links d-none d-md-flex">
         <a href="/index.html">Ricerca orari</a>
         <a href="/pages/tracking.html">Tracking live</a>
+        <a href="/pages/mappa.html">Mappa linee</a>
         <a class="active" href="/pages/acquista.html">Biglietti</a>
         <a href="/pages/avvisi.html">Avvisi</a>
       </div>
@@ -28,9 +30,35 @@
       <div>
         <p class="eyebrow mb-1">Ticketing</p>
         <h1 class="h4 mb-1">Calcola e compra</h1>
-        <p class="muted mb-0">Stessa esperienza visiva delle altre pagine, con focus su biglietti e abbonamenti.</p>
+        <p class="muted mb-0">Tariffa ufficiale UnicoCampania, QR demo in stile biglietto digitale.</p>
+        <div class="d-flex align-items-center gap-2 flex-wrap mt-2">
+          <span class="pill-contrast is-ghost">Richiesta tariffa live</span>
+          <span class="pill-contrast is-ghost">Supporto PPN</span>
+          <span class="pill-contrast is-ghost">QR demo integrato</span>
+        </div>
+        <div class="list-soft mt-2">
+          <div class="item">
+            <span class="meta-chip text-muted">Prefetch</span>
+            <span class="small text-muted">Le stazioni ammesse sono già in maiuscolo per allinearsi all'API Unico.</span>
+          </div>
+          <div class="item">
+            <span class="meta-chip text-muted">Output</span>
+            <span class="small text-muted">Mostriamo prezzi aziendali e integrati per biglietti e abbonamenti.</span>
+          </div>
+        </div>
       </div>
-      <span class="pill pill-ghost">Prezzi live</span>
+      <div class="hero-kpis">
+        <div class="hero-kpi">
+          <small>Prezzi</small>
+          <strong>Live</strong>
+          <div class="muted small">Chiamata API diretta</div>
+        </div>
+        <div class="hero-kpi">
+          <small>Tariffe statiche</small>
+          <strong>Disponibili</strong>
+          <div class="muted small">Tabella integrata</div>
+        </div>
+      </div>
     </section>
     <section class="row g-3 align-items-stretch justify-content-center">
       <div class="col-lg-10 col-xl-9">
@@ -41,7 +69,10 @@
               <h1 class="h4 mb-1">Biglietti e abbonamenti</h1>
               <p class="muted mb-0">Inserisci origine e destinazione: recuperiamo il prezzo e mostriamo le opzioni.</p>
             </div>
-            <span class="pill pill-live">Live</span>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <span class="pill pill-live">Live</span>
+              <span class="pill pill-soft">API UnicoCampania</span>
+            </div>
           </div>
 
           <form id="ticket-form" class="row g-3">
@@ -62,7 +93,14 @@
             </div>
           </form>
 
-          <div id="ticket-status" class="alert alert-info mt-3" role="status" aria-live="polite"></div>
+          <div class="list-soft mt-2">
+            <div class="item">
+              <span class="meta-chip text-muted">Suggerimento</span>
+              <span class="small text-muted">Scrivi la stazione in maiuscolo: es. NAPOLI, SORRENTO. Se servono PPN spunta l'opzione.</span>
+            </div>
+          </div>
+
+          <div id="ticket-status" class="alert alert-secondary mt-3" role="status" aria-live="polite">Pronto a calcolare la tariffa.</div>
 
           <div id="ticket-result" class="tickets-layout mt-3"></div>
         </div>
