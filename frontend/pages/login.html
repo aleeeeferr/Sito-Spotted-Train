@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accedi - EAV Treni</title>
+  <title>Accedi - Spotted Train</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/style.css">
   <script src="../js/nav-links.js" defer></script>
+  <script src="../js/ui.js" defer></script>
   <style>
     body.login-page {
       min-height: 100vh;
@@ -68,23 +69,22 @@
     <body class="app-body login-page d-flex flex-column">
   <nav class="topbar">
     <div class="container d-flex align-items-center justify-content-between gap-3">
-      <a class="brand" href="/index.html"><span class="dot"></span>EAV Treni</a>
+      <a class="brand" href="/index.html"><img class="brand-logo" src="../images/logo.png" alt="Spotted Train">Spotted Train</a>
       <div class="nav-links d-none d-md-flex">
         <a href="/index.html">Ricerca orari</a>
-        <a href="/pages/tracking.html">Tracking live</a>
-        <a href="/pages/mappa.html">Mappa linee</a>
-        <a href="/pages/acquista.html">Biglietti</a>
-        <a href="/pages/avvisi.html">Avvisi</a>
-      </div>
+      <a href="/pages/tracking.html">Tracking live</a>
+      <a href="/pages/mappa.html">Mappa linee</a>
+      <a href="/pages/acquista.html">Biglietti</a>
+      <a href="/pages/avvisi.html">Avvisi</a>
+    </div>
       <div class="nav-actions d-flex align-items-center gap-2">
-        <span class="pill pill-soft">Dati live</span>
         <a class="btn btn-sm btn-outline-light" href="/pages/login.html">Area utente</a>
       </div>
     </div>
   </nav>
 
   <main class="container page page-shell py-4 py-md-5 flex-grow-1 d-flex align-items-center">
-    <div class="login-card p-4 p-md-5 w-100">
+    <div class="login-card p-4 p-md-5 w-100" data-tilt>
       <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
         <div>
           <p class="eyebrow mb-1 text-uppercase">Accesso demo</p>

@@ -7,11 +7,12 @@
   <link rel="stylesheet" href="../css/static.css" />
   <link rel="stylesheet" href="../css/style.css" />
   <script src="../js/nav-links.js" defer></script>
+  <script src="../js/ui.js" defer></script>
 </head>
 <body class="app-body">
   <nav class="topbar">
     <div class="container d-flex align-items-center justify-content-between gap-3">
-      <a class="brand" href="/index.html"><span class="dot"></span>EAV Treni</a>
+      <a class="brand" href="/index.html"><img class="brand-logo" src="../images/logo.png" alt="Spotted Train">Spotted Train</a>
       <div class="nav-links d-none d-md-flex">
         <a href="/index.html">Ricerca orari</a>
         <a href="/pages/tracking.html">Tracking live</a>
@@ -20,48 +21,21 @@
         <a href="/pages/avvisi.html">Avvisi</a>
       </div>
       <div class="nav-actions d-flex align-items-center gap-2">
-        <span class="pill pill-soft">Dati live</span>
         <a class="btn btn-sm btn-outline-light" href="/pages/utente.html">Area utente</a>
       </div>
     </div>
   </nav>
 
   <main class="container page-shell py-4 py-md-5 static-container">
-    <section class="page-hero-card mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <section class="page-hero-card mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3" data-tilt>
       <div>
         <p class="eyebrow mb-1">Tariffe</p>
         <h1 class="h4 mb-1">Panoramica prezzi</h1>
         <p class="muted mb-0">Stile allineato alle altre pagine, con importi di riferimento aggiornati.</p>
-        <div class="d-flex align-items-center gap-2 flex-wrap mt-2">
-          <span class="pill-contrast is-ghost">Tabella TARIFFS</span>
-          <span class="pill-contrast is-ghost">Ricerca istantanea</span>
-        </div>
-        <div class="list-soft mt-2">
-          <div class="item">
-            <span class="meta-chip text-muted">Fonte</span>
-            <span class="small text-muted">Tabella static disponibile in frontend/js/tariffs.js.</span>
-          </div>
-          <div class="item">
-            <span class="meta-chip text-muted">Ricerca</span>
-            <span class="small text-muted">Digita parte del codice per filtrare subito la lista.</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero-kpis">
-        <div class="hero-kpi">
-          <small>Titoli</small>
-          <strong>Biglietti</strong>
-          <div class="muted small">Importi di riferimento</div>
-        </div>
-        <div class="hero-kpi">
-          <small>Abbonamenti</small>
-          <strong>Inclusi</strong>
-          <div class="muted small">Per ogni codice</div>
-        </div>
       </div>
     </section>
 
-    <section class="static-card">
+    <section class="static-card" data-tilt>
       <div class="tariff-toolbar mb-2">
         <div>
           <p class="eyebrow mb-1">Catalogo tariffe</p>
@@ -70,7 +44,6 @@
         </div>
         <div class="d-flex align-items-center gap-2 flex-wrap">
           <input id="tariff-search" class="form-control input-glow" type="search" placeholder="Cerca codice tariffa">
-          <span class="pill pill-soft" id="tariff-count">0 tariffe</span>
         </div>
       </div>
       <p class="tariff-note mb-3">Questi importi vengono aggiornati dal Consorzio Unico Campania. Li riportiamo come riferimento rapido: trova il codice e scegli il titolo più adatto.</p>
@@ -110,7 +83,6 @@
                   <div class="train-title mb-1">${code}</div>
                   <div class="text-muted small">Tipo: ${data.tipo || "-"}</div>
                 </div>
-                <span class="pill pill-soft pill-compact">${data.label || "Tariffa"}</span>
               </div>
               <div class="tariff-grid mt-2">
                 <div>

@@ -11,11 +11,12 @@
     />
     <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/nav-links.js" defer></script>
+    <script src="../js/ui.js" defer></script>
   </head>
-  <body class="app-body">
+  <body class="app-body light-hero">
     <nav class="topbar">
       <div class="container d-flex align-items-center justify-content-between gap-3">
-        <a class="brand" href="/index.html"><span class="dot"></span>EAV Treni</a>
+        <a class="brand" href="/index.html"><img class="brand-logo" src="../images/logo.png" alt="Spotted Train">Spotted Train</a>
         <div class="nav-links d-none d-md-flex">
         <a href="/index.html">Ricerca orari</a>
         <a class="active" href="/pages/tracking.html">Tracking live</a>
@@ -24,68 +25,29 @@
         <a href="/pages/avvisi.html">Avvisi</a>
       </div>
         <div class="nav-actions d-flex align-items-center gap-2">
-          <span class="pill pill-soft">Dati live</span>
           <a class="btn btn-sm btn-outline-light" href="/pages/utente.html">Area utente</a>
         </div>
       </div>
     </nav>
     <main class="container page page-shell pt-3 pb-5">
-      <section class="page-hero-card mb-4">
+      <section class="page-hero-card mb-4" data-tilt>
         <div class="row g-3 align-items-center">
-          <div class="col-lg-7">
+          <div class="col-12">
             <p class="eyebrow mb-1">Live network</p>
             <h1 class="h4 mb-1">Tracking in tempo reale</h1>
-            <p class="muted mb-2">Segui la corsa, vedi ritardi e binari e passa da una tratta all'altra con un clic.</p>
-            <div class="d-flex align-items-center gap-2 flex-wrap mt-2">
-              <span class="pill-contrast is-ghost">Aggiornamento ogni 30s</span>
-              <span class="pill-contrast is-ghost">Storage proxy attivo</span>
-              <span class="pill-contrast is-ghost">App Check pronto</span>
-            </div>
-            <div class="list-soft mt-2">
-              <div class="item">
-                <span class="meta-chip text-muted">Manifest</span>
-                <span class="small text-muted">manifest.json + station_data.json caricati in apertura.</span>
-              </div>
-              <div class="item">
-                <span class="meta-chip text-muted">Linea</span>
-                <span class="small text-muted">Seleziona linea, origine e (opz.) destinazione per filtrare i treni.</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-5">
-            <div class="hero-kpis mb-2">
-              <div class="hero-kpi">
-                <small>Stazioni</small>
-                <strong>Live</strong>
-                <div class="muted small">Percorso aggiornato</div>
-              </div>
-              <div class="hero-kpi">
-                <small>Polling</small>
-                <strong>30s</strong>
-                <div class="muted small">Aggiornamento automatico</div>
-              </div>
-              <div class="hero-kpi">
-                <small>Proxy</small>
-                <strong>Attivo</strong>
-                <div class="muted small">Forzato in pagina</div>
-              </div>
-            </div>
+            <p class="muted mb-2">Stile rinnovato: pannelli chiari, badge contrastati e controlli rapidi per seguire ogni corsa.</p>
           </div>
         </div>
       </section>
       <section class="row g-4 align-items-stretch hero-block justify-content-center">
         <div class="col-lg-10 col-xl-9">
-          <div class="card search-card h-100 shadow-lg">
+          <div class="card search-card h-100 shadow-lg" data-tilt>
             <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
               <div>
                 <p class="eyebrow mb-1">Tracking live</p>
-                <h1 class="h4 mb-1" id="line-title">Linea Napoli Porta Nolana → Sorrento</h1>
-                <p class="muted mb-0" id="line-subtitle">Monitoraggio continuo delle fermate principali, aggiornato ogni 30s.</p>
-              </div>
-              <div class="d-flex align-items-center gap-2 flex-wrap">
-                <span class="pill pill-live">Live</span>
-                <span class="pill pill-soft">Binari inclusi</span>
-              </div>
+            <h1 class="h4 mb-1" id="line-title">Linea Napoli Porta Nolana → Sorrento</h1>
+            <p class="muted mb-0" id="line-subtitle">Monitoraggio continuo delle fermate principali, aggiornato ogni 30s.</p>
+          </div>
             </div>
 
             <div class="row g-3">
@@ -104,7 +66,6 @@
               <div class="col-md-5 position-relative">
                 <div class="d-flex justify-content-between align-items-center">
                   <label for="destination-select" class="form-label fw-semibold small-label">Destinazione (opzionale)</label>
-                  <span class="pill pill-soft pill-compact">Filtro</span>
                 </div>
                 <select id="destination-select" class="form-select form-select-lg input-glow">
                   <option value="">(nessuna)</option>
@@ -122,16 +83,6 @@
               </div>
               <div id="train-picker" class="list-group list-group-flush border rounded-3" style="max-height: 240px; overflow-y: auto; display: none;"></div>
               <div id="train-picker-empty" class="text-muted small" style="display:none;">Nessun orario disponibile sulla partenza selezionata.</div>
-              <div class="list-soft mt-2">
-                <div class="item">
-                  <span class="meta-chip text-muted">Suggerimento</span>
-                  <span class="small text-muted">Prima scegli la linea, poi partenza e destinazione per un elenco mirato.</span>
-                </div>
-                <div class="item">
-                  <span class="meta-chip text-muted">CORS</span>
-                  <span class="small text-muted">window.FORCE_STORAGE_PROXY = true; la pagina forza già il proxy.</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -18,6 +18,9 @@ const greetingEl = document.getElementById("user-greeting");
 const statusEl = document.getElementById("user-status");
 const loginCtaEl = document.getElementById("user-login-cta");
 const paymentEl = document.getElementById("payment-info");
+const statsTicketsEl = document.getElementById("stats-tickets");
+const statsCreditEl = document.getElementById("stats-credit");
+const statsLastEl = document.getElementById("stats-last");
 const CARD_STORAGE_KEY = "eav-user-card";
 
 const demoTracking = ["Napoli Garibaldi → Sorrento", "Pompei → Napoli", "Napoli Porta Nolana → Sarno"];
@@ -40,6 +43,15 @@ function loadProfile() {
     console.warn("Profilo non leggibile, riparto vuoto.", err);
     updateGreeting("");
     toggleLoginCta(false);
+  }
+}
+
+function getProfileName() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    return saved.name || "";
+  } catch {
+    return "";
   }
 }
 
@@ -115,6 +127,33 @@ function loadWallet() {
   }
 }
 
+function getLatestPurchaseTimestamp(entries = []) {
+  if (!Array.isArray(entries) || !entries.length) return null;
+  let latest = null;
+  entries.forEach((item) => {
+    const ts = Number(item.purchaseAt);
+    if (Number.isFinite(ts) && (latest === null || ts > latest)) {
+      latest = ts;
+    }
+  });
+  return latest;
+}
+
+function updateStats() {
+  const wallet = loadWallet();
+  if (statsTicketsEl) {
+    statsTicketsEl.textContent = wallet.length ? String(wallet.length) : "0";
+  }
+  if (statsCreditEl) {
+    const card = loadCard();
+    statsCreditEl.textContent = card ? formatPrice(card.credit) : "-";
+  }
+  if (statsLastEl) {
+    const latest = getLatestPurchaseTimestamp(wallet);
+    statsLastEl.textContent = latest ? formatPurchaseDate(latest) : "-";
+  }
+}
+
 function renderWalletCard(item) {
   const isDemo = item.demo;
   const title = item.label || item.title || "Titolo demo";
@@ -186,6 +225,7 @@ loadProfile();
 wireInputs();
 renderHistory();
 renderPayment();
+updateStats();
 
 document.addEventListener("click", (event) => {
   if (event.target.closest("[data-add-card]")) {
@@ -242,7 +282,7 @@ function renderPayment() {
 }
 
 function addDemoCard() {
-  const name = inputs.name?.value?.trim() || "Utente";
+  const name = inputs.name?.value?.trim() || getProfileName() || "Utente";
   const card = {
     brand: "VISA",
     last4: Math.floor(Math.random() * 9000 + 1000).toString(),
@@ -251,4 +291,5 @@ function addDemoCard() {
   };
   saveCard(card);
   renderPayment();
+  updateStats();
 }

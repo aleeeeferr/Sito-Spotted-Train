@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/style.css">
 <script src="../js/nav-links.js" defer></script>
+<script src="../js/ui.js" defer></script>
   <style>
     body.success-page {
       background: radial-gradient(circle at 12% 18%, rgba(14, 165, 233, 0.2), transparent 32%),
@@ -152,7 +153,7 @@
 <body class="app-body success-page">
   <nav class="topbar">
     <div class="container d-flex align-items-center justify-content-between gap-3">
-      <a class="brand" href="/index.html"><span class="dot"></span>EAV Treni</a>
+      <a class="brand" href="/index.html"><img class="brand-logo" src="../images/logo.png" alt="Spotted Train">Spotted Train</a>
       <div class="nav-links d-none d-md-flex">
         <a href="/index.html">Ricerca orari</a>
         <a href="/pages/tracking.html">Tracking live</a>
@@ -161,20 +162,18 @@
         <a href="/pages/avvisi.html">Avvisi</a>
       </div>
       <div class="nav-actions d-flex align-items-center gap-2">
-        <span class="pill pill-soft">Dati live</span>
         <a class="btn btn-sm btn-outline-light" href="/pages/utente.html">Area utente</a>
       </div>
     </div>
   </nav>
 
   <main class="container page-shell py-4 py-md-5">
-    <section class="success-hero mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <section class="success-hero mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3" data-tilt>
       <div>
         <p class="eyebrow mb-1">Ticketing demo</p>
         <h1 class="h4 mb-1">Biglietto acquistato con successo</h1>
         <p class="muted mb-0">Pagina statica: mostra un QR stile Unicampania senza azioni aggiuntive.</p>
       </div>
-      <span class="pill pill-ghost">Demo</span>
     </section>
 
     <section class="metrics-grid mb-3">
@@ -192,7 +191,7 @@
 
     <section class="row g-3 align-items-stretch justify-content-center">
       <div class="col-lg-8 col-xl-7">
-        <div class="ticket-success-card surface-card">
+        <div class="ticket-success-card surface-card" data-tilt>
           <div class="ticket-success-banner">Pagamento completato</div>
           <div class="ticket-success-body mt-3">
             <div class="ticket-success-text">

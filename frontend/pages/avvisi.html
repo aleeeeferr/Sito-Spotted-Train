@@ -8,11 +8,12 @@
   <link rel="stylesheet" href="../css/static.css" />
   <link rel="stylesheet" href="../css/style.css" />
   <script src="../js/nav-links.js" defer></script>
+  <script src="../js/ui.js" defer></script>
 </head>
-<body class="app-body">
+<body class="app-body avvisi-page">
   <nav class="topbar">
     <div class="container d-flex align-items-center justify-content-between gap-3">
-      <a class="brand" href="/index.html"><span class="dot"></span>EAV Treni</a>
+      <a class="brand" href="/index.html"><img class="brand-logo" src="../images/logo.png" alt="Spotted Train">Spotted Train</a>
       <div class="nav-links d-none d-md-flex">
         <a href="/index.html">Ricerca orari</a>
         <a href="/pages/tracking.html">Tracking live</a>
@@ -21,57 +22,25 @@
         <a class="active" href="/pages/avvisi.html">Avvisi</a>
       </div>
       <div class="nav-actions d-flex align-items-center gap-2">
-        <span class="pill pill-soft">Dati live</span>
         <a class="btn btn-sm btn-outline-light" href="/pages/utente.html">Area utente</a>
       </div>
     </div>
   </nav>
 
   <main class="container page-shell py-4 py-md-5 static-container">
-    <section class="page-hero-card mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <section class="page-hero-card mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3" data-tilt>
       <div>
         <p class="eyebrow mb-1">Avvisi</p>
         <h1 class="h4 mb-1">Comunicazioni di rete</h1>
         <p class="muted mb-0">Ritardi, soppressioni, scioperi e note in una veste coerente col resto del sito.</p>
-        <div class="d-flex align-items-center gap-2 flex-wrap mt-2">
-          <span class="pill-contrast is-ghost">Dati Firestore</span>
-          <span class="pill-contrast is-ghost">Ordinati per tema</span>
-          <span class="pill-contrast is-ghost">Espandi per i dettagli</span>
-        </div>
-        <div class="list-soft mt-2">
-          <div class="item">
-            <span class="meta-chip text-muted">Documento</span>
-            <span class="small text-muted">avvisi/latest come fonte principale, fallback alla collezione.</span>
-          </div>
-          <div class="item">
-            <span class="meta-chip text-muted">Grouping</span>
-            <span class="small text-muted">Ritardi, Soppressioni, Scioperi e Avvisi generici.</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero-kpis">
-        <div class="hero-kpi">
-          <small>Fonte</small>
-          <strong>Firestore</strong>
-          <div class="muted small">Documento avvisi/latest</div>
-        </div>
-        <div class="hero-kpi">
-          <small>Dettagli</small>
-          <strong>Espandibili</strong>
-          <div class="muted small">Summary + testo completo</div>
-        </div>
       </div>
     </section>
 
-    <section class="static-card">
+    <section class="static-card" data-tilt>
       <div class="tariff-toolbar mb-2">
         <div>
           <p class="eyebrow mb-1">Rete EAV</p>
           <h3 class="h5 mb-0">Situazione aggiornata</h3>
-        </div>
-        <div class="tariff-meta">
-          <span class="pill pill-soft">Live</span>
-          <span class="pill pill-soft">Raggruppo automatico</span>
         </div>
       </div>
       <p class="tariff-note mb-3">Gli avvisi vengono suddivisi in Ritardi, Soppressioni, Scioperi o Avvisi generici. Clicca su ogni scheda per leggere tutti i dettagli.</p>

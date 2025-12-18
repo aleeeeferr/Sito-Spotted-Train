@@ -17,105 +17,61 @@
     />
     <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/nav-links.js" defer></script>
+    <script src="../js/ui.js" defer></script>
   </head>
-  <body class="app-body map-page">
+  <body class="app-body map-page light-hero">
     <nav class="topbar">
       <div class="container d-flex align-items-center justify-content-between gap-3">
-        <a class="brand" href="/index.html"><span class="dot"></span>EAV Treni</a>
-        <div class="nav-links d-none d-md-flex">
-          <a href="/index.html">Ricerca orari</a>
-          <a href="/pages/tracking.html">Tracking live</a>
-          <a class="active" href="/pages/mappa.html">Mappa linee</a>
-          <a href="/pages/acquista.html">Biglietti</a>
-          <a href="/pages/avvisi.html">Avvisi</a>
-        </div>
+      <a class="brand" href="/index.html"><img class="brand-logo" src="../images/logo.png" alt="Spotted Train">Spotted Train</a>
+      <div class="nav-links d-none d-md-flex">
+        <a href="/index.html">Ricerca orari</a>
+        <a href="/pages/tracking.html">Tracking live</a>
+        <a class="active" href="/pages/mappa.html">Mappa linee</a>
+        <a href="/pages/acquista.html">Biglietti</a>
+        <a href="/pages/avvisi.html">Avvisi</a>
+      </div>
         <div class="nav-actions d-flex align-items-center gap-2">
-          <span class="pill pill-soft">Leaflet</span>
           <a class="btn btn-sm btn-outline-light" href="/pages/utente.html">Area utente</a>
         </div>
       </div>
     </nav>
 
     <main class="container page page-shell pt-4 pb-5">
-      <section class="page-hero-card map-hero mb-4">
+      <section class="page-hero-card map-hero mb-4" data-tilt>
         <div class="row g-3 align-items-center">
-          <div class="col-lg-7">
+          <div class="col-12">
             <p class="eyebrow mb-1 text-uppercase text-gradient">Rete Vesuviana</p>
-            <h1 class="display-6 mb-2" style="letter-spacing:-0.02em;">Linee, fermate e indicazioni in una sola vista</h1>
+            <h1 class="display-6 mb-2" style="letter-spacing:-0.02em;">Mappa linee, fermate e interscambi</h1>
             <p class="lead mb-3 text-light">
-              Mappa interattiva con percorsi colorati, marker densi e link diretti a Google Maps. Cambia basemap, esplora e apri la fermata che ti serve.
+              Mappa ripensata in stile eavsrl.it: percorsi nitidi, basemap moderne e marker densi con link diretti a Google Maps.
             </p>
-            <div class="d-flex align-items-center gap-2 flex-wrap mt-2">
-              <span class="pill-contrast is-ghost">6 linee pre-mappate</span>
-              <span class="pill-contrast is-ghost">Marker cliccabili</span>
-              <span class="pill-contrast is-ghost">Basemap multiple</span>
-            </div>
-          </div>
-          <div class="col-lg-5">
-            <div class="map-hero-panel">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="pill pill-live">Live-ready</span>
-                <span class="pill pill-soft">Leaflet</span>
-              </div>
-              <div class="map-metrics">
-                <div>
-                  <p class="small text-muted mb-1">Linee</p>
-                  <h3 class="h4 mb-0">6</h3>
-                  <span class="small text-muted">Percorsi tracciati</span>
-                </div>
-                <div>
-                  <p class="small text-muted mb-1">Fermate</p>
-                  <h3 class="h4 mb-0" id="stations-count">--</h3>
-                  <span class="small text-muted">Marker cliccabili</span>
-                </div>
-                <div>
-                  <p class="small text-muted mb-1">Indicazioni</p>
-                  <h3 class="h6 mb-0">Google Maps</h3>
-                  <span class="small text-muted">Driving by default</span>
-                </div>
-              </div>
-              <div class="map-legend-chips">
-                <span class="badge rounded-pill text-bg-light border">Carto Voyager</span>
-                <span class="badge rounded-pill text-bg-light border">OSM Standard</span>
-                <span class="badge rounded-pill text-bg-light border">Esri Imagery</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       <section class="row g-4 align-items-start">
         <div class="col-lg-8">
-          <div class="surface-card h-100 map-card shadow-lg">
+          <div class="surface-card h-100 map-card shadow-lg" data-tilt>
             <div class="section-heading map-toolbar">
               <div>
-                <p class="eyebrow mb-1">Leaflet</p>
-                <h3 class="h5 mb-1">Mappa linee Vesuviana</h3>
+                <p class="eyebrow mb-1">Mappa rete</p>
+                <h3 class="h5 mb-1">Linee Vesuviana</h3>
                 <p class="section-subtitle mb-0">Pallini cliccabili: aprono subito il percorso per raggiungere la fermata.</p>
-              </div>
-              <div class="d-flex align-items-center gap-2 flex-wrap">
-                <span class="pill pill-live">Interattiva</span>
-                <span class="pill pill-soft">Layer switch</span>
               </div>
             </div>
             <div id="vesuviana-map" class="mb-3"></div>
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-              <small class="text-muted" id="map-status">Basemap colorata (Carto Voyager), puoi cambiarla dal controllo in alto a destra.</small>
-              <div class="d-flex align-items-center gap-2 flex-wrap">
-                <span class="badge rounded-pill text-bg-light border">Drag per muoverti</span>
-                <span class="badge rounded-pill text-bg-light border">Zoom con la rotellina</span>
-              </div>
+              <small class="text-muted" id="map-status">Basemap consigliata: Carto Voyager. Cambiala dal controllo in alto a destra.</small>
             </div>
           </div>
         </div>
         <div class="col-lg-4">
-          <div class="surface-card map-sidecard">
+          <div class="surface-card map-sidecard" data-tilt>
             <div class="section-heading mb-2">
               <div>
                 <p class="eyebrow mb-1">Legenda linee</p>
                 <h3 class="h6 mb-0">Colore per percorso</h3>
               </div>
-              <span class="pill pill-soft">Polylines</span>
             </div>
             <div id="lines-legend" class="line-legend mb-3"></div>
             <div class="divider-soft"></div>
