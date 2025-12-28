@@ -1,473 +1,171 @@
 <!doctype html>
 <html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <title>Spotted Train</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/nav-links.js" defer></script>
-
-  <style>
-    :root {
-      --primary: #0b1f3f;
-      --primary-hover: #0a1730;
-      --primary-strong: #0d2a56;
-      --primary-rgb: 11, 31, 63;
-      --accent: #2d6bff;
-      --accent-rgb: 45, 107, 255;
-      --bg: #e9f0fb;
-      --card: #ffffff;
-      --text: #0b1224;
-      --muted: #5b677a;
-      --success: #1ab26b;
-      --warning: #f4b740;
-      --danger: #dc3545;
-    }
-
-    body {
-      font-family: "DM Sans", "Space Grotesk", system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    .app-header {
-      background: var(--primary);
-      padding: 14px 0;
-      color: #fff;
-    }
-
-    .app-header nav a {
-      color: rgba(255,255,255,0.85);
-      margin-left: 18px;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .app-header nav a:hover {
-      color: #ffffff;
-    }
-
-    .hero {
-      position: relative;
-      background:
-        linear-gradient(140deg, rgba(0, 92, 179, 0.16) 0%, rgba(0, 120, 210, 0.14) 45%, rgba(17, 140, 220, 0.12) 70%, rgba(233, 240, 251, 0.03) 100%),
-        url("images/treno1.png") left -20% bottom 30% / clamp(320px, 46vw, 720px) auto no-repeat,
-        radial-gradient(60% 40% at 25% 85%, rgba(8, 66, 130, 0.35) 0%, rgba(8, 66, 130, 0.2) 55%, rgba(8, 66, 130, 0) 68%),
-        radial-gradient(36% 28% at 32% 82%, rgba(8, 66, 130, 0.28) 0%, rgba(8, 66, 130, 0.16) 55%, rgba(8, 66, 130, 0) 70%),
-        url("images/vesuvio.jpg") center/cover no-repeat;
-      color: #f8fafc;
-      padding: 56px 0 72px;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(520px circle at 12% 22%, rgba(255, 255, 255, 0.12), transparent 62%),
-        radial-gradient(620px circle at 88% 0%, rgba(var(--accent-rgb), 0.28), transparent 58%);
-      opacity: 0.55;
-      pointer-events: none;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 50%;
-      height: 80%;
-      left: -8%;
-      top: 45%;
-      background: linear-gradient(130deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
-      border-radius: 48% 52% 40% 60% / 55% 45% 55% 45%;
-      opacity: 0.3;
-      pointer-events: none;
-    }
-
-    .hero .container {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .hero-head {
-      max-width: 640px;
-      margin-bottom: 18px;
-    }
-
-    .hero-kicker {
-      text-transform: uppercase;
-      letter-spacing: 0.24em;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: rgba(248, 250, 252, 0.75);
-      margin-bottom: 10px;
-    }
-
-    .hero h1 {
-      font-size: clamp(2rem, 3vw, 3.1rem);
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      color: rgba(248, 250, 252, 0.8);
-      font-size: 1.02rem;
-    }
-
-    .search-wrapper {
-      background: #f6f8fb;
-      border-radius: 18px;
-      padding: 20px 22px;
-      margin: 12px 0 0;
-      box-shadow: 0 18px 50px -32px rgba(9, 17, 40, 0.35);
-      border: 1px solid rgba(15, 23, 42, 0.06);
-    }
-
-    .booking-shell {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .booking-row {
-      display: grid;
-      gap: 14px;
-    }
-
-    .booking-row--main {
-      grid-template-columns: 1fr auto 1fr;
-      align-items: end;
-    }
-
-    .booking-row--secondary {
-      grid-template-columns: 1fr 1fr auto;
-      margin-top: 10px;
-      align-items: end;
-    }
-
-    .booking-field {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .booking-label {
-      font-weight: 600;
-      color: #1e2a44;
-      font-size: 0.95rem;
-    }
-
-    .booking-control {
-      border-radius: 12px;
-      border: 1px solid #cbd5e1;
-      padding: 10px 12px;
-      background: #fff;
-    }
-
-    .booking-control:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 0.2rem rgba(var(--accent-rgb), 0.18);
-    }
-
-    .booking-split {
-      display: grid;
-      grid-template-columns: 1fr 120px;
-      gap: 10px;
-    }
-
-    .booking-swap {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: none;
-      background: #1e2a44;
-      color: #ffffff;
-      display: grid;
-      place-items: center;
-      box-shadow: 0 14px 30px -18px rgba(9, 17, 40, 0.6);
-    }
-
-    .booking-swap svg {
-      width: 18px;
-      height: 18px;
-      stroke: currentColor;
-      stroke-width: 2.2;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .booking-cta {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn-cta {
-      border-radius: 10px;
-      padding: 12px 18px;
-      font-weight: 700;
-      min-width: 140px;
-    }
-
-    .booking-actions {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-    }
-
-    .booking-actions .btn {
-      border-radius: 10px;
-      min-width: 140px;
-      padding: 12px 18px;
-    }
-
-    .booking-promo {
-      font-weight: 600;
-      color: #0b1f3f;
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-
-    .booking-divider {
-      height: 1px;
-      background: rgba(15, 23, 42, 0.08);
-      margin: 18px 0;
-    }
-
-    .section-label {
-      font-weight: 700;
-      color: #1e2a44;
-      letter-spacing: 0.02em;
-    }
-
-    .results-table {
-      max-width: 1100px;
-      margin: 32px auto 60px;
-      background: var(--card);
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 20px 50px -32px rgba(9, 17, 40, 0.4);
-      border: 1px solid rgba(15, 23, 42, 0.08);
-    }
-
-    .badge-live {
-      background: var(--success);
-      color: white;
-    }
-
-    .badge-delay {
-      background: var(--warning);
-      color: #1f2937;
-    }
-
-    .badge-cancelled {
-      background: var(--danger);
-      color: white;
-    }
-
-    .btn-primary {
-      background: linear-gradient(120deg, #1e4bff, #2d6bff);
-      border: none;
-      padding: 10px 24px;
-      font-weight: 600;
-      box-shadow: 0 16px 32px -22px rgba(30, 75, 255, 0.75);
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(120deg, #183ee6, #245fe0);
-    }
-
-    .btn-outline-secondary {
-      border-color: rgba(12, 18, 32, 0.2);
-      color: #0b1f3f;
-    }
-
-    .results-summary {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 12px;
-    }
-
-    .results-summary h3,
-    .results-summary p {
-      margin-bottom: 0;
-    }
-
-    .results-table #searchResults {
-      margin-top: 16px;
-    }
-
-    @media (max-width: 1100px) {
-      .booking-row--secondary {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        padding: 42px 0 60px;
-      }
-
-      .booking-tabs {
-        align-self: stretch;
-        justify-content: space-between;
-      }
-
-      .booking-row--main {
-        grid-template-columns: 1fr;
-      }
-
-      .booking-swap {
-        justify-self: center;
-        transform: rotate(90deg);
-      }
-
-      .booking-row--secondary {
-        grid-template-columns: 1fr;
-      }
-
-      .booking-split {
-        grid-template-columns: 1fr;
-      }
-
-      .booking-cta {
-        align-items: stretch;
-      }
-
-      .btn-cta {
-        width: 100%;
-        min-width: 0;
-      }
-
-      .train-card__main {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .train-card__badges {
-        align-items: flex-start;
-        width: 100%;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-<nav class="topbar">
-  <div class="container d-flex align-items-center justify-content-between gap-3">
-    <a class="brand" href="/index.html"><img class="brand-logo" src="images/logo.png" alt="Spotted Train">Spotted Train</a>
-    <div class="nav-links d-none d-md-flex"></div>
-    <div class="nav-actions d-flex align-items-center gap-2">
-      <a class="btn btn-sm btn-outline-light" href="/pages/utente.html">Area utente</a>
-    </div>
-  </div>
-</nav>
-
-<section class="hero">
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-head">
-        <h1>Ricerca Orario</h1>
-      </div>
-
-      <div class="booking-shell">
-        <div class="search-wrapper">
-          <div class="booking-row booking-row--main">
-            <div class="booking-field">
-              <label class="booking-label" for="fromStation">Partenza da</label>
-              <select id="fromStation" class="form-select booking-control">
-                <option value="">Caricamento stazioni...</option>
-              </select>
-            </div>
-
-            <button id="swapStations" type="button" class="booking-swap" aria-label="Scambia stazioni">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M7 7h10M17 7l-3-3M17 7l-3 3M17 17H7M7 17l3-3M7 17l3 3"></path>
-              </svg>
-            </button>
-
-            <div class="booking-field">
-              <label class="booking-label" for="toStation">Arrivo a</label>
-              <select id="toStation" class="form-select booking-control">
-                <option value="">Caricamento stazioni...</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="booking-row booking-row--secondary">
-            <div class="booking-field">
-              <label class="booking-label" for="searchTime">Orario (opzionale)</label>
-              <input id="searchTime" type="time" class="form-control booking-control" placeholder="es. 14:30">
-            </div>
-
-            <div class="booking-field">
-              <label class="booking-label" for="lineFilter">Linea (opzionale)</label>
-              <select id="lineFilter" class="form-select booking-control">
-                <option value="">Tutte</option>
-              </select>
-            </div>
-
-            <div class="booking-actions">
-              <button id="searchBtn" type="button" class="btn btn-primary btn-cta">Cerca treni</button>
-              <button type="button" class="btn btn-outline-secondary btn-cta" onclick="document.getElementById('fromStation').selectedIndex=0;document.getElementById('toStation').selectedIndex=0;">Reset</button>
-            </div>
-          </div>
-
-          <div class="booking-divider"></div>
-
-          <div class="row g-4">
-            <div class="col-md-6">
-              <p class="section-label mb-1">Linee compatibili</p>
-              <div id="linesResult" class="tag-list">
-                Seleziona le stazioni per vedere le linee possibili.
-              </div>
-            </div>
-            <div class="col-md-6">
-              <p class="section-label mb-1">Stazioni della linea</p>
-              <div id="lineStations" class="tag-list">
-                Seleziona una linea per vedere le stazioni.
-              </div>
-            </div>
-          </div>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../immagini/logo.ico">
+        <title>Spotted Train</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body>
+        <nav class="barrasup">
+            <ul>
+                <li class="logo-menu">
+                    <a class="active" href="home">
+                        <img class="logo" src="../immagini/logo.png" alt="Logo Spotted Train">
+                        <span class="logo-testo">
+                            <span class="logo-iniziale">S</span><span class="logo-resto"> potted</span><span class="logo-iniziale">T</span><span class="logo-resto"> rain</span>
+                        </span>
+                    </a>
+                </li>
+                <li><a href="index.html">Ricerca Orari</a></li>
+                <li><a href="traking.html">Traking live</a></li>
+                <li><a href="mappe.html">Mappe Stazioni</a></li>
+                <li><a href="biglietti.html">Biglietti</a></li>
+                <li><a href="avvisi.html">Avvisi</a></li>
+                <li class="pulsante-accedi"><a href="">Accedi</a></li>
+            </ul>
+        </nav>
+
+        <div class="immagine">
+            <img class="sfondo" src="../immagini/vesuvio1.JPG" alt="Panorama con mare e montagne">
+            <img class="treno" src="../immagini/nuovo_t.png" alt="Treno in partenza">
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="results-table">
-  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <h3 class="mb-0">Risultati treni disponibili</h3>
-  </div>
-  <div id="searchResults">
-    <div class="empty-state">Avvia una ricerca per vedere i treni disponibili.</div>
-  </div>
-</section>
+        <section class="ricerca">
+            <h1>Ricerca Orario</h1>
+            <div class="ricerca-box">
+                <div class="campi">
+                    <div class="campo campo-partenza">
+                        <label class="campo-label" for="partenza">Da</label>
+                        <div class="campo-row">
+                            <span class="campo-icona" aria-hidden="true">
+                                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"></path>
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
+                                </svg>
+                            </span>
+                            <input id="partenza" type="text" placeholder="Seleziona una stazione">
+                        </div>
+                    </div>
+                    <div class="campo campo-arrivo">
+                        <button class="swap-btn" type="button" aria-label="Inverti tratta">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 3v14"></path>
+                                <path d="M4 6l3-3 3 3"></path>
+                                <path d="M17 21V7"></path>
+                                <path d="M14 18l3 3 3-3"></path>
+                            </svg>
+                        </button>
+                        <label class="campo-label" for="arrivo">A</label>
+                        <div class="campo-row">
+                            <span class="campo-icona" aria-hidden="true">
+                                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855l-.452.18a.5.5 0 0 0-.082.887l.41.26 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .887-.083l.18-.452 5.682-14.547z"></path>
+                                    <path d="M6.637 10.07 13.5 3.207 7.65 8.708a.5.5 0 0 0-.13.196l-.883 2.65z"></path>
+                                </svg>
+                            </span>
+                            <input id="arrivo" type="text" placeholder="Seleziona una stazione">
+                        </div>
+                    </div>
+                    
+                    <div class="campo campo-orario">
+                        <div class="campo-header">
+                            <label class="campo-label" for="ora">Orario</label>
+                            <span class="campo-sub">Orario rapido</span>
+                        </div>
+                        <div class="campo-row">
+                            <span class="campo-icona" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <path d="M12 7v6l4 2"></path>
+                                </svg>
+                            </span>
+                            <input id="ora" type="time">
+                            <div class="campo-azioni">
+                                <button class="btn-rapido" type="button">-30m</button>
+                                <button class="btn-rapido" type="button">+30m</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="azioni">
+                    <button class="btn-principale" id="btn-cerca" type="button">Cerca</button>
+                    <button class="btn-secondario btn-reset" id="btn-reset" type="button">Reset</button>
+                </div>
+            </div>
+            <div class="risultati" id="risultati">
+                <h2>Orari disponibili</h2>
+                <ul class="risultati-lista">
+                    <li>
+                        <div class="risultato-top">
+                            <span class="treno">Treno 2391</span>
+                            <span class="tipo">DD</span>
+                            <span class="ritardo ritardo-positivo">+5'</span>
+                        </div>
+                        <div class="risultato-bottom">
+                            <span class="dettaglio"><strong>Partenza</strong> 07:20</span>
+                            <span class="dettaglio"><strong>Arrivo</strong> 08:28</span>
+                            <span class="dettaglio"><strong>Binario</strong> 3</span>
+                            <span class="dettaglio info">Via Pompei</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="risultato-top">
+                            <span class="treno">Treno 1287</span>
+                            <span class="tipo">EXP</span>
+                            <span class="ritardo ritardo-zero">In orario</span>
+                        </div>
+                        <div class="risultato-bottom">
+                            <span class="dettaglio"><strong>Partenza</strong> 08:05</span>
+                            <span class="dettaglio"><strong>Arrivo</strong> 09:02</span>
+                            <span class="dettaglio"><strong>Binario</strong> 5</span>
+                            <span class="dettaglio info">Via Torre Annunziata</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="risultato-top">
+                            <span class="treno">Treno 5514</span>
+                            <span class="tipo">R</span>
+                            <span class="ritardo ritardo-negativo">-2'</span>
+                        </div>
+                        <div class="risultato-bottom">
+                            <span class="dettaglio"><strong>Partenza</strong> 09:10</span>
+                            <span class="dettaglio"><strong>Arrivo</strong> 10:15</span>
+                            <span class="dettaglio"><strong>Binario</strong> 1</span>
+                            <span class="dettaglio info">Via Castellammare</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
 
-<script>
-  window.FORCE_STORAGE_PROXY = true;
-  window.STORAGE_PROXY_BASE = "https://corsproxy.io/?";
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script type="module" src="js/stationsMeta.js"></script>
+        <footer class="footer">
+            <p>© 2025 Spotted Train. Tutti i diritti riservati.</p>
+        </footer>
 
-</body>
+        <script>
+            const oraInput = document.getElementById("ora");
+            if (oraInput) {
+                const now = new Date();
+                const hh = String(now.getHours()).padStart(2, "0");
+                const mm = String(now.getMinutes()).padStart(2, "0");
+                oraInput.value = `${hh}:${mm}`;
+            }
+
+            const btnCerca = document.getElementById("btn-cerca");
+            const btnReset = document.getElementById("btn-reset");
+            const risultati = document.getElementById("risultati");
+
+            if (btnCerca && risultati) {
+                btnCerca.addEventListener("click", () => {
+                    risultati.classList.add("attivo");
+                });
+            }
+            if (btnReset && risultati) {
+                btnReset.addEventListener("click", () => {
+                    risultati.classList.remove("attivo");
+                });
+            }
+        </script>
+    </body>
 </html>
