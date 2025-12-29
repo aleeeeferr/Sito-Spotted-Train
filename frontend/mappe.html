@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../immagini/logo.ico">
+        <title>Spotted Train</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body class="pagina-mappe">
+        <nav class="barrasup">
+            <ul>
+                <li class="logo-menu">
+                    <a class="active" href="home">
+                        <img class="logo" src="../immagini/logo.png" alt="Logo Spotted Train">
+                        <span class="logo-testo">
+                            <span class="logo-iniziale">S</span><span class="logo-resto"> potted</span><span class="logo-iniziale">T</span><span class="logo-resto"> rain</span>
+                        </span>
+                    </a>
+                </li>
+                <li><a href="index.html">Ricerca Orari</a></li>
+                <li><a href="traking.html">Traking live</a></li>
+                <li><a href="mappe.html">Mappe Stazioni</a></li>
+                <li><a href="biglietti.html">Biglietti</a></li>
+                <li><a href="avvisi.html">Avvisi</a></li>
+                <li class="pulsante-accedi"><a href="">Accedi</a></li>
+            </ul>
+        </nav>
+        <main class="mappe">
+            <div class="mappe-layout">
+                <section class="mappe-canvas" aria-label="Mappa interattiva delle linee">
+                    <div id="map" class="mappe-map"></div>
+                </section>
+
+                <aside class="mappe-panel" aria-label="Linee disponibili">
+                    <div class="panel-head">
+                        <span class="sheet-handle" aria-hidden="true"></span>
+                        <h1>Mappe stazioni</h1>
+                        <p>Seleziona una linea per evidenziarla sulla mappa.</p>
+                    </div>
+                    <div class="linee-lista">
+                        <article class="linea-card is-active" data-linea="napoli-sorrento" style="--linea-color: #d6453d;" role="button" tabindex="0" aria-expanded="true">
+                            <div class="linea-head">
+                                <div class="linea-titolo">
+                                    <span class="linea-dot" aria-hidden="true"></span>
+                                    <div>
+                                        <h3>Napoli - Sorrento</h3>
+                                    </div>
+                                </div>
+                                <span class="linea-badge">19 fermate</span>
+                            </div>
+                            <div class="linea-dettagli">
+                                <div class="linea-info">
+                                    <div>
+                                        <span>Tratte</span>
+                                        <strong>4</strong>
+                                    </div>
+                                    <div>
+                                        <span>Fermate</span>
+                                        <strong>19</strong>
+                                    </div>
+                                    <div>
+                                        <span>Durata</span>
+                                        <strong>1h 10m</strong>
+                                    </div>
+                                    <div>
+                                        <span>Stazioni</span>
+                                        <strong>Napoli - Sorrento</strong>
+                                    </div>
+                                </div>
+                                <button class="btn-secondario btn-linea" type="button">Apri dettagli</button>
+                            </div>
+                        </article>
+
+                        <article class="linea-card" data-linea="napoli-poggiomarino" style="--linea-color: #2f80ed;" role="button" tabindex="0" aria-expanded="false">
+                            <div class="linea-head">
+                                <div class="linea-titolo">
+                                    <span class="linea-dot" aria-hidden="true"></span>
+                                    <div>
+                                        <h3>Napoli - Poggiomarino</h3>
+                                    </div>
+                                </div>
+                                <span class="linea-badge">26 fermate</span>
+                            </div>
+                            <div class="linea-dettagli">
+                                <div class="linea-info">
+                                    <div>
+                                        <span>Tratte</span>
+                                        <strong>5</strong>
+                                    </div>
+                                    <div>
+                                        <span>Fermate</span>
+                                        <strong>26</strong>
+                                    </div>
+                                    <div>
+                                        <span>Durata</span>
+                                        <strong>1h 05m</strong>
+                                    </div>
+                                    <div>
+                                        <span>Stazioni</span>
+                                        <strong>Napoli - Poggiomarino</strong>
+                                    </div>
+                                </div>
+                                <button class="btn-secondario btn-linea" type="button">Apri dettagli</button>
+                            </div>
+                        </article>
+
+                        <article class="linea-card" data-linea="napoli-sarno" style="--linea-color: #2eae61;" role="button" tabindex="0" aria-expanded="false">
+                            <div class="linea-head">
+                                <div class="linea-titolo">
+                                    <span class="linea-dot" aria-hidden="true"></span>
+                                    <div>
+                                        <h3>Napoli - Sarno</h3>
+                                    </div>
+                                </div>
+                                <span class="linea-badge">25 fermate</span>
+                            </div>
+                            <div class="linea-dettagli">
+                                <div class="linea-info">
+                                    <div>
+                                        <span>Tratte</span>
+                                        <strong>5</strong>
+                                    </div>
+                                    <div>
+                                        <span>Fermate</span>
+                                        <strong>25</strong>
+                                    </div>
+                                    <div>
+                                        <span>Durata</span>
+                                        <strong>1h 00m</strong>
+                                    </div>
+                                    <div>
+                                        <span>Stazioni</span>
+                                        <strong>Napoli - Sarno</strong>
+                                    </div>
+                                </div>
+                                <button class="btn-secondario btn-linea" type="button">Apri dettagli</button>
+                            </div>
+                        </article>
+
+                        <article class="linea-card" data-linea="napoli-baiano" style="--linea-color: #f4b400;" role="button" tabindex="0" aria-expanded="false">
+                            <div class="linea-head">
+                                <div class="linea-titolo">
+                                    <span class="linea-dot" aria-hidden="true"></span>
+                                    <div>
+                                        <h3>Napoli - Baiano</h3>
+                                    </div>
+                                </div>
+                                <span class="linea-badge">27 fermate</span>
+                            </div>
+                            <div class="linea-dettagli">
+                                <div class="linea-info">
+                                    <div>
+                                        <span>Tratte</span>
+                                        <strong>6</strong>
+                                    </div>
+                                    <div>
+                                        <span>Fermate</span>
+                                        <strong>27</strong>
+                                    </div>
+                                    <div>
+                                        <span>Durata</span>
+                                        <strong>1h 05m</strong>
+                                    </div>
+                                    <div>
+                                        <span>Stazioni</span>
+                                        <strong>Napoli - Baiano</strong>
+                                    </div>
+                                </div>
+                                <button class="btn-secondario btn-linea" type="button">Apri dettagli</button>
+                            </div>
+                        </article>
+                    </div>
+                </aside>
+            </div>
+        </main>
+
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script>
+            const map = L.map("map", { zoomControl: false, attributionControl: false })
+                .setView([40.85, 14.27], 11);
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
+
+            const cards = document.querySelectorAll(".linea-card");
+            const panel = document.querySelector(".linee-lista");
+
+            const setActiveLine = (linea) => {
+                cards.forEach((card) => {
+                    const isActive = card.dataset.linea === linea;
+                    card.classList.toggle("is-active", isActive);
+                    card.setAttribute("aria-expanded", isActive ? "true" : "false");
+                });
+            };
+
+            panel?.addEventListener("click", (event) => {
+                const card = event.target.closest(".linea-card");
+                if (card?.dataset.linea) {
+                    setActiveLine(card.dataset.linea);
+                }
+            });
+            panel?.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    const card = event.target.closest(".linea-card");
+                    if (card?.dataset.linea) {
+                        event.preventDefault();
+                        setActiveLine(card.dataset.linea);
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
