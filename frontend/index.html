@@ -35,20 +35,21 @@
             <h1>Ricerca Orario</h1>
             <div class="ricerca-box">
                 <div class="campi">
-                    <div class="campo campo-partenza">
-                        <label class="campo-label" for="partenza">Da</label>
-                        <div class="campo-row">
-                            <span class="campo-icona" aria-hidden="true">
-                                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"></path>
-                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
-                                </svg>
-                            </span>
-                            <input id="partenza" type="text" placeholder="Seleziona una stazione">
+                    <div class="tratta">
+                        <div class="campo campo-partenza">
+                            <label class="campo-label" for="partenza">Da</label>
+                            <div class="campo-row">
+                                <span class="campo-icona" aria-hidden="true">
+                                    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"></path>
+                                        <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
+                                    </svg>
+                                </span>
+                                <input id="partenza" type="text" placeholder="Seleziona una stazione">
+                            </div>
                         </div>
-                    </div>
-                    <div class="campo campo-arrivo">
-                        <button class="swap-btn" type="button" aria-label="Inverti tratta">
+
+                        <button class="swap-btn" type="button" aria-label="Inverti stazioni" title="Inverti stazioni">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M7 3v14"></path>
                                 <path d="M4 6l3-3 3 3"></path>
@@ -56,18 +57,21 @@
                                 <path d="M14 18l3 3 3-3"></path>
                             </svg>
                         </button>
-                        <label class="campo-label" for="arrivo">A</label>
-                        <div class="campo-row">
-                            <span class="campo-icona" aria-hidden="true">
-                                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855l-.452.18a.5.5 0 0 0-.082.887l.41.26 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .887-.083l.18-.452 5.682-14.547z"></path>
-                                    <path d="M6.637 10.07 13.5 3.207 7.65 8.708a.5.5 0 0 0-.13.196l-.883 2.65z"></path>
-                                </svg>
-                            </span>
-                            <input id="arrivo" type="text" placeholder="Seleziona una stazione">
+
+                        <div class="campo campo-arrivo">
+                            <label class="campo-label" for="arrivo">A</label>
+                            <div class="campo-row">
+                                <span class="campo-icona" aria-hidden="true">
+                                    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                                        <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855l-.452.18a.5.5 0 0 0-.082.887l.41.26 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .887-.083l.18-.452 5.682-14.547z"></path>
+                                        <path d="M6.637 10.07 13.5 3.207 7.65 8.708a.5.5 0 0 0-.13.196l-.883 2.65z"></path>
+                                    </svg>
+                                </span>
+                                <input id="arrivo" type="text" placeholder="Seleziona una stazione">
+                            </div>
                         </div>
                     </div>
-                    
+
                     <div class="campo campo-orario">
                         <div class="campo-header">
                             <label class="campo-label" for="ora">Orario</label>
