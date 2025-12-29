@@ -530,6 +530,533 @@ nav li{
     transform: translateY(-1px);
 }
 
+/* biglietti page */
+.pagina-biglietti{
+    background: #f7f4ef;
+    color: #1d1c1a;
+}
+.biglietti{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+}
+.biglietti-hero{
+    text-align: center;
+    margin-bottom: 28px;
+}
+.biglietti-eyebrow{
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    color: #9b6b3c;
+    margin: 0 0 6px;
+}
+.biglietti-hero h1{
+    margin: 0 0 10px;
+    font-size: 30px;
+}
+.biglietti-sub{
+    margin: 0 auto;
+    max-width: 680px;
+    color: #6b655e;
+}
+.biglietti-form{
+    background: #ffffff;
+    border: 1px solid #e3ded5;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 10px 20px rgba(45, 30, 10, 0.08);
+    margin-bottom: 18px;
+}
+.form-row{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+.pagina-biglietti .campo{
+    background: #f8f5f0;
+    border: 1px solid #e4ded4;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: none;
+}
+.pagina-biglietti .campo-label{
+    color: #1d1c1a;
+    margin-bottom: 6px;
+}
+.ppn-row{
+    margin-top: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #1d1c1a;
+}
+.ppn-row + .btn-calcola{
+    margin-top: 12px;
+}
+.ppn-row input{
+    width: 16px;
+    height: 16px;
+    accent-color: #0b2a55;
+}
+.pagina-biglietti .campo input,
+.pagina-biglietti .campo select{
+    background: #ffffff;
+    color: #1d1c1a;
+    border: 1px solid #e6e1d7;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+.btn-calcola{
+    display: block;
+    margin-top: 12px;
+    margin-left: auto;
+    background: #b02020;
+    box-shadow: none;
+}
+.btn-calcola:hover{
+    box-shadow: none;
+    filter: none;
+    transform: none;
+}
+.tariffa-placeholder{
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px dashed #e2ddd4;
+    background: #fbfaf7;
+    color: #6b655e;
+    margin-bottom: 18px;
+}
+.placeholder-icon{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f1ece5;
+    color: #9b6b3c;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+.tariffa-placeholder h3{
+    margin: 0 0 4px;
+    font-size: 16px;
+    color: #1d1c1a;
+}
+.tariffa-placeholder p{
+    margin: 0;
+    font-size: 14px;
+}
+.riepilogo-tratta{
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid #e3ded5;
+    box-shadow: 0 10px 20px rgba(45, 30, 10, 0.08);
+    margin-bottom: 18px;
+    opacity: 0;
+    transform: translateY(8px);
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.25s ease, transform 0.25s ease, max-height 0.25s ease;
+}
+.riepilogo-tratta.is-visible{
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 200px;
+}
+.riepilogo-label{
+    font-size: 12px;
+    color: #6b655e;
+    display: block;
+    margin-bottom: 4px;
+}
+.riepilogo-prezzo{
+    text-align: right;
+}
+.biglietti-layout{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 20px;
+    align-items: start;
+    opacity: 0;
+    transform: translateY(10px);
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease;
+}
+.biglietti-layout.is-visible{
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 2000px;
+}
+.biglietti-lista{
+    display: grid;
+    gap: 16px;
+}
+.sezione-biglietti h2{
+    margin: 0 0 12px;
+    font-size: 18px;
+}
+.biglietti-grid{
+    display: grid;
+    gap: 16px;
+}
+.biglietto-card{
+    background: #ffffff;
+    border: 1px solid #e3ded5;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 10px 20px rgba(45, 30, 10, 0.08);
+}
+.biglietto-top{
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+.biglietto-top h2{
+    margin: 0 0 6px;
+    font-size: 18px;
+}
+.biglietto-validita{
+    margin: 0;
+    color: #6b655e;
+    font-size: 13px;
+}
+.biglietto-prezzo{
+    text-align: right;
+}
+.biglietto-prezzo .prezzo{
+    display: block;
+    font-size: 28px;
+    font-weight: 700;
+    color: #b02020;
+}
+.biglietto-prezzo .tipo{
+    font-size: 12px;
+    color: #6b655e;
+}
+.biglietto-meta{
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+.biglietto-meta span{
+    display: block;
+    font-size: 12px;
+    color: #6b655e;
+}
+.biglietto-meta strong{
+    display: block;
+    font-size: 14px;
+}
+.quantita{
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    border: 1px solid #e3ded5;
+    margin-bottom: 14px;
+}
+.stepper-btn{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #e3ded5;
+    background: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+}
+.stepper-value{
+    min-width: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+.riepilogo{
+    background: #ffffff;
+    border: 1px solid #e3ded5;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 10px 20px rgba(45, 30, 10, 0.08);
+    position: sticky;
+    top: 90px;
+}
+.riepilogo h2{
+    margin: 0 0 12px;
+    font-size: 18px;
+}
+.riepilogo-lista{
+    display: grid;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.riepilogo-item{
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 8px;
+    font-size: 14px;
+}
+.riepilogo-totale{
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+.btn-checkout{
+    width: 100%;
+}
+.btn-checkout{
+    background: #1e4db7;
+    box-shadow: none;
+}
+.btn-checkout:hover{
+    background: #254fc2;
+    box-shadow: none;
+    filter: none;
+    transform: none;
+}
+.modal{
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 50;
+}
+.modal.is-open{
+    display: flex;
+}
+.modal-card{
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 20px;
+    width: min(560px, 100%);
+    position: relative;
+}
+.modal-card h2{
+    margin: 0 0 12px;
+}
+.modal-close{
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    cursor: pointer;
+}
+.checkout-stepper{
+    list-style: none;
+    display: flex;
+    gap: 12px;
+    padding: 0;
+    margin: 0 0 16px;
+    font-size: 13px;
+    color: #6b655e;
+}
+.checkout-stepper .is-active{
+    color: #b02020;
+    font-weight: 700;
+}
+.checkout-step{
+    border: 1px solid #e3ded5;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 12px;
+}
+.checkout-step h3{
+    margin: 0 0 6px;
+    font-size: 16px;
+}
+.checkout-step p{
+    margin: 0 0 10px;
+    color: #6b655e;
+    font-size: 13px;
+}
+.checkout-input{
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #e3ded5;
+    padding: 0 10px;
+}
+
+/* mappe page */
+.pagina-mappe{
+    background: #f2f3f6;
+    color: #1d1c1a;
+}
+.mappe{
+    height: calc(100vh - 68px);
+}
+.mappe-layout{
+    display: flex;
+    height: 100%;
+}
+.mappe-canvas{
+    flex: 1;
+    position: relative;
+    min-width: 0;
+    height: 100%;
+}
+.mappe-map{
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+.mappe-panel{
+    width: 360px;
+    max-width: 34%;
+    background: #f9f8f6;
+    border-left: 1px solid #e1ddd6;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.panel-head h1{
+    margin: 0;
+    font-size: 22px;
+}
+.panel-head p{
+    margin: 6px 0 0;
+    color: #6b655e;
+    font-size: 14px;
+}
+.sheet-handle{
+    display: none;
+    width: 36px;
+    height: 4px;
+    background: #d7d2cb;
+    border-radius: 999px;
+    margin: 0 auto 10px;
+}
+.linee-lista{
+    display: grid;
+    gap: 12px;
+    overflow-y: auto;
+    flex: 1;
+}
+.linea-card{
+    background: #ffffff;
+    border: 1px solid #e3ded5;
+    border-radius: 14px;
+    padding: 12px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(34, 24, 12, 0.08);
+}
+.linea-card.is-active{
+    box-shadow: 0 8px 16px rgba(34, 24, 12, 0.14);
+}
+.linea-head{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+.linea-titolo{
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+.linea-titolo h3{
+    margin: 0;
+    font-size: 16px;
+    color: #1d1c1a;
+}
+.linea-titolo p{
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #6b655e;
+}
+.linea-dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #b02020;
+    margin-top: 4px;
+}
+.linea-badge{
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.04);
+    color: #1d1c1a;
+}
+.linea-sorrento .linea-dot{
+    background: #d6453d;
+}
+.linea-sorrento .linea-badge{
+    color: #d6453d;
+    background: rgba(214, 69, 61, 0.08);
+}
+.linea-poggiomarino .linea-dot{
+    background: #2f80ed;
+}
+.linea-poggiomarino .linea-badge{
+    color: #2f80ed;
+    background: rgba(47, 128, 237, 0.12);
+}
+.linea-sarno .linea-dot{
+    background: #2eae61;
+}
+.linea-sarno .linea-badge{
+    color: #2eae61;
+    background: rgba(46, 174, 97, 0.12);
+}
+.linea-baiano .linea-dot{
+    background: #f4b400;
+}
+.linea-baiano .linea-badge{
+    color: #f4b400;
+    background: rgba(244, 180, 0, 0.12);
+}
+.linea-dettagli{
+    margin-top: 12px;
+}
+.linea-info{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.linea-info div{
+    flex: 1 1 140px;
+}
+.linea-info span{
+    display: block;
+    font-size: 12px;
+    color: #6b655e;
+}
+.linea-info strong{
+    display: block;
+    font-size: 13px;
+    color: #1d1c1a;
+}
+.pagina-mappe .btn-secondario{
+    background: transparent;
+    color: #1d1c1a;
+    border: 1px solid #d8d3c8;
+    box-shadow: none;
+}
+.pagina-mappe .btn-linea{
+    width: 100%;
+}
+
 /* tracking page */
 .tracking{
     position: relative;
@@ -789,6 +1316,46 @@ nav li{
     }
     .logo-testo{
         font-size: 22px;
+    }
+    .biglietti-layout{
+        grid-template-columns: 1fr;
+    }
+    .form-row{
+        grid-template-columns: 1fr;
+    }
+    .riepilogo{
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        top: auto;
+        z-index: 40;
+    }
+    .biglietti{
+        padding-bottom: 160px;
+    }
+    .mappe{
+        height: calc(100vh - 62px);
+    }
+    .mappe-panel{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: none;
+        max-height: 55vh;
+        border-left: none;
+        border-top: 1px solid #e1ddd6;
+        border-radius: 18px 18px 0 0;
+        box-shadow: 0 -12px 24px rgba(34, 24, 12, 0.18);
+        background: #f9f8f6;
+    }
+    .sheet-handle{
+        display: block;
+    }
+    .linee-lista{
+        max-height: calc(55vh - 130px);
     }
 }
 

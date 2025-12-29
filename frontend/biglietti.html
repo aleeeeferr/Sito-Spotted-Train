@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../immagini/logo.ico">
+        <title>Spotted Train</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body class="pagina-biglietti">
+        <nav class="barrasup">
+            <ul>
+                <li class="logo-menu">
+                    <a class="active" href="home">
+                        <img class="logo" src="../immagini/logo.png" alt="Logo Spotted Train">
+                        <span class="logo-testo">
+                            <span class="logo-iniziale">S</span><span class="logo-resto"> potted</span><span class="logo-iniziale">T</span><span class="logo-resto"> rain</span>
+                        </span>
+                    </a>
+                </li>
+                <li><a href="index.html">Ricerca Orari</a></li>
+                <li><a href="traking.html">Traking live</a></li>
+                <li><a href="mappe.html">Mappe Stazioni</a></li>
+                <li><a href="biglietti.html">Biglietti</a></li>
+                <li><a href="avvisi.html">Avvisi</a></li>
+                <li class="pulsante-accedi"><a href="">Accedi</a></li>
+            </ul>
+        </nav>
+
+        <main class="biglietti">
+            <header class="biglietti-hero">
+                <p class="biglietti-eyebrow">Biglietti</p>
+                <h1>Acquista il tuo titolo di viaggio</h1>
+                <p class="biglietti-sub">
+                    Seleziona il biglietto, scegli la quantita e aggiungilo al riepilogo.
+                </p>
+            </header>
+
+            <form class="biglietti-form" id="biglietti-form">
+                <div class="form-row">
+                    <div class="campo campo-origine">
+                        <label class="campo-label" for="origine">Origine</label>
+                        <input id="origine" type="text" placeholder="Seleziona origine">
+                    </div>
+                    <div class="campo campo-destinazione">
+                        <label class="campo-label" for="destinazione">Destinazione</label>
+                        <input id="destinazione" type="text" placeholder="Seleziona destinazione">
+                    </div>
+                </div>
+                <label class="ppn-row" for="ppn">
+                    <input id="ppn" type="checkbox">
+                    Con passaggio su Napoli
+                </label>
+                <button class="btn-principale btn-calcola" id="btn-calcola" type="button">Calcola tariffa</button>
+            </form>
+
+            <div class="tariffa-placeholder" id="tariffa-placeholder">
+                <span class="placeholder-icon" aria-hidden="true">i</span>
+                <div>
+                    <h3>Inserisci la tratta</h3>
+                    <p>Inserisci origine e destinazione e calcola la tariffa per vedere le opzioni.</p>
+                </div>
+            </div>
+
+            <div class="riepilogo-tratta" id="riepilogo-tratta">
+                <div>
+                    <span class="riepilogo-label">Tratta</span>
+                    <strong id="riepilogo-tratta-testo">-</strong>
+                </div>
+                <div class="riepilogo-prezzo">
+                    <span>Tariffa base</span>
+                    <strong id="riepilogo-prezzo">€3,80</strong>
+                </div>
+            </div>
+
+            <div class="biglietti-layout" id="biglietti-risultati">
+                <section class="biglietti-lista" aria-label="Tipi di biglietto">
+                    <div class="sezione-biglietti">
+                        <h2>Biglietti</h2>
+                        <div class="biglietti-grid">
+                            <article class="biglietto-card">
+                                <div class="biglietto-top">
+                                    <div>
+                                        <h2>Corsa singola</h2>
+                                        <p class="biglietto-validita">Valida 90 minuti</p>
+                                    </div>
+                                    <div class="biglietto-prezzo">
+                                        <span class="prezzo">€1,30</span>
+                                        <span class="tipo">Aziendale</span>
+                                    </div>
+                                </div>
+                                <div class="biglietto-dettagli">
+                                    <div class="biglietto-meta">
+                                        <div>
+                                            <span>Validita</span>
+                                            <strong>90 min</strong>
+                                        </div>
+                                        <div>
+                                            <span>Tipo</span>
+                                            <strong>Aziendale</strong>
+                                        </div>
+                                    </div>
+                                    <div class="quantita">
+                                        <button class="stepper-btn" type="button" aria-label="Diminuisci quantita">-</button>
+                                        <span class="stepper-value">1</span>
+                                        <button class="stepper-btn" type="button" aria-label="Aumenta quantita">+</button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="biglietto-card">
+                                <div class="biglietto-top">
+                                    <div>
+                                        <h2>Giornaliero</h2>
+                                        <p class="biglietto-validita">Valido 24 ore</p>
+                                    </div>
+                                    <div class="biglietto-prezzo">
+                                        <span class="prezzo">€4,00</span>
+                                        <span class="tipo">Aziendale</span>
+                                    </div>
+                                </div>
+                                <div class="biglietto-dettagli">
+                                    <div class="biglietto-meta">
+                                        <div>
+                                            <span>Validita</span>
+                                            <strong>24 ore</strong>
+                                        </div>
+                                        <div>
+                                            <span>Tipo</span>
+                                            <strong>Aziendale</strong>
+                                        </div>
+                                    </div>
+                                    <div class="quantita">
+                                        <button class="stepper-btn" type="button" aria-label="Diminuisci quantita">-</button>
+                                        <span class="stepper-value">1</span>
+                                        <button class="stepper-btn" type="button" aria-label="Aumenta quantita">+</button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="biglietto-card">
+                                <div class="biglietto-top">
+                                    <div>
+                                        <h2>Integrato urbano</h2>
+                                        <p class="biglietto-validita">Valido 140 minuti</p>
+                                    </div>
+                                    <div class="biglietto-prezzo">
+                                        <span class="prezzo">€2,50</span>
+                                        <span class="tipo">Integrato</span>
+                                    </div>
+                                </div>
+                                <div class="biglietto-dettagli">
+                                    <div class="biglietto-meta">
+                                        <div>
+                                            <span>Validita</span>
+                                            <strong>140 min</strong>
+                                        </div>
+                                        <div>
+                                            <span>Tipo</span>
+                                            <strong>Integrato</strong>
+                                        </div>
+                                    </div>
+                                    <div class="quantita">
+                                        <button class="stepper-btn" type="button" aria-label="Diminuisci quantita">-</button>
+                                        <span class="stepper-value">1</span>
+                                        <button class="stepper-btn" type="button" aria-label="Aumenta quantita">+</button>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="sezione-biglietti">
+                        <h2>Abbonamenti</h2>
+                        <div class="biglietti-grid">
+                            <article class="biglietto-card">
+                                <div class="biglietto-top">
+                                    <div>
+                                        <h2>Settimanale</h2>
+                                        <p class="biglietto-validita">Valido 7 giorni</p>
+                                    </div>
+                                    <div class="biglietto-prezzo">
+                                        <span class="prezzo">€16,00</span>
+                                        <span class="tipo">Aziendale</span>
+                                    </div>
+                                </div>
+                                <div class="biglietto-dettagli">
+                                    <div class="biglietto-meta">
+                                        <div>
+                                            <span>Validita</span>
+                                            <strong>7 giorni</strong>
+                                        </div>
+                                        <div>
+                                            <span>Tipo</span>
+                                            <strong>Aziendale</strong>
+                                        </div>
+                                    </div>
+                                    <div class="quantita">
+                                        <button class="stepper-btn" type="button" aria-label="Diminuisci quantita">-</button>
+                                        <span class="stepper-value">1</span>
+                                        <button class="stepper-btn" type="button" aria-label="Aumenta quantita">+</button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="biglietto-card">
+                                <div class="biglietto-top">
+                                    <div>
+                                        <h2>Mensile</h2>
+                                        <p class="biglietto-validita">Valido 30 giorni</p>
+                                    </div>
+                                    <div class="biglietto-prezzo">
+                                        <span class="prezzo">€45,00</span>
+                                        <span class="tipo">Integrato</span>
+                                    </div>
+                                </div>
+                                <div class="biglietto-dettagli">
+                                    <div class="biglietto-meta">
+                                        <div>
+                                            <span>Validita</span>
+                                            <strong>30 giorni</strong>
+                                        </div>
+                                        <div>
+                                            <span>Tipo</span>
+                                            <strong>Integrato</strong>
+                                        </div>
+                                    </div>
+                                    <div class="quantita">
+                                        <button class="stepper-btn" type="button" aria-label="Diminuisci quantita">-</button>
+                                        <span class="stepper-value">1</span>
+                                        <button class="stepper-btn" type="button" aria-label="Aumenta quantita">+</button>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <aside class="riepilogo" aria-label="Riepilogo ordine">
+                    <h2>Riepilogo ordine</h2>
+                    <div class="riepilogo-lista">
+                        <div class="riepilogo-item">
+                            <span>Corsa singola</span>
+                            <span>x1</span>
+                            <strong>€1,30</strong>
+                        </div>
+                        <div class="riepilogo-item">
+                            <span>Integrato urbano</span>
+                            <span>x1</span>
+                            <strong>€2,50</strong>
+                        </div>
+                    </div>
+                    <div class="riepilogo-totale">
+                        <span>Totale</span>
+                        <strong>€3,80</strong>
+                    </div>
+                    <button class="btn-principale btn-checkout" id="btn-checkout" type="button">Vai al pagamento</button>
+                </aside>
+            </div>
+        </main>
+
+        <div class="modal" id="checkout-modal" aria-hidden="true">
+            <div class="modal-backdrop" data-close="true"></div>
+            <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+                <button class="modal-close" type="button" data-close="true" aria-label="Chiudi">×</button>
+                <h2 id="checkout-title">Checkout</h2>
+                <ol class="checkout-stepper">
+                    <li class="is-active">Email</li>
+                    <li>Pagamento PayPal</li>
+                    <li>Conferma</li>
+                </ol>
+                <div class="checkout-step">
+                    <h3>Email</h3>
+                    <p>Inserisci l'email per ricevere il biglietto.</p>
+                    <input class="checkout-input" type="email" placeholder="email@esempio.it">
+                </div>
+                <div class="checkout-step">
+                    <h3>Pagamento PayPal</h3>
+                    <p>Completa il pagamento con PayPal.</p>
+                    <button class="btn-secondario" type="button">Paga con PayPal</button>
+                </div>
+                <div class="checkout-step">
+                    <h3>Conferma</h3>
+                    <p>Controlla i dati e conferma l'acquisto.</p>
+                    <button class="btn-principale" type="button">Conferma ordine</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const checkoutBtn = document.getElementById("btn-checkout");
+            const checkoutModal = document.getElementById("checkout-modal");
+            const btnCalcola = document.getElementById("btn-calcola");
+            const placeholder = document.getElementById("tariffa-placeholder");
+            const riepilogoTratta = document.getElementById("riepilogo-tratta");
+            const riepilogoTesto = document.getElementById("riepilogo-tratta-testo");
+            const bigliettiRisultati = document.getElementById("biglietti-risultati");
+            const origineInput = document.getElementById("origine");
+            const destinazioneInput = document.getElementById("destinazione");
+            const ppnInput = document.getElementById("ppn");
+
+            const openModal = () => {
+                checkoutModal?.classList.add("is-open");
+                checkoutModal?.setAttribute("aria-hidden", "false");
+            };
+            const closeModal = () => {
+                checkoutModal?.classList.remove("is-open");
+                checkoutModal?.setAttribute("aria-hidden", "true");
+            };
+
+            const showRisultati = () => {
+                placeholder?.classList.add("is-hidden");
+                riepilogoTratta?.classList.add("is-visible");
+                bigliettiRisultati?.classList.add("is-visible");
+            };
+            const resetRisultati = () => {
+                placeholder?.classList.remove("is-hidden");
+                riepilogoTratta?.classList.remove("is-visible");
+                bigliettiRisultati?.classList.remove("is-visible");
+            };
+
+            btnCalcola?.addEventListener("click", () => {
+                const origine = origineInput?.value.trim();
+                const destinazione = destinazioneInput?.value.trim();
+                if (!origine || !destinazione) {
+                    resetRisultati();
+                    return;
+                }
+                if (riepilogoTesto) {
+                    const ppn = ppnInput?.checked ? " (PPN)" : "";
+                    riepilogoTesto.textContent = `${origine} - ${destinazione}${ppn}`;
+                }
+                showRisultati();
+            });
+
+            [origineInput, destinazioneInput, ppnInput].forEach((input) => {
+                input?.addEventListener("input", resetRisultati);
+                input?.addEventListener("change", resetRisultati);
+            });
+
+            checkoutBtn?.addEventListener("click", openModal);
+            checkoutModal?.addEventListener("click", (event) => {
+                if (event.target instanceof HTMLElement && event.target.dataset.close === "true") {
+                    closeModal();
+                }
+            });
+        </script>
+    </body>
+</html>
