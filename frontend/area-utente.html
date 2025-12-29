@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../immagini/logo.ico">
+        <title>Spotted Train - Area Utente</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body class="pagina-area-utente">
+        <nav class="barrasup">
+            <ul>
+                <li class="logo-menu">
+                    <a class="active" href="home">
+                        <img class="logo" src="../immagini/logo.png" alt="Logo Spotted Train">
+                        <span class="logo-testo">
+                            <span class="logo-iniziale">S</span><span class="logo-resto"> potted</span><span class="logo-iniziale">T</span><span class="logo-resto"> rain</span>
+                        </span>
+                    </a>
+                </li>
+                <li><a href="index.html">Ricerca Orari</a></li>
+                <li><a href="traking.html">Traking live</a></li>
+                <li><a href="mappe.html">Mappe Stazioni</a></li>
+                <li><a href="biglietti.html">Biglietti</a></li>
+                <li><a href="avvisi.html">Avvisi</a></li>
+                <li class="pulsante-accedi" id="nav-auth"><a href="accedi.html">Accedi</a></li>
+            </ul>
+        </nav>
+
+        <main class="area-utente">
+            <a class="back-link" href="index.html">← Torna alla home</a>
+            <div class="dashboard-grid">
+                <div class="dashboard-main">
+                    <article class="card card--primary credit-card">
+                        <div class="area-card-head">
+                            <h2>Credito e biglietti attivi</h2>
+                            <span class="area-card-tag">Disponibile</span>
+                        </div>
+                        <p class="saldo-importo">143,00 &euro;</p>
+                        <div class="saldo-azioni">
+                            <input class="input" id="ricarica-input" type="number" min="5" placeholder="Importo ricarica">
+                            <button class="btn-primary btn-ricarica" type="button">Ricarica</button>
+                        </div>
+
+                        <div class="ticket-compact ticket-divider">
+                            <div class="ticket-compact-info">
+                                <span class="badge-ok">Attivo</span>
+                                <h3>Corsa singola</h3>
+                                <p>Napoli Porta Nolana → Torre del Greco</p>
+                                <p class="ticket-meta">Valido fino a: 29/12/2025 – 18:40</p>
+                            </div>
+                            <button class="btn-primary btn-small btn-ticket" type="button" data-open-ticket>Apri biglietto</button>
+                        </div>
+                    </article>
+
+                    <article class="card history-card">
+                        <div class="area-card-head">
+                            <h2>Storico biglietti</h2>
+                            <span class="badge-info badge-demo">Ultimi viaggi</span>
+                        </div>
+                        <ul class="history-list">
+                            <li>
+                                <span class="badge-alert">Scaduto</span>
+                                <div>
+                                    <strong>Corsa singola</strong>
+                                    <p>Napoli Porta Nolana → Sorrento</p>
+                                    <small>Valido fino a: 12/10/2024 – 19:10</small>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="badge-alert">Scaduto</span>
+                                <div>
+                                    <strong>Andata/Ritorno</strong>
+                                    <p>Torre del Greco → Napoli Centrale</p>
+                                    <small>Valido fino a: 03/09/2024 – 08:30</small>
+                                </div>
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+
+                <aside class="dashboard-aside">
+                    <article class="card profile-card">
+                        <div class="profile-avatar" id="profile-avatar">U</div>
+                        <div>
+                            <h2 id="area-user-name">Nome Utente</h2>
+                            <p id="area-user-email">nome@email.it</p>
+                        </div>
+                        <span class="badge-ok status-badge">Profilo attivo</span>
+                    </article>
+
+                    <article class="card">
+                        <div class="area-card-head">
+                            <h2>Metodo di pagamento</h2>
+                        </div>
+                        <p class="metodo-testo">PayPal (demo)</p>
+                        <div class="payment-details">
+                            <span>Metodo salvato: PayPal demo</span>
+                            <span>Ultimo pagamento: 22/12/2025</span>
+                        </div>
+                        <span class="badge-info badge-demo">Demo / Nessun addebito reale</span>
+                        <div class="payment-actions">
+                            <button class="btn-outline btn-small" type="button">Gestisci</button>
+                        </div>
+                    </article>
+
+                    <article class="card quick-info">
+                        <h2>Info rapide</h2>
+                        <div class="quick-row">
+                            <span>Linea preferita</span>
+                            <strong>Napoli - Sorrento</strong>
+                        </div>
+                        <div class="quick-row">
+                            <span>Stato rete</span>
+                            <strong class="status-ok">Regolare</strong>
+                        </div>
+                    </article>
+                </aside>
+            </div>
+        </main>
+
+        <div class="modal ticket-modal" id="ticket-modal" aria-hidden="true">
+            <div class="modal-overlay" data-close-modal></div>
+            <div class="modal-card modal-ticket" role="dialog" aria-modal="true">
+                <div class="modal-header">
+                    <span class="badge-ok">Pagamento completato</span>
+                    <button class="btn-ghost btn-small" type="button" data-close-modal>Chiudi</button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-info">
+                        <h3>Corsa singola</h3>
+                        <p class="ticket-route">Napoli Porta Nolana → Torre del Greco</p>
+                        <p class="ticket-meta">Codice biglietto: <strong>ST-2025-0182</strong></p>
+                        <p class="modal-hint">Mostra il codice al controllo</p>
+                    </div>
+                    <div class="modal-qr qr-fake">
+                        <span class="qr-label">Finto</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>© 2025 Spotted Train. Tutti i diritti riservati.</p>
+        </footer>
+
+        <script src="js/auth.js"></script>
+    </body>
+</html>

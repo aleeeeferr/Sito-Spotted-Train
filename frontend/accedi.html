@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../immagini/logo.ico">
+        <title>Spotted Train</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body class="pagina-accedi">
+        <nav class="barrasup">
+            <ul>
+                <li class="logo-menu">
+                    <a class="active" href="home">
+                        <img class="logo" src="../immagini/logo.png" alt="Logo Spotted Train">
+                        <span class="logo-testo">
+                            <span class="logo-iniziale">S</span><span class="logo-resto"> potted</span><span class="logo-iniziale">T</span><span class="logo-resto"> rain</span>
+                        </span>
+                    </a>
+                </li>
+                <li><a href="index.html">Ricerca Orari</a></li>
+                <li><a href="traking.html">Traking live</a></li>
+                <li><a href="mappe.html">Mappe Stazioni</a></li>
+                <li><a href="biglietti.html">Biglietti</a></li>
+                <li><a href="avvisi.html">Avvisi</a></li>
+                <li class="pulsante-accedi" id="nav-auth"><a href="accedi.html">Accedi</a></li>
+            </ul>
+        </nav>
+
+        <main class="accedi">
+            <div class="accedi-card">
+                <div class="accedi-tabs">
+                    <input type="radio" name="tab-accedi" id="tab-login" checked>
+                    <input type="radio" name="tab-accedi" id="tab-registrati">
+
+                    <h1 class="accedi-title">
+                        <span class="titolo-login">Accedi</span>
+                        <span class="titolo-registrati">Registrati</span>
+                    </h1>
+
+                    <div class="accedi-tab-labels">
+                        <label for="tab-login">Accedi</label>
+                        <label for="tab-registrati">Registrati</label>
+                    </div>
+
+                    <div class="accedi-panels">
+                        <section class="accedi-panel panel-login">
+                            <div class="accedi-campo">
+                                <label for="login-email">Email</label>
+                                <input id="login-email" type="email" placeholder="Inserisci la tua email">
+                            </div>
+                            <div class="accedi-campo">
+                                <label for="login-password">Password</label>
+                                <input id="login-password" type="password" placeholder="Inserisci la tua password">
+                            </div>
+                            <label class="accedi-check">
+                                <input type="checkbox">
+                                Ricordami
+                            </label>
+                            <button class="accedi-btn" type="button">Accedi</button>
+                            <div class="accedi-links">
+                                <p>Non hai un account? <label class="accedi-switch" for="tab-registrati">Registrati</label></p>
+                                <a class="accedi-link" href="#">Password dimenticata?</a>
+                            </div>
+                        </section>
+
+                        <section class="accedi-panel panel-registrati">
+                            <div class="accedi-campo">
+                                <label for="reg-nome">Nome</label>
+                                <input id="reg-nome" type="text" placeholder="Inserisci il tuo nome">
+                            </div>
+                            <div class="accedi-campo">
+                                <label for="reg-email">Email</label>
+                                <input id="reg-email" type="email" placeholder="Inserisci la tua email">
+                            </div>
+                            <div class="accedi-campo">
+                                <label for="reg-password">Password</label>
+                                <input id="reg-password" type="password" placeholder="Crea una password">
+                            </div>
+                            <div class="accedi-campo">
+                                <label for="reg-password2">Conferma password</label>
+                                <input id="reg-password2" type="password" placeholder="Conferma la password">
+                            </div>
+                            <button class="accedi-btn" type="button">Crea account</button>
+                            <div class="accedi-links">
+                                <p>Hai gia un account? <label class="accedi-switch" for="tab-login">Accedi</label></p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="js/auth.js"></script>
+    </body>
+</html>
