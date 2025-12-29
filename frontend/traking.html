@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../immagini/logo.ico">
+        <title>Spotted Train</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body class="pagina-tracking">
+        <nav class="barrasup">
+            <ul>
+                <li class="logo-menu">
+                    <a class="active" href="home">
+                        <img class="logo" src="../immagini/logo.png" alt="Logo Spotted Train">
+                        <span class="logo-testo">
+                            <span class="logo-iniziale">S</span><span class="logo-resto"> potted</span><span class="logo-iniziale">T</span><span class="logo-resto"> rain</span>
+                        </span>
+                    </a>
+                </li>
+                <li><a href="index.html">Ricerca Orari</a></li>
+                <li><a href="traking.html">Traking live</a></li>
+                <li><a href="mappe.html">Mappe Stazioni</a></li>
+                <li><a href="biglietti.html">Biglietti</a></li>
+                <li><a href="avvisi.html">Avvisi</a></li>
+                <li class="pulsante-accedi"><a href="">Accedi</a></li>
+            </ul>
+        </nav>
+
+        <section class="tracking">
+            <div class="blocco-sup">
+                <p class="testo-sup">Live control</p>
+                <h1>Tracking treni</h1>
+                <p class="testo-sotto">
+                    Scegli la linea, imposta la tratta e avvia il live.
+                </p>
+            </div>
+
+            <div class="blocco-base">
+                <div class="blocco blocco-linea">
+                    <h2>Linea</h2>
+                    <div class="campo campo-linea">
+                        <label class="campo-label" for="linea">Seleziona linea</label>
+                        <select id="linea">
+                            <option value="" disabled>Seleziona linea</option>
+                            <option value="napoli-sorrento" selected>Napoli Porta Nolana → Sorrento</option>
+                            <option value="napoli-poggiomarino">Napoli Porta Nolana → Poggiomarino</option>
+                            <option value="napoli-sarno">Napoli Porta Nolana → Sarno</option>
+                            <option value="napoli-torre-greco">Napoli Porta Nolana → Torre Del Greco</option>
+                            <option value="napoli-san-giorgio">Napoli Porta Nolana → San Giorgio a Cremano</option>
+                            <option value="napoli-baiano">Napoli Porta Nolana → Baiano</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="blocco blocco-tratta">
+                    <h2>Tratta</h2>
+                    <div class="tratta">
+                        <div class="campo campo-partenza">
+                            <label class="campo-label" for="partenza">Partenza</label>
+                            <input id="partenza" type="text" placeholder="Seleziona stazione di partenza">
+                        </div>
+                        <div class="campo campo-arrivo">
+                            <label class="campo-label" for="arrivo">Arrivo</label>
+                            <input id="arrivo" type="text" placeholder="Seleziona stazione di arrivo">
+                        </div>
+                    </div>
+                    <div class="azioni azioni-live">
+                        <button class="btn-principale" id="btn-avvia-live" type="button">Avvia Live</button>
+                        <button class="btn-secondario" id="btn-reset-live" type="button">Azzera</button>
+                    </div>
+                </div>
+
+                <div class="live-placeholder" id="live-placeholder">
+                    Premi Avvia Live per iniziare il tracking.
+                </div>
+
+                <div class="live-panel is-hidden" id="live-panel">
+                    <div class="blocco blocco-live">
+                        <div class="live-header">
+                            <h2>Stato Live</h2>
+                            <span class="badge badge-ritardo">+3 min</span>
+                        </div>
+                        <div class="live-info">
+                            <div class="live-row">
+                                <span class="live-label">Treno</span>
+                                <span class="live-value">EAV 8134</span>
+                            </div>
+                            <div class="live-row">
+                                <span class="live-label">Ultimo update</span>
+                                <span class="live-value">12:41</span>
+                            </div>
+                            <div class="live-row">
+                                <span class="live-label">Ultima stazione</span>
+                                <span class="live-value">Ercolano Scavi</span>
+                            </div>
+                            <div class="live-row">
+                                <span class="live-label">Prossima fermata</span>
+                                <span class="live-value">Torre del Greco</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blocco blocco-stazioni">
+                        <h2>Stazioni della linea</h2>
+                        <div class="stazioni-gruppo" data-linea="napoli-sorrento">
+                            <h3>Napoli Porta Nolana - Sorrento</h3>
+                            <ol class="timeline">
+                                <li class="timeline-item stato-passato">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Napoli Porta Nolana</span>
+                                        <span class="timeline-meta">Passata</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-passato">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Napoli Piazza Garibaldi</span>
+                                        <span class="timeline-meta">Passata</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-passato">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Portici Bellavista</span>
+                                        <span class="timeline-meta">Passata</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-attuale">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Ercolano Scavi</span>
+                                        <span class="timeline-meta">Stazione corrente</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Torre del Greco</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Torre Annunziata Oplonti</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Pompei Scavi</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Castellammare di Stabia</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Vico Equense</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Meta</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Piano</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Sorrento</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="stazioni-gruppo nascosto" data-linea="napoli-poggiomarino">
+                            <h3>Napoli Porta Nolana - Poggiomarino</h3>
+                            <ol class="timeline">
+                                <li class="timeline-item stato-passato">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Napoli Porta Nolana</span>
+                                        <span class="timeline-meta">Passata</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-attuale">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Napoli Piazza Garibaldi</span>
+                                        <span class="timeline-meta">Stazione corrente</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">San Giorgio a Cremano</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Cercola</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Ponticelli</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Volla</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Boscoreale</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Poggiomarino</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="stazioni-gruppo nascosto" data-linea="napoli-sarno">
+                            <h3>Napoli Porta Nolana - Sarno</h3>
+                            <ol class="timeline">
+                                <li class="timeline-item stato-passato">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Napoli Porta Nolana</span>
+                                        <span class="timeline-meta">Passata</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-passato">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Napoli Piazza Garibaldi</span>
+                                        <span class="timeline-meta">Passata</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-attuale">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Portici Bellavista</span>
+                                        <span class="timeline-meta">Stazione corrente</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Ercolano Scavi</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Torre del Greco</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Torre Annunziata Oplonti</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Pompei Scavi</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Scafati</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Poggiomarino</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Sarno</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="stazioni-gruppo nascosto" data-linea="napoli-torre-greco">
+                            <h3>Napoli Porta Nolana - Torre Del Greco</h3>
+                            <ol class="timeline">
+                                <li class="timeline-item stato-passato">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Napoli Porta Nolana</span>
+                                        <span class="timeline-meta">Passata</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-attuale">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Napoli Piazza Garibaldi</span>
+                                        <span class="timeline-meta">Stazione corrente</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Portici Bellavista</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Ercolano Scavi</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Torre del Greco</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="stazioni-gruppo nascosto" data-linea="napoli-san-giorgio">
+                            <h3>Napoli Porta Nolana - San Giorgio a Cremano</h3>
+                            <ol class="timeline">
+                                <li class="timeline-item stato-passato">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Napoli Porta Nolana</span>
+                                        <span class="timeline-meta">Passata</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-attuale">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Napoli Piazza Garibaldi</span>
+                                        <span class="timeline-meta">Stazione corrente</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">San Giorgio a Cremano</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="stazioni-gruppo nascosto" data-linea="napoli-baiano">
+                            <h3>Napoli Porta Nolana - Baiano</h3>
+                            <ol class="timeline">
+                                <li class="timeline-item stato-passato">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Napoli Porta Nolana</span>
+                                        <span class="timeline-meta">Passata</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-passato">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Napoli Piazza Garibaldi</span>
+                                        <span class="timeline-meta">Passata</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-attuale">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">San Giorgio a Cremano</span>
+                                        <span class="timeline-meta">Stazione corrente</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Pomigliano d'Arco</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Casalnuovo</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Marigliano</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Mariglianella</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Nola</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Cimitile</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                                <li class="timeline-item stato-futuro">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-nome">Baiano</span>
+                                        <span class="timeline-meta">Prevista</span>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+    
+
+        <footer class="footer">
+            <p>© 2025 Spotted Train. Tutti i diritti riservati.</p>
+        </footer>
+        <script>
+            const btnAvviaLive = document.getElementById("btn-avvia-live");
+            const btnResetLive = document.getElementById("btn-reset-live");
+            const livePanel = document.getElementById("live-panel");
+            const livePlaceholder = document.getElementById("live-placeholder");
+
+            btnAvviaLive?.addEventListener("click", () => {
+                livePanel?.classList.remove("is-hidden");
+                livePlaceholder?.classList.add("is-hidden");
+            });
+
+            btnResetLive?.addEventListener("click", () => {
+                livePanel?.classList.add("is-hidden");
+                livePlaceholder?.classList.remove("is-hidden");
+            });
+        </script>
+    </body>
+</html>
