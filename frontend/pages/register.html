@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../immagini/logo.ico">
+        <title>Spotted Train - Registrati</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body class="pagina-accedi pagina-register">
+        <nav class="barrasup">
+            <ul>
+                <li class="logo-menu">
+                    <a class="active" href="home">
+                        <img class="logo" src="../immagini/logo.png" alt="Logo Spotted Train">
+                        <span class="logo-testo">
+                            <span class="logo-iniziale">S</span><span class="logo-resto"> potted</span><span class="logo-iniziale">T</span><span class="logo-resto"> rain</span>
+                        </span>
+                    </a>
+                </li>
+                <li><a href="index.html">Ricerca Orari</a></li>
+                <li><a href="traking.html">Traking live</a></li>
+                <li><a href="mappe.html">Mappe Stazioni</a></li>
+                <li><a href="biglietti.html">Biglietti</a></li>
+                <li><a href="avvisi.html">Avvisi</a></li>
+                <li class="pulsante-accedi" id="nav-auth"><a href="login.html">Accedi</a></li>
+            </ul>
+        </nav>
+
+        <main class="accedi">
+            <div class="accedi-card">
+                <h1 class="accedi-title">Registrati</h1>
+                <form id="register-form">
+                    <div class="accedi-campo">
+                        <label for="register-name">Nome</label>
+                        <input id="register-name" type="text" placeholder="Inserisci il tuo nome" required>
+                    </div>
+                    <div class="accedi-campo">
+                        <label for="register-email">Email</label>
+                        <input id="register-email" type="email" placeholder="Inserisci la tua email" required>
+                    </div>
+                    <div class="accedi-campo">
+                        <label for="register-password">Password</label>
+                        <input id="register-password" type="password" placeholder="Crea una password" required>
+                    </div>
+                    <div class="accedi-campo">
+                        <label for="register-password2">Conferma password</label>
+                        <input id="register-password2" type="password" placeholder="Conferma la password" required>
+                    </div>
+                    <button class="accedi-btn" type="submit">Crea account</button>
+                </form>
+                <div id="register-error" class="alert alert-danger" style="display: none;"></div>
+                <div class="accedi-links">
+                    <p>Hai gia un account? <a class="accedi-link" href="login.html">Accedi</a></p>
+                </div>
+            </div>
+        </main>
+
+        <script src="js/login.js"></script>
+        <script type="module" src="js/user-dashboard.js"></script>
+    </body>
+</html>

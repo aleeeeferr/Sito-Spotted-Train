@@ -22,7 +22,7 @@
                 <li><a href="mappe.html">Mappe Stazioni</a></li>
                 <li><a href="biglietti.html">Biglietti</a></li>
                 <li><a href="avvisi.html">Avvisi</a></li>
-                <li class="pulsante-accedi" id="nav-auth"><a href="accedi.html">Accedi</a></li>
+                <li class="pulsante-accedi" id="nav-auth"><a href="login.html">Accedi</a></li>
             </ul>
         </nav>
 
@@ -57,6 +57,7 @@
                                 Ricordami
                             </label>
                             <button class="accedi-btn" type="button">Accedi</button>
+                            <div id="login-error" class="alert alert-danger" style="display: none;"></div>
                             <div class="accedi-links">
                                 <p>Non hai un account? <label class="accedi-switch" for="tab-registrati">Registrati</label></p>
                                 <a class="accedi-link" href="#">Password dimenticata?</a>
@@ -81,6 +82,7 @@
                                 <input id="reg-password2" type="password" placeholder="Conferma la password">
                             </div>
                             <button class="accedi-btn" type="button">Crea account</button>
+                            <div id="register-error" class="alert alert-danger" style="display: none;"></div>
                             <div class="accedi-links">
                                 <p>Hai gia un account? <label class="accedi-switch" for="tab-login">Accedi</label></p>
                             </div>
@@ -89,6 +91,6 @@
                 </div>
             </div>
         </main>
-        <script src="js/auth.js"></script>
+        <script type="module" src="js/user-dashboard.js"></script>
     </body>
 </html>

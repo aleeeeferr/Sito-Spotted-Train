@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../immagini/logo.ico">
+        <title>Spotted Train - I miei biglietti</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body class="pagina-area-utente">
+        <nav class="barrasup">
+            <ul>
+                <li class="logo-menu">
+                    <a class="active" href="home">
+                        <img class="logo" src="../immagini/logo.png" alt="Logo Spotted Train">
+                        <span class="logo-testo">
+                            <span class="logo-iniziale">S</span><span class="logo-resto"> potted</span><span class="logo-iniziale">T</span><span class="logo-resto"> rain</span>
+                        </span>
+                    </a>
+                </li>
+                <li><a href="index.html">Ricerca Orari</a></li>
+                <li><a href="traking.html">Traking live</a></li>
+                <li><a href="mappe.html">Mappe Stazioni</a></li>
+                <li><a href="biglietti.html">Biglietti</a></li>
+                <li><a href="avvisi.html">Avvisi</a></li>
+                <li class="pulsante-accedi" id="nav-auth"><a href="login.html">Accedi</a></li>
+            </ul>
+        </nav>
+
+        <main class="area-utente">
+            <a class="back-link" href="index.html">← Torna alla home</a>
+            <div class="dashboard-grid">
+                <div class="dashboard-main">
+                    <article class="card">
+                        <div class="area-card-head">
+                            <h2>I tuoi biglietti</h2>
+                            <span class="area-card-tag">Demo</span>
+                        </div>
+                        <div id="user-ticket-list"></div>
+                        <p class="biglietti-vuoto" id="user-ticket-empty">Non hai ancora biglietti salvati.</p>
+                    </article>
+                </div>
+
+                <aside class="dashboard-aside">
+                    <article class="card profile-card">
+                        <div class="profile-avatar" id="profile-avatar">U</div>
+                        <div>
+                            <h2 id="area-user-name">Nome Utente</h2>
+                            <p id="area-user-email">nome@email.it</p>
+                        </div>
+                        <span class="badge-ok status-badge">Profilo attivo</span>
+                        <span class="badge-info status-badge" id="area-user-credit">Credito: €0,00</span>
+                    </article>
+                </aside>
+            </div>
+        </main>
+
+        <script type="module" src="js/user.js"></script>
+    </body>
+</html>

@@ -22,7 +22,7 @@
                 <li><a href="mappe.html">Mappe Stazioni</a></li>
                 <li><a href="biglietti.html">Biglietti</a></li>
                 <li><a href="avvisi.html">Avvisi</a></li>
-                <li class="pulsante-accedi" id="nav-auth"><a href="accedi.html">Accedi</a></li>
+                <li class="pulsante-accedi" id="nav-auth"><a href="login.html">Accedi</a></li>
             </ul>
         </nav>
 
@@ -32,49 +32,25 @@
                 <div class="dashboard-main">
                     <article class="card card--primary credit-card">
                         <div class="area-card-head">
-                            <h2>Credito e biglietti attivi</h2>
+                            <h2>Credito e biglietti</h2>
                             <span class="area-card-tag">Disponibile</span>
                         </div>
-                        <p class="saldo-importo">143,00 &euro;</p>
+                        <p class="saldo-importo" id="user-credit">0,00 &euro;</p>
                         <div class="saldo-azioni">
                             <input class="input" id="ricarica-input" type="number" min="5" placeholder="Importo ricarica">
                             <button class="btn-primary btn-ricarica" type="button">Ricarica</button>
                         </div>
-
-                        <div class="ticket-compact ticket-divider">
-                            <div class="ticket-compact-info">
-                                <span class="badge-ok">Attivo</span>
-                                <h3>Corsa singola</h3>
-                                <p>Napoli Porta Nolana → Torre del Greco</p>
-                                <p class="ticket-meta">Valido fino a: 29/12/2025 – 18:40</p>
-                            </div>
-                            <button class="btn-primary btn-small btn-ticket" type="button" data-open-ticket>Apri biglietto</button>
-                        </div>
+                        <div id="active-ticket-list"></div>
+                        <p class="biglietti-vuoto" id="active-ticket-empty">Nessun biglietto attivo.</p>
                     </article>
 
                     <article class="card history-card">
                         <div class="area-card-head">
-                            <h2>Storico biglietti</h2>
-                            <span class="badge-info badge-demo">Ultimi viaggi</span>
+                            <h2>Movimenti credito</h2>
+                            <span class="badge-info badge-demo">Ultime operazioni</span>
                         </div>
-                        <ul class="history-list">
-                            <li>
-                                <span class="badge-alert">Scaduto</span>
-                                <div>
-                                    <strong>Corsa singola</strong>
-                                    <p>Napoli Porta Nolana → Sorrento</p>
-                                    <small>Valido fino a: 12/10/2024 – 19:10</small>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="badge-alert">Scaduto</span>
-                                <div>
-                                    <strong>Andata/Ritorno</strong>
-                                    <p>Torre del Greco → Napoli Centrale</p>
-                                    <small>Valido fino a: 03/09/2024 – 08:30</small>
-                                </div>
-                            </li>
-                        </ul>
+                        <ul class="history-list" id="credit-movements"></ul>
+                        <p class="biglietti-vuoto" id="credit-movements-empty">Nessuna operazione registrata.</p>
                     </article>
                 </div>
 
@@ -86,21 +62,6 @@
                             <p id="area-user-email">nome@email.it</p>
                         </div>
                         <span class="badge-ok status-badge">Profilo attivo</span>
-                    </article>
-
-                    <article class="card">
-                        <div class="area-card-head">
-                            <h2>Metodo di pagamento</h2>
-                        </div>
-                        <p class="metodo-testo">PayPal (demo)</p>
-                        <div class="payment-details">
-                            <span>Metodo salvato: PayPal demo</span>
-                            <span>Ultimo pagamento: 22/12/2025</span>
-                        </div>
-                        <span class="badge-info badge-demo">Demo / Nessun addebito reale</span>
-                        <div class="payment-actions">
-                            <button class="btn-outline btn-small" type="button">Gestisci</button>
-                        </div>
                     </article>
 
                     <article class="card quick-info">
@@ -143,6 +104,6 @@
             <p>© 2025 Spotted Train. Tutti i diritti riservati.</p>
         </footer>
 
-        <script src="js/auth.js"></script>
+        <script type="module" src="js/area-user.js"></script>
     </body>
 </html>
