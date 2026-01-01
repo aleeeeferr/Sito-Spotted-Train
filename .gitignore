@@ -1,24 +1,28 @@
-# OS metadata
+# Metadati di sistema
 .DS_Store
 
-# Node dependencies
+# Dipendenze Node
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+*.log
 
-# Environment and editor settings
+# Variabili d'ambiente ed editor
 .env
 .env.*
+.env.local
 .vscode/
 .idea/
 
-# Build output
+# Output di build e test
 dist/
 build/
 coverage/
 
-# Local SDKs and configs not meant for source control
-google_cloud/
+# SDK e config locali (non versionare)
 .gcloud/
+
+# Dati locali Docker
+mongo-data/

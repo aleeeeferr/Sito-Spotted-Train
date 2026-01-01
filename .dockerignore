@@ -1,10 +1,18 @@
+# Dipendenze e build frontend
 frontend/node_modules
 frontend/dist
 frontend/.vite
-frontend/.DS_Store
 frontend/npm-debug.log
+frontend/.DS_Store
+
+# File/venv Python (se presenti)
 api/__pycache__
 api/*.pyc
-api/.DS_Store
 api/.venv
+api/.DS_Store
+
+# Git
 .git
+
+# Log generici
+*.log
