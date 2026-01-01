@@ -22,7 +22,7 @@
                 <li><a href="mappe.html">Mappe Stazioni</a></li>
                 <li><a href="biglietti.html">Biglietti</a></li>
                 <li><a href="avvisi.html">Avvisi</a></li>
-                <li class="pulsante-accedi"><a href="">Accedi</a></li>
+                <li class="pulsante-accedi" id="nav-auth"><a href="login.html">Accedi</a></li>
             </ul>
         </nav>
 
@@ -45,11 +45,13 @@
                                         <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
                                     </svg>
                                 </span>
-                                <input id="partenza" type="text" placeholder="Seleziona una stazione">
+                                <select id="fromStation">
+                                    <option value="">Seleziona una stazione</option>
+                                </select>
                             </div>
                         </div>
 
-                        <button class="swap-btn" type="button" aria-label="Inverti stazioni" title="Inverti stazioni">
+                        <button class="swap-btn" id="swapStations" type="button" aria-label="Inverti stazioni" title="Inverti stazioni">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M7 3v14"></path>
                                 <path d="M4 6l3-3 3 3"></path>
@@ -67,11 +69,12 @@
                                         <path d="M6.637 10.07 13.5 3.207 7.65 8.708a.5.5 0 0 0-.13.196l-.883 2.65z"></path>
                                     </svg>
                                 </span>
-                                <input id="arrivo" type="text" placeholder="Seleziona una stazione">
+                                <select id="toStation">
+                                    <option value="">Seleziona una stazione</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-
                     <div class="campo campo-orario">
                         <div class="campo-header">
                             <label class="campo-label" for="ora">Orario</label>
@@ -93,53 +96,14 @@
                     </div>
                 </div>
                 <div class="azioni">
-                    <button class="btn-principale" id="btn-cerca" type="button">Cerca</button>
+                    <button class="btn-principale" id="searchBtn" type="button">Cerca</button>
                     <button class="btn-secondario btn-reset" id="btn-reset" type="button">Reset</button>
                 </div>
             </div>
-            <div class="risultati" id="risultati">
+            <div class="risultati" id="searchResults">
                 <h2>Orari disponibili</h2>
-                <ul class="risultati-lista">
-                    <li>
-                        <div class="risultato-top">
-                            <span class="treno">Treno 2391</span>
-                            <span class="tipo">DD</span>
-                            <span class="ritardo ritardo-positivo">+5'</span>
-                        </div>
-                        <div class="risultato-bottom">
-                            <span class="dettaglio"><strong>Partenza</strong> 07:20</span>
-                            <span class="dettaglio"><strong>Arrivo</strong> 08:28</span>
-                            <span class="dettaglio"><strong>Binario</strong> 3</span>
-                            <span class="dettaglio info">Via Pompei</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="risultato-top">
-                            <span class="treno">Treno 1287</span>
-                            <span class="tipo">EXP</span>
-                            <span class="ritardo ritardo-zero">In orario</span>
-                        </div>
-                        <div class="risultato-bottom">
-                            <span class="dettaglio"><strong>Partenza</strong> 08:05</span>
-                            <span class="dettaglio"><strong>Arrivo</strong> 09:02</span>
-                            <span class="dettaglio"><strong>Binario</strong> 5</span>
-                            <span class="dettaglio info">Via Torre Annunziata</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="risultato-top">
-                            <span class="treno">Treno 5514</span>
-                            <span class="tipo">R</span>
-                            <span class="ritardo ritardo-negativo">-2'</span>
-                        </div>
-                        <div class="risultato-bottom">
-                            <span class="dettaglio"><strong>Partenza</strong> 09:10</span>
-                            <span class="dettaglio"><strong>Arrivo</strong> 10:15</span>
-                            <span class="dettaglio"><strong>Binario</strong> 1</span>
-                            <span class="dettaglio info">Via Castellammare</span>
-                        </div>
-                    </li>
-                </ul>
+                <p class="biglietti-vuoto" id="risultati-status">Seleziona una stazione e premi Cerca.</p>
+                <ul class="risultati-lista"></ul>
             </div>
         </section>
 
@@ -148,28 +112,12 @@
         </footer>
 
         <script>
-            const oraInput = document.getElementById("ora");
-            if (oraInput) {
-                const now = new Date();
-                const hh = String(now.getHours()).padStart(2, "0");
-                const mm = String(now.getMinutes()).padStart(2, "0");
-                oraInput.value = `${hh}:${mm}`;
-            }
-
-            const btnCerca = document.getElementById("btn-cerca");
-            const btnReset = document.getElementById("btn-reset");
-            const risultati = document.getElementById("risultati");
-
-            if (btnCerca && risultati) {
-                btnCerca.addEventListener("click", () => {
-                    risultati.classList.add("attivo");
-                });
-            }
-            if (btnReset && risultati) {
-                btnReset.addEventListener("click", () => {
-                    risultati.classList.remove("attivo");
-                });
-            }
+            window.FORCE_STORAGE_PROXY = true;
+            window.STORAGE_PROXY_BASE = "https://corsproxy.io/?";
         </script>
+        <script src="js/firebase-config.js"></script>
+        <script type="module" src="js/user-dashboard.js"></script>
+        <script type="module" src="js/stationsMeta.js"></script>
+
     </body>
 </html>
