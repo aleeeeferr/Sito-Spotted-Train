@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../immagini/logo.ico">
+        <title>Spotted Train</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body class="pagina-avvisi">
+        <nav class="barrasup">
+            <ul>
+                <li class="logo-menu">
+                    <a class="active" href="home">
+                        <img class="logo" src="../immagini/logo.png" alt="Logo Spotted Train">
+                        <span class="logo-testo">
+                            <span class="logo-iniziale">S</span><span class="logo-resto"> potted</span><span class="logo-iniziale">T</span><span class="logo-resto"> rain</span>
+                        </span>
+                    </a>
+                </li>
+                <li><a href="index.html">Ricerca Orari</a></li>
+                <li><a href="traking.html">Traking live</a></li>
+                <li><a href="mappe.html">Mappe Stazioni</a></li>
+                <li><a href="biglietti.html">Biglietti</a></li>
+                <li><a href="avvisi.html">Avvisi</a></li>
+                <li class="pulsante-accedi" id="nav-auth"><a href="login.html">Accedi</a></li>
+            </ul>
+        </nav>
+
+        <main class="avvisi">
+            <header class="avvisi-header">
+                <p class="avvisi-eyebrow">AVVISI</p>
+                <h1>Avvisi di servizio</h1>
+                <p class="avvisi-sub">
+                    Ritardi, soppressioni, scioperi e note in una veste coerente col resto del sito.
+                </p>
+            </header>
+
+            <section class="avvisi-card">
+                <div class="avvisi-card-head">
+                    <h2>Situazione aggiornata</h2>
+                    <p>Consulta gli avvisi attivi per categoria.</p>
+                </div>
+
+                <div class="avvisi-grid">
+                    <section class="avvisi-box">
+                        <h3>Ritardi</h3>
+                        <div class="avvisi-lista" data-avvisi-section="ritardi"></div>
+                    </section>
+                    <section class="avvisi-box">
+                        <h3>Soppressioni</h3>
+                        <div class="avvisi-lista" data-avvisi-section="soppressioni"></div>
+                    </section>
+                    <section class="avvisi-box">
+                        <h3>Scioperi</h3>
+                        <div class="avvisi-lista" data-avvisi-section="scioperi"></div>
+                    </section>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <p>© 2025 Spotted Train. Tutti i diritti riservati.</p>
+        </footer>
+        <script src="js/firebase-config.js"></script>
+        <script type="module" src="js/avvisi.js"></script>
+        <script type="module" src="js/user-dashboard.js"></script>
+    </body>
+</html>
