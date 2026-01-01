@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../immagini/logo.ico">
+        <title>Spotted Train - Biglietto confermato</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body class="pagina-biglietti">
+        <nav class="barrasup">
+            <ul>
+                <li class="logo-menu">
+                    <a class="active" href="home">
+                        <img class="logo" src="../immagini/logo.png" alt="Logo Spotted Train">
+                        <span class="logo-testo">
+                            <span class="logo-iniziale">S</span><span class="logo-resto"> potted</span><span class="logo-iniziale">T</span><span class="logo-resto"> rain</span>
+                        </span>
+                    </a>
+                </li>
+                <li><a href="index.html">Ricerca Orari</a></li>
+                <li><a href="traking.html">Traking live</a></li>
+                <li><a href="mappe.html">Mappe Stazioni</a></li>
+                <li><a href="biglietti.html">Biglietti</a></li>
+                <li><a href="avvisi.html">Avvisi</a></li>
+                <li class="pulsante-accedi" id="nav-auth"><a href="login.html">Accedi</a></li>
+            </ul>
+        </nav>
+
+        <main class="biglietti">
+            <header class="biglietti-hero">
+                <p class="biglietti-eyebrow">Conferma</p>
+                <h1>Biglietto acquistato</h1>
+                <p class="biglietti-sub">Trovi qui il riepilogo del tuo acquisto demo.</p>
+            </header>
+
+            <section class="card ticket-success-card" id="ticket-success">
+                <h2>Dettagli biglietto</h2>
+                <div class="ticket-success-grid">
+                    <div class="ticket-success-info">
+                        <span class="badge-ok">Pagamento completato</span>
+                        <h3 id="ticketLabel">Caricamento in corso...</h3>
+                        <p id="ticketSummary">Tratta in aggiornamento</p>
+                        <p class="ticket-meta" id="ticketMeta">Codice biglietto: —</p>
+                        <p class="ticket-meta" id="ticketValidity">Validità: —</p>
+                        <p class="ticket-meta" id="ticketTimestamp">Emesso: —</p>
+                    </div>
+                    <div class="ticket-success-qr">
+                        <div class="qr-frame">
+                            <img id="ticketQr" src="" alt="QR del biglietto" width="220" height="220">
+                        </div>
+                        <p class="ticket-meta">Mostra il codice al controllo</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="saldo-azioni" style="margin-top: 20px;">
+                <a class="btn-primary" href="utente.html">Vedi area utente</a>
+                <a class="btn-primary" href="biglietti.html">Acquista un altro biglietto</a>
+                <a class="btn-outline" href="index.html">Torna alla home</a>
+            </div>
+        </main>
+
+        <script type="module" src="js/user-dashboard.js"></script>
+        <script src="js/biglietto-successo.js"></script>
+    </body>
+</html>

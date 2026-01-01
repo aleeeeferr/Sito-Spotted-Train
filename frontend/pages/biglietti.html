@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../immagini/logo.ico">
+        <title>Spotted Train</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body class="pagina-biglietti">
+        <nav class="barrasup">
+            <ul>
+                <li class="logo-menu">
+                    <a class="active" href="home">
+                        <img class="logo" src="../immagini/logo.png" alt="Logo Spotted Train">
+                        <span class="logo-testo">
+                            <span class="logo-iniziale">S</span><span class="logo-resto"> potted</span><span class="logo-iniziale">T</span><span class="logo-resto"> rain</span>
+                        </span>
+                    </a>
+                </li>
+                <li><a href="index.html">Ricerca Orari</a></li>
+                <li><a href="traking.html">Traking live</a></li>
+                <li><a href="mappe.html">Mappe Stazioni</a></li>
+                <li><a href="biglietti.html">Biglietti</a></li>
+                <li><a href="avvisi.html">Avvisi</a></li>
+                <li class="pulsante-accedi" id="nav-auth"><a href="login.html">Accedi</a></li>
+            </ul>
+        </nav>
+
+        <main class="biglietti">
+            <header class="biglietti-hero">
+                <p class="biglietti-eyebrow">Biglietti</p>
+                <h1>Acquista il tuo titolo di viaggio</h1>
+                <p class="biglietti-sub">
+                    Seleziona il biglietto, scegli la quantita e aggiungilo al riepilogo.
+                </p>
+            </header>
+
+            <form class="biglietti-form" id="ticket-form">
+                <div class="form-row">
+                    <div class="campo campo-origine">
+                        <label class="campo-label" for="origine">Origine</label>
+                        <input id="origine" name="origine" type="text" list="station-options" placeholder="Seleziona origine" autocomplete="off">
+                    </div>
+                    <div class="campo campo-destinazione">
+                        <label class="campo-label" for="destinazione">Destinazione</label>
+                        <input id="destinazione" name="destinazione" type="text" list="station-options" placeholder="Seleziona destinazione" autocomplete="off">
+                    </div>
+                </div>
+                <label class="ppn-row" for="ppn">
+                    <input id="ppn" name="ppn" type="checkbox">
+                    Con passaggio su Napoli
+                </label>
+                <button class="btn-principale btn-calcola" id="ticket-submit" type="submit">Calcola tariffa</button>
+            </form>
+
+            <datalist id="station-options"></datalist>
+
+            <div class="tariffa-placeholder" id="ticket-status">
+                <span class="placeholder-icon" aria-hidden="true">i</span>
+                <div>
+                    <h3>Inserisci la tratta</h3>
+                    <p>Inserisci origine e destinazione e calcola la tariffa per vedere le opzioni.</p>
+                </div>
+            </div>
+
+            <div class="riepilogo-tratta" id="riepilogo-tratta">
+                <div>
+                    <span class="riepilogo-label">Tratta</span>
+                    <strong id="riepilogo-tratta-testo">-</strong>
+                </div>
+                <div class="riepilogo-prezzo">
+                    <span>Tariffa base</span>
+                    <strong id="riepilogo-prezzo">-</strong>
+                </div>
+            </div>
+
+            <div class="biglietti-layout" id="ticket-result">
+                <section class="biglietti-lista" id="ticket-preview" aria-label="Tipi di biglietto">
+                    <div class="sezione-biglietti">
+                        <h2>Biglietti</h2>
+                        <div class="biglietti-grid" data-ticket-grid="biglietti"></div>
+                    </div>
+
+                    <div class="sezione-biglietti">
+                        <h2>Abbonamenti</h2>
+                        <div class="biglietti-grid" data-ticket-grid="abbonamenti"></div>
+                    </div>
+                </section>
+
+                <aside class="riepilogo" id="ticket-cart" aria-label="Riepilogo ordine"></aside>
+            </div>
+        </main>
+
+        <div class="modal" id="payment-modal" aria-hidden="true">
+            <div class="modal-backdrop" data-close-payment="true"></div>
+            <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="payment-title">
+                <button class="modal-close" type="button" data-close-payment="true" aria-label="Chiudi">×</button>
+                <h2 id="payment-title">Checkout</h2>
+                <div id="payment-summary"></div>
+                <div id="paypal-button-container"></div>
+                <div id="payment-feedback"></div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>© 2025 Spotted Train. Tutti i diritti riservati.</p>
+        </footer>
+
+        <script type="module" src="js/tickets.js"></script>
+        <script type="module" src="js/user-dashboard.js"></script>
+    </body>
+</html>
