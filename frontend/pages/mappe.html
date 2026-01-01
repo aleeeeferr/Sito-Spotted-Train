@@ -23,7 +23,7 @@
                 <li><a href="mappe.html">Mappe Stazioni</a></li>
                 <li><a href="biglietti.html">Biglietti</a></li>
                 <li><a href="avvisi.html">Avvisi</a></li>
-                <li class="pulsante-accedi"><a href="">Accedi</a></li>
+                <li class="pulsante-accedi" id="nav-auth"><a href="login.html">Accedi</a></li>
             </ul>
         </nav>
         <main class="mappe">
@@ -69,6 +69,7 @@
                                     </div>
                                 </div>
                                 <button class="btn-secondario btn-linea" type="button">Apri dettagli</button>
+                                <div class="linea-stazioni" data-linea-stazioni></div>
                             </div>
                         </article>
 
@@ -102,6 +103,7 @@
                                     </div>
                                 </div>
                                 <button class="btn-secondario btn-linea" type="button">Apri dettagli</button>
+                                <div class="linea-stazioni" data-linea-stazioni></div>
                             </div>
                         </article>
 
@@ -135,6 +137,41 @@
                                     </div>
                                 </div>
                                 <button class="btn-secondario btn-linea" type="button">Apri dettagli</button>
+                                <div class="linea-stazioni" data-linea-stazioni></div>
+                            </div>
+                        </article>
+
+                        <article class="linea-card linea-torre" data-linea="napoli-torre" role="button" tabindex="0" aria-expanded="false">
+                            <div class="linea-head">
+                                <div class="linea-titolo">
+                                    <span class="linea-dot" aria-hidden="true"></span>
+                                    <div>
+                                        <h3>Napoli - Torre del Greco</h3>
+                                    </div>
+                                </div>
+                                <span class="linea-badge">13 fermate</span>
+                            </div>
+                            <div class="linea-dettagli">
+                                <div class="linea-info">
+                                    <div>
+                                        <span>Tratte</span>
+                                        <strong>3</strong>
+                                    </div>
+                                    <div>
+                                        <span>Fermate</span>
+                                        <strong>13</strong>
+                                    </div>
+                                    <div>
+                                        <span>Durata</span>
+                                        <strong>0h 35m</strong>
+                                    </div>
+                                    <div>
+                                        <span>Stazioni</span>
+                                        <strong>Napoli - Torre del Greco</strong>
+                                    </div>
+                                </div>
+                                <button class="btn-secondario btn-linea" type="button">Apri dettagli</button>
+                                <div class="linea-stazioni" data-linea-stazioni></div>
                             </div>
                         </article>
 
@@ -168,45 +205,15 @@
                                     </div>
                                 </div>
                                 <button class="btn-secondario btn-linea" type="button">Apri dettagli</button>
+                                <div class="linea-stazioni" data-linea-stazioni></div>
                             </div>
                         </article>
                     </div>
                 </aside>
             </div>
         </main>
-
+        <script type="module" src="js/user-dashboard.js"></script>
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-        <script>
-            const map = L.map("map", { zoomControl: false, attributionControl: false })
-                .setView([40.85, 14.27], 11);
-            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
-
-            const cards = document.querySelectorAll(".linea-card");
-            const panel = document.querySelector(".linee-lista");
-
-            const setActiveLine = (linea) => {
-                cards.forEach((card) => {
-                    const isActive = card.dataset.linea === linea;
-                    card.classList.toggle("is-active", isActive);
-                    card.setAttribute("aria-expanded", isActive ? "true" : "false");
-                });
-            };
-
-            panel?.addEventListener("click", (event) => {
-                const card = event.target.closest(".linea-card");
-                if (card?.dataset.linea) {
-                    setActiveLine(card.dataset.linea);
-                }
-            });
-            panel?.addEventListener("keydown", (event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                    const card = event.target.closest(".linea-card");
-                    if (card?.dataset.linea) {
-                        event.preventDefault();
-                        setActiveLine(card.dataset.linea);
-                    }
-                }
-            });
-        </script>
+        <script src="js/map.js"></script>
     </body>
 </html>

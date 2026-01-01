@@ -22,7 +22,7 @@
                 <li><a href="mappe.html">Mappe Stazioni</a></li>
                 <li><a href="biglietti.html">Biglietti</a></li>
                 <li><a href="avvisi.html">Avvisi</a></li>
-                <li class="pulsante-accedi"><a href="">Accedi</a></li>
+                <li class="pulsante-accedi" id="nav-auth"><a href="login.html">Accedi</a></li>
             </ul>
         </nav>
 
@@ -41,13 +41,7 @@
                     <div class="campo campo-linea">
                         <label class="campo-label" for="linea">Seleziona linea</label>
                         <select id="linea">
-                            <option value="" disabled>Seleziona linea</option>
-                            <option value="napoli-sorrento" selected>Napoli Porta Nolana → Sorrento</option>
-                            <option value="napoli-poggiomarino">Napoli Porta Nolana → Poggiomarino</option>
-                            <option value="napoli-sarno">Napoli Porta Nolana → Sarno</option>
-                            <option value="napoli-torre-greco">Napoli Porta Nolana → Torre Del Greco</option>
-                            <option value="napoli-san-giorgio">Napoli Porta Nolana → San Giorgio a Cremano</option>
-                            <option value="napoli-baiano">Napoli Porta Nolana → Baiano</option>
+                            <option value="">Seleziona linea</option>
                         </select>
                     </div>
                 </div>
@@ -75,27 +69,37 @@
                 </div>
 
                 <div class="live-panel is-hidden" id="live-panel">
+                    <div class="blocco blocco-orari">
+                        <div class="live-header">
+                            <h2>Orari disponibili</h2>
+                            <button class="btn-secondario" id="open-train-picker" type="button">Apri orari</button>
+                        </div>
+                        <div id="train-picker-empty" class="train-picker-empty">
+                            Seleziona una linea e apri gli orari per scegliere il treno.
+                        </div>
+                        <div id="train-picker" class="train-picker"></div>
+                    </div>
                     <div class="blocco blocco-live">
                         <div class="live-header">
                             <h2>Stato Live</h2>
-                            <span class="badge badge-ritardo">+3 min</span>
+                            <span class="badge badge-ritardo" id="live-delay">--</span>
                         </div>
                         <div class="live-info">
                             <div class="live-row">
                                 <span class="live-label">Treno</span>
-                                <span class="live-value">EAV 8134</span>
+                                <span class="live-value" id="live-train">--</span>
                             </div>
                             <div class="live-row">
                                 <span class="live-label">Ultimo update</span>
-                                <span class="live-value">12:41</span>
+                                <span class="live-value" id="live-update">--:--</span>
                             </div>
                             <div class="live-row">
                                 <span class="live-label">Ultima stazione</span>
-                                <span class="live-value">Ercolano Scavi</span>
+                                <span class="live-value" id="live-last-stop">--</span>
                             </div>
                             <div class="live-row">
                                 <span class="live-label">Prossima fermata</span>
-                                <span class="live-value">Torre del Greco</span>
+                                <span class="live-value" id="live-next-stop">--</span>
                             </div>
                         </div>
                     </div>
@@ -327,7 +331,7 @@
                                 </li>
                             </ol>
                         </div>
-                        <div class="stazioni-gruppo nascosto" data-linea="napoli-torre-greco">
+                        <div class="stazioni-gruppo nascosto" data-linea="napoli-torre">
                             <h3>Napoli Porta Nolana - Torre Del Greco</h3>
                             <ol class="timeline">
                                 <li class="timeline-item stato-passato">
@@ -478,6 +482,9 @@
         <footer class="footer">
             <p>© 2025 Spotted Train. Tutti i diritti riservati.</p>
         </footer>
+        <script src="js/firebase-config.js"></script>
+        <script type="module" src="js/user-dashboard.js"></script>
+        <script type="module" src="js/tracking.js"></script>
         <script>
             const btnAvviaLive = document.getElementById("btn-avvia-live");
             const btnResetLive = document.getElementById("btn-reset-live");

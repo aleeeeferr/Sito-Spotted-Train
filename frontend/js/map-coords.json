@@ -1,0 +1,350 @@
+{
+  "Napoli Porta Nolana": {
+    "lat": 40.849526,
+    "lng": 14.269761
+  },
+  "Napoli Garibaldi": {
+    "lat": 40.850735,
+    "lng": 14.274303
+  },
+  "San Giorgio a Cremano": {
+    "lat": 40.833468,
+    "lng": 14.337294
+  },
+  "Portici Bellavista": {
+    "lat": 40.822046,
+    "lng": 14.343459
+  },
+  "Ercolano Scavi": {
+    "lat": 40.808435,
+    "lng": 14.355569
+  },
+  "Torre Del Greco": {
+    "lat": 40.793337,
+    "lng": 14.369877
+  },
+  "Torre Annunziata - Oplonti": {
+    "lat": 40.759776,
+    "lng": 14.450877
+  },
+  "Villa Regina": {
+    "lat": 40.757254,
+    "lng": 14.470271
+  },
+  "Pompei Scavi Villa Dei Misteri": {
+    "lat": 40.748626,
+    "lng": 14.481073
+  },
+  "Moregine": {
+    "lat": 40.7382268,
+    "lng": 14.4850746
+  },
+  "Pioppaino": {
+    "lat": 40.718911,
+    "lng": 14.491708
+  },
+  "Stabia Scavi": {
+    "lat": 40.703898,
+    "lng": 14.490334
+  },
+  "Castellammare Di Stabia": {
+    "lat": 40.695012,
+    "lng": 14.482626
+  },
+  "Vico Equense": {
+    "lat": 40.663002,
+    "lng": 14.430031
+  },
+  "Seiano": {
+    "lat": 40.656238,
+    "lng": 14.426988
+  },
+  "Meta": {
+    "lat": 40.640435,
+    "lng": 14.416175
+  },
+  "Piano": {
+    "lat": 40.635052,
+    "lng": 14.410347
+  },
+  "Sant'Agnello": {
+    "lat": 40.631192,
+    "lng": 14.397927
+  },
+  "Sorrento": {
+    "lat": 40.62556,
+    "lng": 14.379425
+  },
+  "Via Gianturco": {
+    "lat": 40.846043,
+    "lng": 14.287206
+  },
+  "San Giovanni a Teduccio": {
+    "lat": 40.841776,
+    "lng": 14.299993
+  },
+  "Barra": {
+    "lat": 40.844125,
+    "lng": 14.314147
+  },
+  "Santa Maria Del Pozzo": {
+    "lat": 40.840128,
+    "lng": 14.327769
+  },
+  "Cavalli Di Bronzo": {
+    "lat": 40.828916,
+    "lng": 14.340609
+  },
+  "Portici Via Libertà": {
+    "lat": 40.816882,
+    "lng": 14.346216
+  },
+  "Ercolano Miglio D'Oro": {
+    "lat": 40.802104,
+    "lng": 14.361475
+  },
+  "Via Sant'Antonio": {
+    "lat": 40.784283,
+    "lng": 14.384268
+  },
+  "Via Del Monte": {
+    "lat": 40.778022,
+    "lng": 14.392697
+  },
+  "Villa Delle Ginestre": {
+    "lat": 40.772343,
+    "lng": 14.408317
+  },
+  "Leopardi": {
+    "lat": 40.766157,
+    "lng": 14.417742
+  },
+  "Trecase": {
+    "lat": 40.761941,
+    "lng": 14.439563
+  },
+  "Boscotrecase": {
+    "lat": 40.76864,
+    "lng": 14.462054
+  },
+  "Boscoreale": {
+    "lat": 40.770033,
+    "lng": 14.474448
+  },
+  "Pompei Santuario": {
+    "lat": 40.751272,
+    "lng": 14.501682
+  },
+  "Scafati": {
+    "lat": 40.753643,
+    "lng": 14.524151
+  },
+  "San Pietro": {
+    "lat": 40.760671,
+    "lng": 14.534356
+  },
+  "Via Cangiani": {
+    "lat": 40.785675,
+    "lng": 14.537639
+  },
+  "Poggiomarino": {
+    "lat": 40.801116,
+    "lng": 14.539853
+  },
+  "Ponticelli": {
+    "lat": 40.850966,
+    "lng": 14.33352
+  },
+  "Vesuvio De Meis (SA)": {
+    "lat": 40.8517,
+    "lng": 14.339127
+  },
+  "Cercola": {
+    "lat": 40.856294,
+    "lng": 14.35548
+  },
+  "Pollena Trocchia": {
+    "lat": 40.859898,
+    "lng": 14.379796
+  },
+  "Guindazzi": {
+    "lat": 40.861867,
+    "lng": 14.383942
+  },
+  "Madonna Dell'Arco": {
+    "lat": 40.867008,
+    "lng": 14.389347
+  },
+  "Sant'Anastasia": {
+    "lat": 40.870085,
+    "lng": 14.400355
+  },
+  "Villa Augustea": {
+    "lat": 40.873293,
+    "lng": 14.425985
+  },
+  "Somma Vesuviana": {
+    "lat": 40.874042,
+    "lng": 14.43845
+  },
+  "Rione Trieste": {
+    "lat": 40.87025,
+    "lng": 14.461915
+  },
+  "Ottaviano": {
+    "lat": 40.852987,
+    "lng": 14.480606
+  },
+  "S. Leonardo": {
+    "lat": 40.843232,
+    "lng": 14.491985
+  },
+  "San Giuseppe": {
+    "lat": 40.837761,
+    "lng": 14.500935
+  },
+  "Casilli": {
+    "lat": 40.826856,
+    "lng": 14.500416
+  },
+  "Terzigno": {
+    "lat": 40.814354,
+    "lng": 14.497291
+  },
+  "Flocco": {
+    "lat": 40.8037,
+    "lng": 14.531537
+  },
+  "Striano": {
+    "lat": 40.811924,
+    "lng": 14.57721
+  },
+  "San Valentino": {
+    "lat": 40.797638,
+    "lng": 14.600597
+  },
+  "Sarno": {
+    "lat": 40.812386,
+    "lng": 14.618618
+  },
+  "Centro Direzionale": {
+    "lat": 40.8580543,
+    "lng": 14.281598
+  },
+  "Botteghelle": {
+    "lat": 40.872198,
+    "lng": 14.315616
+  },
+  "Madonnelle": {
+    "lat": 40.871412,
+    "lng": 14.334098
+  },
+  "Argine - Palasport": {
+    "lat": 40.861978,
+    "lng": 14.338264
+  },
+  "Villa Visconti": {
+    "lat": 40.855463,
+    "lng": 14.338409
+  },
+  "Bartolo Longo": {
+    "lat": 40.847169,
+    "lng": 14.336296
+  },
+  "Volla": {
+    "lat": 40.878411,
+    "lng": 14.342932
+  },
+  "Salice": {
+    "lat": 40.899751,
+    "lng": 14.337606
+  },
+  "Casalnuovo": {
+    "lat": 40.907851,
+    "lng": 14.347592
+  },
+  "La Pigna": {
+    "lat": 40.908943,
+    "lng": 14.355002
+  },
+  "Talona": {
+    "lat": 40.910224,
+    "lng": 14.365256
+  },
+  "Pratola Ponte": {
+    "lat": 40.913455,
+    "lng": 14.382909
+  },
+  "Pomigliano d’arco": {
+    "lat": 40.914711,
+    "lng": 14.392912
+  },
+  "Castelcisterna": {
+    "lat": 40.920433,
+    "lng": 14.412318
+  },
+  "Brusciano": {
+    "lat": 40.917232,
+    "lng": 14.417645
+  },
+  "De Ruggiero": {
+    "lat": 40.916693,
+    "lng": 14.42912
+  },
+  "Via Vittorio Veneto": {
+    "lat": 40.919419,
+    "lng": 14.442758
+  },
+  "Marigliano": {
+    "lat": 40.916939,
+    "lng": 14.456321
+  },
+  "S.Vitaliano": {
+    "lat": 40.918434,
+    "lng": 14.473151
+  },
+  "Scisciano": {
+    "lat": 40.912594,
+    "lng": 14.480591
+  },
+  "Saviano": {
+    "lat": 40.912202,
+    "lng": 14.509296
+  },
+  "Nola": {
+    "lat": 40.929385,
+    "lng": 14.526854
+  },
+  "Cimitile": {
+    "lat": 40.938972,
+    "lng": 14.530543
+  },
+  "Camposano": {
+    "lat": 40.952212,
+    "lng": 14.531408
+  },
+  "Cicciano": {
+    "lat": 40.96073,
+    "lng": 14.543639
+  },
+  "Roccarainola": {
+    "lat": 40.966389,
+    "lng": 14.559841
+  },
+  "Avella": {
+    "lat": 40.955184,
+    "lng": 14.60299
+  },
+  "Baiano": {
+    "lat": 40.952765,
+    "lng": 14.617179
+  },
+  "Poggiorale": {
+    "lat": 40.866773,
+    "lng": 14.293338
+  },
+  "Vesuvio De Meis (SGV)": {
+    "lat": 40.8517,
+    "lng": 14.339127
+  }
+}
