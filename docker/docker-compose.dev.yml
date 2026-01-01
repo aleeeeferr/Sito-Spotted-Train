@@ -1,0 +1,51 @@
+services:
+  frontend:
+    container_name: sito-spotted-train
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ../:/usr/share/nginx/html:ro
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+  api:
+    image: node:20-alpine
+    container_name: spotted-api
+    working_dir: /app
+    volumes:
+      - ../:/app
+    ports:
+      - "4000:4000"
+    environment:
+      MONGODB_URI: "mongodb://mongo:27017/spottedtrain"
+      JWT_SECRET: "spotted-dev-secret"
+      INITIAL_CREDIT: "300"
+      HOST: "0.0.0.0"
+      PORT: "4000"
+    depends_on:
+      - mongo
+    command: ["sh", "-c", "npm install --omit=dev && node frontend/js/index.js"]
+  mongo:
+    image: mongo:6
+    container_name: spotted-mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: spottedtrain
+    volumes:
+      - mongo_data:/data/db
+  mongo-express:
+    image: mongo-express:1
+    container_name: spotted-mongo-express
+    depends_on:
+      - mongo
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+
+volumes:
+  mongo_data:
