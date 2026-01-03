@@ -33,6 +33,7 @@ services:
       MONGO_INITDB_DATABASE: spottedtrain
     volumes:
       - mongo_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d:ro
   mongo-express:
     image: mongo-express:1
     container_name: spotted-mongo-express
