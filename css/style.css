@@ -950,10 +950,14 @@ nav li{
     background: #ffffff;
     border: 1px solid #e3ded5;
     border-radius: 16px;
-    padding: 24px;
+    padding: 32px;
     box-shadow: 0 10px 20px rgba(45, 30, 10, 0.08);
     margin-bottom: 18px;
-    width: 100%;
+    width: 150%;
+    min-height: 200px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .form-row{
     display: grid;
@@ -1018,7 +1022,10 @@ nav li{
     background: #fbfaf7;
     color: #6b655e;
     margin-bottom: 18px;
-    width: 100%;
+    width: 150%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .placeholder-icon{
     width: 32px;
@@ -1050,16 +1057,18 @@ nav li{
     border: 1px solid #e3ded5;
     box-shadow: 0 10px 20px rgba(45, 30, 10, 0.08);
     margin-bottom: 18px;
-    width: 100%;
+    width: 150%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
     opacity: 0;
-    transform: translateY(8px);
     max-height: 0;
     overflow: hidden;
     transition: opacity 0.25s ease, transform 0.25s ease, max-height 0.25s ease;
 }
 .riepilogo-tratta.is-visible{
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
     max-height: 200px;
 }
 .riepilogo-label{
@@ -1076,15 +1085,18 @@ nav li{
     grid-template-columns: minmax(0, 1fr) 320px;
     gap: 20px;
     align-items: start;
+    width: 150%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
     opacity: 0;
-    transform: translateY(10px);
     max-height: 0;
     overflow: hidden;
     transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease;
 }
 .biglietti-layout.is-visible{
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
     max-height: none;
     overflow: visible;
 }
@@ -1956,6 +1968,32 @@ nav li{
     }
     .form-row{
         grid-template-columns: 1fr;
+    }
+    .biglietti-form{
+        width: 100%;
+        left: 0;
+        transform: none;
+    }
+    .tariffa-placeholder{
+        width: 100%;
+        left: 0;
+        transform: none;
+    }
+    .riepilogo-tratta{
+        width: 100%;
+        left: 0;
+        transform: translateY(8px);
+    }
+    .riepilogo-tratta.is-visible{
+        transform: translateY(0);
+    }
+    .biglietti-layout{
+        width: 100%;
+        left: 0;
+        transform: translateY(10px);
+    }
+    .biglietti-layout.is-visible{
+        transform: translateY(0);
     }
     .riepilogo{
         position: fixed;
