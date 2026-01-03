@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li><a href="index.html">Ricerca Orari</a></li>
-                <li><a href="traking.html">Traking live</a></li>
+                <li><a href="tracking.html">Tracking</a></li>
                 <li><a href="mappe.html">Mappe Stazioni</a></li>
                 <li><a href="biglietti.html">Biglietti</a></li>
                 <li><a href="avvisi.html">Avvisi</a></li>
@@ -29,21 +29,18 @@
         <main class="accedi">
             <div class="accedi-card">
                 <div class="accedi-tabs">
-                    <input type="radio" name="tab-accedi" id="tab-login" checked>
-                    <input type="radio" name="tab-accedi" id="tab-registrati">
-
                     <h1 class="accedi-title">
-                        <span class="titolo-login">Accedi</span>
-                        <span class="titolo-registrati">Registrati</span>
+                        <span class="titolo-tab is-attivo" data-title="login">Accedi</span>
+                        <span class="titolo-tab" data-title="registrati">Registrati</span>
                     </h1>
 
                     <div class="accedi-tab-labels">
-                        <label for="tab-login">Accedi</label>
-                        <label for="tab-registrati">Registrati</label>
+                        <button class="accedi-tab is-attivo" type="button" data-tab="login">Accedi</button>
+                        <button class="accedi-tab" type="button" data-tab="registrati">Registrati</button>
                     </div>
 
                     <div class="accedi-panels">
-                        <section class="accedi-panel panel-login">
+                        <section class="accedi-panel is-attivo" data-panel="login">
                             <div class="accedi-campo">
                                 <label for="login-email">Email</label>
                                 <input id="login-email" type="email" placeholder="Inserisci la tua email">
@@ -59,12 +56,12 @@
                             <button class="accedi-btn" type="button">Accedi</button>
                             <div id="login-error" class="alert alert-danger" style="display: none;"></div>
                             <div class="accedi-links">
-                                <p>Non hai un account? <label class="accedi-switch" for="tab-registrati">Registrati</label></p>
+                                <p>Non hai un account? <button class="accedi-switch" type="button" data-tab-target="registrati">Registrati</button></p>
                                 <a class="accedi-link" href="#">Password dimenticata?</a>
                             </div>
                         </section>
 
-                        <section class="accedi-panel panel-registrati">
+                        <section class="accedi-panel" data-panel="registrati">
                             <div class="accedi-campo">
                                 <label for="reg-nome">Nome</label>
                                 <input id="reg-nome" type="text" placeholder="Inserisci il tuo nome">
@@ -84,7 +81,7 @@
                             <button class="accedi-btn" type="button">Crea account</button>
                             <div id="register-error" class="alert alert-danger" style="display: none;"></div>
                             <div class="accedi-links">
-                                <p>Hai gia un account? <label class="accedi-switch" for="tab-login">Accedi</label></p>
+                                <p>Hai gia un account? <button class="accedi-switch" type="button" data-tab-target="login">Accedi</button></p>
                             </div>
                         </section>
                     </div>
@@ -92,5 +89,33 @@
             </div>
         </main>
         <script type="module" src="js/user-dashboard.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const tabs = Array.from(document.querySelectorAll(".accedi-tab"));
+                const titles = Array.from(document.querySelectorAll(".titolo-tab"));
+                const panels = Array.from(document.querySelectorAll(".accedi-panel"));
+                const switches = Array.from(document.querySelectorAll("[data-tab-target]"));
+
+                const activateTab = (tabId) => {
+                    tabs.forEach((tab) => {
+                        tab.classList.toggle("is-attivo", tab.dataset.tab === tabId);
+                    });
+                    titles.forEach((title) => {
+                        title.classList.toggle("is-attivo", title.dataset.title === tabId);
+                    });
+                    panels.forEach((panel) => {
+                        panel.classList.toggle("is-attivo", panel.dataset.panel === tabId);
+                    });
+                };
+
+                tabs.forEach((tab) => {
+                    tab.addEventListener("click", () => activateTab(tab.dataset.tab));
+                });
+
+                switches.forEach((btn) => {
+                    btn.addEventListener("click", () => activateTab(btn.dataset.tabTarget));
+                });
+            });
+        </script>
     </body>
 </html>

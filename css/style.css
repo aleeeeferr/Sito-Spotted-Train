@@ -47,7 +47,7 @@ a{
     padding: 10px 16px;
     cursor: pointer;
     border: 1px solid transparent;
-    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    transition: all 0.15s ease;
 }
 .btn-primary{
     background: #b02020;
@@ -356,18 +356,11 @@ nav li{
     margin: 0 0 16px;
     font-size: 26px;
 }
-.accedi-title span{
+.accedi-title .titolo-tab{
     display: none;
 }
-#tab-login:checked ~ .accedi-title .titolo-login{
+.accedi-title .titolo-tab.is-attivo{
     display: block;
-}
-#tab-registrati:checked ~ .accedi-title .titolo-registrati{
-    display: block;
-}
-.accedi-tabs input[type="radio"]{
-    position: absolute;
-    left: -9999px;
 }
 .accedi-tab-labels{
     display: flex;
@@ -378,18 +371,19 @@ nav li{
     padding: 4px;
     margin-bottom: 16px;
 }
-.accedi-tab-labels label{
+.accedi-tab{
     flex: 1;
     text-align: center;
     padding: 8px 10px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    color: #3b372f;
-    transition: background 0.2s ease, color 0.2s ease;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
 }
-#tab-login:checked ~ .accedi-tab-labels label[for="tab-login"],
-#tab-registrati:checked ~ .accedi-tab-labels label[for="tab-registrati"]{
+/* Stato attivo dei tab gestito via JS (classi is-attivo). */
+.accedi-tab.is-attivo{
     background: #ffffff;
     color: #1d1c1a;
     border: 1px solid #e3ded5;
@@ -397,10 +391,8 @@ nav li{
 .accedi-panel{
     display: none;
 }
-#tab-login:checked ~ .accedi-panels .panel-login{
-    display: block;
-}
-#tab-registrati:checked ~ .accedi-panels .panel-registrati{
+/* Mostra solo il pannello attivo. */
+.accedi-panel.is-attivo{
     display: block;
 }
 .accedi-campo{
@@ -410,7 +402,6 @@ nav li{
     margin-bottom: 12px;
 }
 .accedi-campo label{
-    font-size: 13px;
     font-weight: 600;
 }
 .accedi-campo input{
@@ -431,9 +422,7 @@ nav li{
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 13px;
     margin: 6px 0 16px;
-    color: #3b372f;
 }
 .accedi-btn{
     width: 100%;
@@ -445,7 +434,7 @@ nav li{
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    transition: all 0.2s ease;
 }
 .accedi-btn:hover{
     background: #981b1b;
@@ -456,8 +445,6 @@ nav li{
     margin-top: 12px;
     display: grid;
     gap: 8px;
-    font-size: 13px;
-    color: #3b372f;
 }
 .accedi-link{
     color: #1f4aa8;
@@ -555,16 +542,7 @@ nav li{
     stroke-linecap: round;
     stroke-linejoin: round;
 }
-.campo input{
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-    font-size: 15px;
-    background: #0b1a33;
-    color: #f2f4f7;
-    height: 46px;
-}
+.campo input,
 .campo select{
     width: 100%;
     padding: 12px 14px;
@@ -586,10 +564,7 @@ nav li{
 .campo input::placeholder{
     color: #c1cadb;
 }
-.campo input:focus{
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(225, 45, 46, 0.25);
-}
+.campo input:focus,
 .campo select:focus{
     outline: none;
     box-shadow: 0 0 0 3px rgba(225, 45, 46, 0.25);
@@ -643,7 +618,7 @@ nav li{
     font-size: 13px;
     cursor: pointer;
     box-shadow: 0 6px 12px rgba(225, 45, 46, 0.2);
-    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    transition: all 0.15s ease;
 }
 .swap-btn{
     width: 52px;
@@ -657,7 +632,7 @@ nav li{
     justify-content: center;
     box-shadow: 0 10px 20px rgba(4, 10, 22, 0.3), 0 0 0 3px rgba(225, 45, 46, 0.08);
     cursor: pointer;
-    transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
+    transition: all 0.16s ease;
 }
 .swap-btn svg{
     width: 22px;
@@ -778,14 +753,8 @@ nav li{
     background: #e11d2e;
     color: #ffffff;
     border: none;
-    border-radius: 14px;
-    padding: 12px 26px;
-    font-weight: 700;
-    font-size: 17px;
-    cursor: pointer;
     box-shadow: 0 10px 18px rgba(225, 45, 46, 0.22);
     min-width: 160px;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 .btn-secondario{
     background-color: transparent;
@@ -795,7 +764,7 @@ nav li{
     padding: 10px 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+    transition: all 0.15s ease;
 }
 .btn-reset{
     background: transparent;
@@ -814,7 +783,7 @@ nav li{
     padding: 0;
     font-weight: 700;
     cursor: pointer;
-    transition: color 0.15s ease, transform 0.15s ease;
+    transition: all 0.15s ease;
 }
 .btn-remove:hover{
     color: #991b1b;
@@ -824,22 +793,26 @@ nav li{
     background: #16a34a;
     border: 1px solid #16a34a;
     color: #ffffff;
+    box-shadow: 0 10px 18px rgba(22, 163, 74, 0.22);
+    min-width: 180px;
+}
+.btn-confirm,
+.btn-principale{
     border-radius: 14px;
     padding: 12px 26px;
     font-weight: 700;
     font-size: 17px;
     cursor: pointer;
-    box-shadow: 0 10px 18px rgba(22, 163, 74, 0.22);
-    min-width: 180px;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    transition: all 0.15s ease;
 }
 .btn-confirm:hover{
     box-shadow: 0 14px 22px rgba(22, 163, 74, 0.3);
-    filter: brightness(1.03);
-    transform: translateY(-1px);
 }
 .btn-principale:hover{
     box-shadow: 0 14px 22px rgba(225, 45, 46, 0.3);
+}
+.btn-confirm:hover,
+.btn-principale:hover{
     filter: brightness(1.03);
     transform: translateY(-1px);
 }
@@ -941,11 +914,7 @@ nav li{
     aspect-ratio: 1 / 1;
     object-fit: contain;
 }
-@media (max-width: 900px){
-    .ticket-success-grid{
-        grid-template-columns: 1fr;
-    }
-}
+
 .biglietti-form{
     background: #ffffff;
     border: 1px solid #e3ded5;
@@ -1094,28 +1063,21 @@ nav li{
     overflow: hidden;
     transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease;
 }
+/* Layout risultati nascosto finché non c’è una ricerca valida. */
 .biglietti-layout.is-visible{
     opacity: 1;
     transform: translateX(-50%) translateY(0);
     max-height: none;
     overflow: visible;
 }
-.riepilogo{
-    align-self: start;
-    position: sticky;
-    top: 90px;
-}
-.biglietti-lista{
+.biglietti-lista,
+.biglietti-grid{
     display: grid;
     gap: 16px;
 }
 .sezione-biglietti h2{
     margin: 0 0 12px;
     font-size: 18px;
-}
-.biglietti-grid{
-    display: grid;
-    gap: 16px;
 }
 .biglietti-sottosezione{
     margin: 8px 0 0;
@@ -1220,9 +1182,11 @@ nav li{
     border-radius: 16px;
     padding: 18px;
     box-shadow: 0 10px 20px rgba(45, 30, 10, 0.08);
+    align-self: start;
     position: sticky;
     top: 90px;
 }
+/* Sidebar riepilogo: resta visibile durante lo scroll. */
 .riepilogo h2{
     margin: 0 0 12px;
     font-size: 18px;
@@ -1435,14 +1399,15 @@ nav li{
     color: #333333;
 }
 .avviso-breve{
-    margin: 0;
-    font-size: 13px;
     color: #333333;
 }
 .avviso-vuoto{
+    color: #6b655e;
+}
+.avviso-breve,
+.avviso-vuoto{
     margin: 0;
     font-size: 13px;
-    color: #6b655e;
 }
 .avviso-ritardi{
     border-left-color: #f2c94c;
@@ -1491,7 +1456,6 @@ nav li{
     gap: 12px;
 }
 .panel-head h1{
-    margin: 0;
     font-size: 22px;
 }
 .panel-head p{
@@ -1543,9 +1507,12 @@ nav li{
     align-items: flex-start;
 }
 .linea-titolo h3{
-    margin: 0;
     font-size: 16px;
     color: #1d1c1a;
+}
+.panel-head h1,
+.linea-titolo h3{
+    margin: 0;
 }
 .linea-titolo p{
     margin: 4px 0 0;
@@ -1729,6 +1696,7 @@ nav li{
     display: grid;
     gap: 14px;
 }
+/* Timeline stati: passato, attuale, futuro. */
 .timeline-item{
     position: relative;
     padding-left: 22px;
@@ -1771,9 +1739,6 @@ nav li{
 .stato-futuro .timeline-dot{
     background: #ffffff;
     border: 2px solid #d8d3c8;
-}
-.stato-futuro .timeline-nome{
-    color: #1d1c1a;
 }
 .blocco-live .live-header{
     display: flex;
@@ -1949,323 +1914,19 @@ nav li{
     box-shadow: none;
 }
 
-@media (max-width: 900px){
-    nav.barrasup{
-        height: 62px;
-    }
-    nav ul{
-        gap: 8px;
-    }
-    nav li a{
-        padding: 8px 10px;
-        font-size: 13px;
-    }
-    .logo-testo{
-        font-size: 22px;
-    }
-    .biglietti-layout{
-        grid-template-columns: 1fr;
-    }
-    .form-row{
-        grid-template-columns: 1fr;
-    }
-    .biglietti-form{
-        width: 100%;
-        left: 0;
-        transform: none;
-    }
-    .tariffa-placeholder{
-        width: 100%;
-        left: 0;
-        transform: none;
-    }
-    .riepilogo-tratta{
-        width: 100%;
-        left: 0;
-        transform: translateY(8px);
-    }
-    .riepilogo-tratta.is-visible{
-        transform: translateY(0);
-    }
-    .biglietti-layout{
-        width: 100%;
-        left: 0;
-        transform: translateY(10px);
-    }
-    .biglietti-layout.is-visible{
-        transform: translateY(0);
-    }
-    .riepilogo{
-        position: fixed;
-        left: 12px;
-        right: 12px;
-        bottom: 12px;
-        top: auto;
-        z-index: 40;
-    }
-    .biglietti{
-        padding-bottom: 160px;
-    }
-    .mappe{
-        height: calc(100vh - 62px);
-    }
-    .mappe-panel{
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        max-width: none;
-        max-height: 55vh;
-        border-left: none;
-        border-top: 1px solid #e1ddd6;
-        border-radius: 18px 18px 0 0;
-        box-shadow: 0 -12px 24px rgba(34, 24, 12, 0.18);
-        background: #f9f8f6;
-    }
-    .sheet-handle{
-        display: block;
-    }
-    .linee-lista{
-        max-height: calc(55vh - 130px);
-    }
-}
 
-@media (max-width: 1024px){
-    .immagine{
-        height: clamp(260px, 42vh, 420px);
-    }
-    .immagine::before{
-        height: 130px;
-    }
-    .immagine::after{
-        background: linear-gradient(180deg, rgba(6, 12, 24, 0.04) 0%, rgba(6, 12, 24, 0.3) 70%, rgba(6, 12, 24, 0.55) 100%);
-    }
-    .ricerca{
-        margin-top: -10px;
-        padding: 50px 20px 70px;
-    }
-    .ricerca h1{
-        margin-bottom: 20px;
-    }
-    .ricerca-box{
-        padding: 22px 22px 24px;
-    }
-    .pagina-tracking .tracking{
-        padding: 50px 18px 70px;
-    }
-    .pagina-tracking .blocco-base{
-        gap: 14px;
-    }
-    .pagina-tracking .blocco{
-        padding: 16px;
-    }
-    .pagina-tracking .live-row{
-        padding: 6px 8px;
-    }
-    .pagina-tracking .timeline{
-        gap: 12px;
-    }
-}
 
-@media (max-width: 768px){
-    .immagine{
-        height: clamp(220px, 28vh, 320px);
-    }
-    .immagine::before{
-        height: 110px;
-    }
-    .immagine .sfondo{
-        object-position: right center;
-    }
-    .ricerca{
-        margin-top: -6px;
-        padding: 40px 16px 60px;
-    }
-    .ricerca h1{
-        font-size: 24px;
-        margin-bottom: 18px;
-    }
-    .ricerca-box{
-        padding: 18px 18px 20px;
-    }
-}
 
-@media (max-width: 480px){
-    .immagine{
-        height: clamp(180px, 22vh, 260px);
-    }
-    .immagine::before{
-        height: 90px;
-    }
-    .immagine .sfondo{
-        object-position: center right;
-    }
-    .ricerca{
-        padding: 32px 14px 54px;
-    }
-    .ricerca-box{
-        padding: 16px 14px 18px;
-    }
-}
 
-@media (max-width: 640px){
-    nav.barrasup{
-        height: auto;
-        padding: 10px 0;
-    }
-    nav ul{
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 6px 8px;
-    }
-    .logo-menu{
-        position: static;
-        transform: none;
-    }
-    .pulsante-accedi{
-        position: static;
-        transform: none;
-    }
-    .immagine .treno{
-        left: 72%;
-        bottom: -10px;
-        width: 280px;
-        transform: translateX(-50%);
-        opacity: 0.45;
-    }
-    .ricerca h1{
-        font-size: 22px;
-    }
-    .campi{
-        gap: 12px;
-    }
-    .campo{
-        padding: 16px 16px 18px;
-        border-radius: 16px;
-    }
-    .campo-label{
-        font-size: 16px;
-        margin-bottom: 10px;
-    }
-    .campo-icona{
-        width: 30px;
-        height: 30px;
-    }
-    .campo input{
-        height: 42px;
-        font-size: 14px;
-    }
-    .swap-btn{
-        width: 46px;
-        height: 46px;
-    }
-    .swap-btn svg{
-        width: 18px;
-        height: 18px;
-    }
-    .campo-row{
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .azioni{
-        flex-direction: column;
-        align-items: stretch;
-    }
-    .btn-principale{
-        width: 100%;
-        min-width: 0;
-    }
-    .btn-reset{
-        width: 100%;
-    }
-    .blocco-sup h1{
-        font-size: 24px;
-    }
-    .blocco-sup .testo-sotto{
-        font-size: 14px;
-    }
-    .risultati{
-        padding: 16px;
-    }
-    .risultati-lista li{
-        gap: 6px;
-        text-align: left;
-    }
-    .risultato-top{
-        flex-wrap: wrap;
-    }
-    .ritardo{
-        margin-left: 0;
-    }
-}
 
-@media (max-width: 480px){
-    .immagine .treno{
-        left: 82%;
-        bottom: -8px;
-        width: 240px;
-        opacity: 0.4;
-    }
-}
 
-@media (max-width: 900px){
-    nav.barrasup{
-        height: 64px;
-        padding: 0;
-    }
-    nav ul{
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        gap: 0;
-        padding: 0 16px;
-    }
-    nav ul li{
-        display: none;
-    }
-    nav ul li.logo-menu{
-        display: flex;
-        position: static;
-        transform: none;
-        margin-right: auto;
-    }
-    nav ul li.pulsante-accedi{
-        display: none;
-        position: static;
-        transform: none;
-    }
-    .nav-toggle{
-        display: inline-flex;
-    }
-    nav.barrasup.is-open{
-        height: auto;
-        padding-bottom: 12px;
-    }
-    nav.barrasup.is-open ul{
-        flex-direction: column;
-        align-items: stretch;
-        gap: 6px;
-        padding: 12px 16px 6px;
-    }
-    nav.barrasup.is-open ul li{
-        display: flex;
-    }
-    nav.barrasup.is-open ul li.logo-menu{
-        margin-right: 0;
-    }
-    nav.barrasup.is-open ul li.pulsante-accedi{
-        display: flex;
-    }
-    .mappe{
-        height: calc(100dvh - 64px);
-    }
-    .mappe-layout{
-        width: 100%;
-    }
-    .mappe-canvas{
-        width: 100%;
-    }
-}
+
+
+
+
+
+
+
 
 /*footer*/
 .footer{
@@ -2647,19 +2308,7 @@ nav li{
     background: rgba(255, 255, 255, 0.8);
 }
 
-@media (max-width: 900px){
-    .dashboard-grid{
-        grid-template-columns: 1fr;
-    }
-    .modal-body{
-        grid-template-columns: 1fr;
-    }
-    .modal-qr{
-        width: 140px;
-        height: 140px;
-        justify-self: start;
-    }
-}
+
 .tab-panels{
     margin-top: 12px;
 }
@@ -2947,4 +2596,354 @@ nav li{
     background: #e6efff;
     color: #4a5b7d;
     border-top: 1px solid #d3def2;
+}
+
+/* Responsive */ 
+
+@media (max-width: 900px){
+    .ticket-success-grid{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px){
+    nav.barrasup{
+        height: 62px;
+    }
+    nav ul{
+        gap: 8px;
+    }
+    nav li a{
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+    .logo-testo{
+        font-size: 22px;
+    }
+    .biglietti-layout{
+        grid-template-columns: 1fr;
+    }
+    .form-row{
+        grid-template-columns: 1fr;
+    }
+    .biglietti-form{
+        width: 100%;
+        left: 0;
+        transform: none;
+    }
+    .tariffa-placeholder{
+        width: 100%;
+        left: 0;
+        transform: none;
+    }
+    .riepilogo-tratta{
+        width: 100%;
+        left: 0;
+        transform: translateY(8px);
+    }
+    .riepilogo-tratta.is-visible{
+        transform: translateY(0);
+    }
+    .biglietti-layout{
+        width: 100%;
+        left: 0;
+        transform: translateY(10px);
+    }
+    .biglietti-layout.is-visible{
+        transform: translateY(0);
+    }
+    .riepilogo{
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        top: auto;
+        z-index: 40;
+    }
+    .biglietti{
+        padding-bottom: 160px;
+    }
+    .mappe{
+        height: calc(100vh - 62px);
+    }
+    .mappe-panel{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: none;
+        max-height: 55vh;
+        border-left: none;
+        border-top: 1px solid #e1ddd6;
+        border-radius: 18px 18px 0 0;
+        box-shadow: 0 -12px 24px rgba(34, 24, 12, 0.18);
+        background: #f9f8f6;
+    }
+    .sheet-handle{
+        display: block;
+    }
+    .linee-lista{
+        max-height: calc(55vh - 130px);
+    }
+}
+
+@media (max-width: 1024px){
+    .immagine{
+        height: clamp(260px, 42vh, 420px);
+    }
+    .immagine::before{
+        height: 130px;
+    }
+    .immagine::after{
+        background: linear-gradient(180deg, rgba(6, 12, 24, 0.04) 0%, rgba(6, 12, 24, 0.3) 70%, rgba(6, 12, 24, 0.55) 100%);
+    }
+    .ricerca{
+        margin-top: -10px;
+        padding: 50px 20px 70px;
+    }
+    .ricerca h1{
+        margin-bottom: 20px;
+    }
+    .ricerca-box{
+        padding: 22px 22px 24px;
+    }
+    .pagina-tracking .tracking{
+        padding: 50px 18px 70px;
+    }
+    .pagina-tracking .blocco-base{
+        gap: 14px;
+    }
+    .pagina-tracking .blocco{
+        padding: 16px;
+    }
+    .pagina-tracking .live-row{
+        padding: 6px 8px;
+    }
+    .pagina-tracking .timeline{
+        gap: 12px;
+    }
+}
+
+@media (max-width: 768px){
+    .immagine{
+        height: clamp(220px, 28vh, 320px);
+    }
+    .immagine::before{
+        height: 110px;
+    }
+    .immagine .sfondo{
+        object-position: right center;
+    }
+    .ricerca{
+        margin-top: -6px;
+        padding: 40px 16px 60px;
+    }
+    .ricerca h1{
+        font-size: 24px;
+        margin-bottom: 18px;
+    }
+    .ricerca-box{
+        padding: 18px 18px 20px;
+    }
+}
+
+@media (max-width: 480px){
+    .immagine{
+        height: clamp(180px, 22vh, 260px);
+    }
+    .immagine::before{
+        height: 90px;
+    }
+    .immagine .sfondo{
+        object-position: center right;
+    }
+    .ricerca{
+        padding: 32px 14px 54px;
+    }
+    .ricerca-box{
+        padding: 16px 14px 18px;
+    }
+}
+
+@media (max-width: 640px){
+    nav.barrasup{
+        height: auto;
+        padding: 10px 0;
+    }
+    nav ul{
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px 8px;
+    }
+    .logo-menu{
+        position: static;
+        transform: none;
+    }
+    .pulsante-accedi{
+        position: static;
+        transform: none;
+    }
+    .immagine .treno{
+        left: 72%;
+        bottom: -10px;
+        width: 280px;
+        transform: translateX(-50%);
+        opacity: 0.45;
+    }
+    .ricerca h1{
+        font-size: 22px;
+    }
+    .campi{
+        gap: 12px;
+    }
+    .campo{
+        padding: 16px 16px 18px;
+        border-radius: 16px;
+    }
+    .campo-label{
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .campo-icona{
+        width: 30px;
+        height: 30px;
+    }
+    .campo input{
+        height: 42px;
+        font-size: 14px;
+    }
+    .swap-btn{
+        width: 46px;
+        height: 46px;
+    }
+    .swap-btn svg{
+        width: 18px;
+        height: 18px;
+    }
+    .campo-row{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .azioni{
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .btn-principale{
+        width: 100%;
+        min-width: 0;
+    }
+    .btn-reset{
+        width: 100%;
+    }
+    .blocco-sup h1{
+        font-size: 24px;
+    }
+    .blocco-sup .testo-sotto{
+        font-size: 14px;
+    }
+    .risultati{
+        padding: 16px;
+    }
+    .risultati-lista li{
+        gap: 6px;
+        text-align: left;
+    }
+    .risultato-top{
+        flex-wrap: wrap;
+    }
+    .ritardo{
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px){
+    .immagine .treno{
+        left: 82%;
+        bottom: -8px;
+        width: 240px;
+        opacity: 0.4;
+    }
+}
+
+@media (max-width: 900px){
+    nav.barrasup{
+        height: 64px;
+        padding: 0;
+    }
+    nav ul{
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 0;
+        padding: 0 16px;
+    }
+    nav ul li{
+        display: none;
+    }
+    nav ul li.logo-menu{
+        display: flex;
+        position: static;
+        transform: none;
+        margin-right: auto;
+    }
+    nav ul li.pulsante-accedi{
+        display: none;
+        position: static;
+        transform: none;
+    }
+    .nav-toggle{
+        display: inline-flex;
+    }
+    nav.barrasup.is-open{
+        height: auto;
+        padding-bottom: 12px;
+    }
+    nav.barrasup.is-open ul{
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        padding: 12px 16px 6px;
+    }
+    nav.barrasup.is-open ul li{
+        display: flex;
+    }
+    nav.barrasup.is-open ul li.logo-menu{
+        margin-right: 0;
+    }
+    nav.barrasup.is-open ul li.pulsante-accedi{
+        display: flex;
+    }
+    .mappe{
+        height: calc(100dvh - 64px);
+    }
+    .mappe-layout{
+        width: 100%;
+    }
+    .mappe-canvas{
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px){
+    .dashboard-grid{
+        grid-template-columns: 1fr;
+    }
+    .modal-body{
+        grid-template-columns: 1fr;
+    }
+    .modal-qr{
+        width: 140px;
+        height: 140px;
+        justify-self: start;
+    }
+}
+.accedi-campo label,
+.accedi-check,
+.accedi-links{
+    font-size: 13px;
+}
+.accedi-tab,
+.accedi-check,
+.accedi-links{
+    color: #3b372f;
 }
