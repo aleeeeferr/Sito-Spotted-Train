@@ -24,7 +24,7 @@ docker compose -f docker/docker-compose.dev.yml up -d
 - API: http://localhost:4000/healthz
 - Mongo Express (optional): http://localhost:8081 (admin/admin)
 
-Note: some pages (e.g. **Avvisi**) require `frontend/js/firebase-config.js`.
+Note: some pages (e.g. **Avvisi**) require `frontend/js/firebase-config.js` (generated from `.env`).
 
 ---
 
@@ -182,23 +182,14 @@ Note: dev/demo only.
 ## Firebase Config
 
 Frontend reads config from:
-- `frontend/js/firebase-config.js`
+- `frontend/js/firebase-config.js` (generated locally)
 
 If the file is missing or empty, some pages (e.g. **Avvisi**) will fail.
 
-### Template (example)
-Create `frontend/js/firebase-config.js`:
-
-```js
-export const firebaseConfig = {
-  apiKey: "...",
-  authDomain: "...",
-  projectId: "...",
-  storageBucket: "...",
-  messagingSenderId: "...",
-  appId: "..."
-};
-```
+### Setup
+1. Copy `.env.example` to `.env` and fill the values.
+2. Generate the config file:
+   `node scripts/generate-firebase-config.js`
 
 ---
 

@@ -1,16 +1,16 @@
-# Sito — Spotted Train (Vesuviana)
-Demo web di **Spotted Train** per la rete **EAV – Circumvesuviana (Vesuviana)**.
+# Spotted Train — Demo Vesuviana
+
+Demo web di **Spotted Train** sulla rete **EAV Circumvesuviana (Vesuviana)**.
 
 Questa repo contiene:
 - **Frontend statico** (HTML/CSS/JS)
 - **API locale** in **Node.js / Express**
-- **Database** **MongoDB** (persistente su volume Docker)
-- **Dati pubblici Vesuviana** (orari, live, avvisi) gestiti su **Firebase Storage + Firestore**
+- **MongoDB** (volume Docker persistente)
+- **Dati pubblici Vesuviana** (orari, live, avvisi) via **Firebase Storage + Firestore**
 - **Cloud Function** (opzionale) per aggiornare i dati live
 
+Importante: il progetto è una **demo tecnica**. Alcune parti usano dati reali, altre sono simulate (vedi "Realtà vs Demo").
 Disclaimer: questo progetto **non è affiliato** a EAV, Circumvesuviana o Unico Campania.
-
-> Importante: il progetto è una **demo tecnica**. Alcune parti usano dati reali, altre sono simulate (vedi sezione “Realtà vs Demo”).
 
 ---
 
@@ -20,25 +20,25 @@ Disclaimer: questo progetto **non è affiliato** a EAV, Circumvesuviana o Unico 
 docker compose -f docker/docker-compose.dev.yml up -d
 ```
 
-- Sito: http://localhost:8080  
-- API: http://localhost:4000/healthz  
-- Mongo Express (opz.): http://localhost:8081 (**admin/admin**)  
+- Sito: http://localhost:8080
+- API: http://localhost:4000/healthz
+- Mongo Express (opzionale): http://localhost:8081 (admin/admin)
 
-Nota: per alcune pagine (es. **Avvisi**) serve il file `frontend/js/firebase-config.js`.
+Nota: per alcune pagine (es. **Avvisi**) serve il file `frontend/js/firebase-config.js` (generato da `.env`).
 
 ---
 
 ## Realtà vs Demo (cosa è vero e cosa è simulato)
 
 | Funzionalità | Stato | Note |
-|---|---:|---|
-| **Tariffe Unico Campania** | Reale | Usa un’API esterna reale per ottenere il **codice tariffa** |
-| **Dettagli prezzo (Excel → tariffs.js)** | Reale | Prezzo/dettagli letti da file generato da Excel |
-| **Acquisto biglietti** | Simulato | Salvataggio su MongoDB (demo), **non genera biglietti validi** |
-| **Credito / storico acquisti** | Simulato | Serve per mostrare il flusso utente |
-| **Orari / cache / live Vesuviana** | Reale (dati pubblici) | I JSON sono su **Firebase del progetto** (Storage) |
+|---|---|---|
+| **Tariffe Unico Campania** | Reale | Usa un’API esterna per ottenere il **codice tariffa** |
+| **Dettagli prezzo (Excel → tariffs.js)** | Reale | Prezzi/dettagli da file generato da Excel |
+| **Acquisto biglietti** | Simulato | Salvato su MongoDB (demo), **nessun biglietto reale** |
+| **Credito / storico acquisti** | Simulato | Serve a mostrare il flusso utente |
+| **Orari / live Vesuviana** | Reale (dati pubblici) | JSON su **Firebase Storage** del progetto |
 | **Avvisi** | Reale | Collezione Firestore `avvisi` |
-| **Tracking live** | Parziale | Basato su **teleindicatori**: se i dati non arrivano bene, non è affidabile al 100% |
+| **Tracking live** | Parziale | Basato su teleindicatori; dati incompleti possibili |
 
 ---
 
@@ -58,24 +58,25 @@ Nota: per alcune pagine (es. **Avvisi**) serve il file `frontend/js/firebase-con
 13. [Proxy CORS Firebase Storage (opzionale)](#proxy-cors-firebase-storage-opzionale)
 14. [Reset database](#reset-database)
 15. [Troubleshooting rapido](#troubleshooting-rapido)
+16. [Note](#note)
 
 ---
 
 ## Architettura
 
 **Componenti principali**
-- **Frontend**: pagine statiche in `frontend/pages/`  
-  Stili in `css/style.css`  
-  Logica in `frontend/js/`
+- **Frontend**: pagine statiche in `frontend/pages/`
+  - Stili: `css/style.css`
+  - Logica: `frontend/js/`
 - **API**: server Node/Express (container `api`)
 - **Database**: MongoDB (container `mongo`, volume `mongo_data`)
 - **Firebase Storage**: JSON pubblici Vesuviana (manifest, stazioni, cache/live)
 - **Firestore**: collezione `avvisi`
-- **Cloud Function (opz.)**: `orchestrateStation` (region `europe-west1`) per aggiornamenti live
+- **Cloud Function (opzionale)**: `orchestrateStation` (region `europe-west1`)
 
 **Perché sia Mongo che Firebase?**
-- **MongoDB**: dati “applicativi” (utenti, credito, biglietti demo).
-- **Firebase**: dati “pubblici” Vesuviana (orari/live/avvisi) serviti al frontend.
+- **MongoDB**: dati applicativi (utenti, credito, biglietti demo)
+- **Firebase**: dati pubblici (orari/live/avvisi) usati dal frontend
 
 ---
 
@@ -102,26 +103,26 @@ Nota: per alcune pagine (es. **Avvisi**) serve il file `frontend/js/firebase-con
 2. Il frontend combina **cache + live** e li mostra in UI.
 
 ### 2) Avvisi
-- Il frontend legge la collezione Firestore: `avvisi` per mostrare comunicazioni in tempo reale.
+- Il frontend legge la collezione Firestore `avvisi` per mostrare gli avvisi.
 
 ### 3) Tracking (teleindicatori)
 - Il tracking si basa sui dati dei **teleindicatori** (arrivi/partenze).
-- Nota: se la sorgente non invia dati coerenti o completi, il tracking può risultare **incompleto o non affidabile**.
+- Nota: se la sorgente è incompleta, il tracking può essere poco affidabile.
 
 ### 4) Pagina Mappa
 - Pagina: `frontend/pages/mappe.html`
 - Logica: `frontend/js/map.js`
 - Dati: `frontend/js/map-coords.json` (coordinate stazioni)
-- Cosa fa: disegna le linee Vesuviana con **Leaflet**, mostra le stazioni, legenda e pannello laterale.
-- Interazione: clic su stazione o in lista → popup + apertura percorso su Google Maps.
+- Cosa fa: disegna le linee Vesuviana con **Leaflet**, mostra stazioni, legenda e pannello laterale.
+- Interazione: clic su una stazione o sulla lista → popup + apertura percorso su Google Maps.
 
 ### 5) Login / Registrazione
 - Gestiti dall’API locale (JWT).
 - Token salvato in `sessionStorage` (chiave `spottedUser`).
 
-**JWT in 2 righe**
+JWT in 2 righe:
 JWT = **JSON Web Token**.  
-E' il "pass digitale": se hai il token, l'API ti riconosce senza rimandare la password.
+È il "pass" dopo il login: se hai il token, l'API ti riconosce.
 
 ### 6) Biglietti (demo)
 1. L’utente seleziona una tratta e vede la tariffa.
@@ -147,13 +148,13 @@ E' il "pass digitale": se hai il token, l'API ti riconosce senza rimandare la pa
 docker compose -f docker/docker-compose.dev.yml up -d
 ```
 
-3. Apri il sito:  
+3. Apri il sito:
    http://localhost:8080
 
-4. (Opzionale) Apri Mongo Express:  
+4. (Opzionale) Apri Mongo Express:
    http://localhost:8081
 
-5. (Opzionale) Verifica l’API:  
+5. (Opzionale) Verifica l’API:
    http://localhost:4000/healthz
 
 ---
@@ -174,7 +175,7 @@ docker compose -f docker/docker-compose.dev.yml up -d
 - Username: `admin`
 - Password: `admin`
 
-> Solo ambiente dev/demo.
+Nota: solo dev/demo.
 
 ---
 
@@ -182,23 +183,14 @@ docker compose -f docker/docker-compose.dev.yml up -d
 
 Il frontend usa la configurazione in:
 
-- `frontend/js/firebase-config.js`
+- `frontend/js/firebase-config.js` (generato localmente)
 
 Se il file è **mancante** o **vuoto**, alcune pagine (es. **Avvisi**) mostreranno errore.
 
-### Template (esempio)
-Crea `frontend/js/firebase-config.js`:
-
-```js
-export const firebaseConfig = {
-  apiKey: "...",
-  authDomain: "...",
-  projectId: "...",
-  storageBucket: "...",
-  messagingSenderId: "...",
-  appId: "..."
-};
-```
+### Setup
+1. Copia `.env.example` in `.env` e compila i valori.
+2. Genera il file di config:
+   `node scripts/generate-firebase-config.js`
 
 ---
 
@@ -224,7 +216,7 @@ const data = await response.json();
 L’API principale è avviata dal container `api` e usa MongoDB.
 Entry point: `package.json` in root, con server in `frontend/js/index.js`.
 
-### Variabili d’ambiente (già presenti nel docker-compose)
+### Variabili d’ambiente (da docker-compose)
 - `MONGODB_URI` → `mongodb://mongo:27017/spottedtrain`
 - `JWT_SECRET` → segreto JWT (demo)
 - `INITIAL_CREDIT` → credito iniziale (default: `300`)
@@ -238,7 +230,7 @@ Entry point: `package.json` in root, con server in `frontend/js/index.js`.
 - `POST /api/user/tickets`
 - `GET /healthz`
 
-> Le richieste protette usano header: `Authorization: Bearer <TOKEN_JWT>`.
+Le richieste protette usano header: `Authorization: Bearer <TOKEN_JWT>`.
 
 ---
 
@@ -275,7 +267,7 @@ python3 scripts/generate_tariffs.py
 Endpoint esposto dall’API:
 
 - `GET /api/trains?stazione=<id>&tipo=P|A`  
-  Dove `P = partenze`, `A = arrivi`
+`P = partenze`, `A = arrivi`
 
 Avvio rapido:
 
@@ -316,9 +308,9 @@ docker compose -f docker/docker-compose.dev.yml down -v
 
 ---
 
-## Note utili
+## Note
 
 - Il DB Mongo è salvato nel volume `mongo_data` (persistente tra riavvii).
 - Seed iniziale: `docker/mongo-init/inizializzazione_db.js` (solo primo avvio con volume vuoto).
 - Se il volume esiste già, Mongo **non** riesegue il seed.
-- Tracking: basato su teleindicatori → qualità dati variabile.
+- Il tracking si basa su teleindicatori; la qualità dati può variare.
