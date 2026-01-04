@@ -1555,6 +1555,13 @@ nav li{
     color: #2eae61;
     background: rgba(46, 174, 97, 0.12);
 }
+.linea-torre .linea-dot{
+    background: #f97316;
+}
+.linea-torre .linea-badge{
+    color: #f97316;
+    background: rgba(249, 115, 22, 0.12);
+}
 .linea-baiano .linea-dot{
     background: #f4b400;
 }

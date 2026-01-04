@@ -108,7 +108,14 @@ Nota: per alcune pagine (es. **Avvisi**) serve il file `frontend/js/firebase-con
 - Il tracking si basa sui dati dei **teleindicatori** (arrivi/partenze).
 - Nota: se la sorgente non invia dati coerenti o completi, il tracking può risultare **incompleto o non affidabile**.
 
-### 4) Login / Registrazione
+### 4) Pagina Mappa
+- Pagina: `frontend/pages/mappe.html`
+- Logica: `frontend/js/map.js`
+- Dati: `frontend/js/map-coords.json` (coordinate stazioni)
+- Cosa fa: disegna le linee Vesuviana con **Leaflet**, mostra le stazioni, legenda e pannello laterale.
+- Interazione: clic su stazione o in lista → popup + apertura percorso su Google Maps.
+
+### 5) Login / Registrazione
 - Gestiti dall’API locale (JWT).
 - Token salvato in `sessionStorage` (chiave `spottedUser`).
 
@@ -116,7 +123,7 @@ Nota: per alcune pagine (es. **Avvisi**) serve il file `frontend/js/firebase-con
 JWT = **JSON Web Token**.  
 E' il "pass digitale": se hai il token, l'API ti riconosce senza rimandare la password.
 
-### 5) Biglietti (demo)
+### 6) Biglietti (demo)
 1. L’utente seleziona una tratta e vede la tariffa.
 2. Quando “compra”, il frontend chiama:
    - `POST http://localhost:4000/api/user/tickets`
@@ -250,6 +257,7 @@ Endpoint esterno (censurato): `https://example.com/unico
 3. `tariffs.js` è generato da un file Excel.
 
 ### Generazione tariffe
+L’Excel è la fonte dati: lo script Python serve per rigenerare il JS quando l’Excel cambia.
 - Excel: `tariffario/schema_tariffario.xlsx`
 - Script: `scripts/generate_tariffs.py`
 - Output: `frontend/js/tariffs.js`

@@ -1,5 +1,5 @@
 const MAP_CENTER = [40.85, 14.27];
-const MAP_ZOOM = 11;
+const MAP_ZOOM = 13;
 const STATIONS_COORDS_PATH = "js/map-coords.json";
 
 // Dati statici delle linee vesuviane per mappa e pannello laterale.
@@ -18,7 +18,6 @@ const VESUVIANA_LINES = [
       "Torre Annunziata - Oplonti",
       "Villa Regina",
       "Pompei Scavi Villa Dei Misteri",
-      "Moregine",
       "Pioppaino",
       "Stabia Scavi",
       "Castellammare Di Stabia",
@@ -98,7 +97,7 @@ const VESUVIANA_LINES = [
   {
     id: "napoli-torre",
     name: "Napoli - Torre del Greco",
-    color: "#a855f7",
+    color: "#f97316",
     stations: [
       "Napoli Porta Nolana",
       "Napoli Garibaldi",
@@ -155,12 +154,11 @@ function formatCoords({ lat, lng }) {
   return `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
 }
 
-// Link diretto a Google Maps con destinazione.
-function getDirectionsUrl({ lat, lng }, name) {
-  const label = name ? ` (${name})` : "";
+// Link diretto a Google Maps con destinazione (robusto: solo coordinate).
+function getDirectionsUrl({ lat, lng }) {
   const params = new URLSearchParams({
     api: "1",
-    destination: `${lat},${lng}${label}`,
+    destination: `${lat},${lng}`,
     travelmode: "driving",
   });
   return `https://www.google.com/maps/dir/?${params.toString()}`;
@@ -168,7 +166,9 @@ function getDirectionsUrl({ lat, lng }, name) {
 
 function buildPopupHtml(name, coords, linesForStation = []) {
   const linesHtml = linesForStation.length
-    ? linesForStation.map((line) => `<span class="pill pill-soft pill-compact me-1 mb-1 d-inline-block">${line}</span>`).join("")
+    ? linesForStation
+        .map((line) => `<span class="pill pill-soft pill-compact me-1 mb-1 d-inline-block">${line}</span>`)
+        .join("")
     : '<span class="text-muted">Linea non indicata</span>';
 
   return `
@@ -176,7 +176,7 @@ function buildPopupHtml(name, coords, linesForStation = []) {
       <strong>${name}</strong>
       <div class="text-muted small mb-1">${formatCoords(coords)}</div>
       <div class="mb-2">${linesHtml}</div>
-      <button class="btn btn-primary btn-sm w-100" data-open-directions="${name}">Apri indicazioni</button>
+      <button class="btn btn-primary btn-sm w-100" data-open-directions>Apri indicazioni</button>
     </div>
   `;
 }
@@ -203,16 +203,18 @@ function renderLegend(lines) {
 }
 
 // Apre Google Maps dal popup.
-function attachDirectionsHandler(marker, coords, name) {
+function attachDirectionsHandler(marker, coords) {
   marker.on("popupopen", (event) => {
     const popupEl = event.popup?.getElement();
     if (!popupEl) return;
+
     const btn = popupEl.querySelector("[data-open-directions]");
     if (!btn) return;
+
     btn.addEventListener(
       "click",
       () => {
-        window.open(getDirectionsUrl(coords, name), "_blank", "noopener");
+        window.open(getDirectionsUrl(coords), "_blank", "noopener");
       },
       { once: true }
     );
@@ -256,6 +258,7 @@ function drawNetwork(map, coords) {
         opacity: 0.85,
         lineCap: "round",
       }).addTo(map);
+
       polyline.bindTooltip(line.name, { sticky: true });
       polylinesById.set(line.id, polyline);
     }
@@ -265,6 +268,7 @@ function drawNetwork(map, coords) {
     const linesForStation = Array.from(stationLines.get(stationName) || []).map(
       (id) => linesById.get(id)?.name || id
     );
+
     const marker = L.circleMarker([meta.coords.lat, meta.coords.lng], {
       radius: 7,
       color: "#ffffff",
@@ -273,22 +277,24 @@ function drawNetwork(map, coords) {
       fillOpacity: 0.95,
       className: "vesuviana-marker",
     }).addTo(map);
+
     meta.marker = marker;
+
+    // Popup standard Leaflet (click = apri popup)
     marker.bindPopup(buildPopupHtml(stationName, meta.coords, linesForStation), { autoPan: true });
-    marker.on("click", () => {
-      window.open(getDirectionsUrl(meta.coords, stationName), "_blank", "noopener");
-    });
-    attachDirectionsHandler(marker, meta.coords, stationName);
+
+    // Solo bottone nel popup per aprire Google Maps
+    attachDirectionsHandler(marker, meta.coords);
   });
 
   const allPoints = Array.from(markers.values()).map((m) => [m.coords.lat, m.coords.lng]);
   if (allPoints.length) {
     const bounds = L.latLngBounds(allPoints);
-    map.fitBounds(bounds.pad(0.08));
+    map.fitBounds(bounds.pad(0.01));
   }
 
   if (statusEl) {
-    statusEl.textContent = "Pronto: clicca un pallino per aprire il percorso su Google Maps.";
+    statusEl.textContent = "Pronto: clicca un pallino per vedere i dettagli (e aprire le indicazioni dal popup).";
   }
 
   const countEl = document.querySelector("#stations-count");
@@ -341,10 +347,13 @@ async function initMap() {
     maxZoom: 19,
     attribution: "&copy; OpenStreetMap contributors",
   });
-  const esriImagery = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
-    maxZoom: 18,
-    attribution: "Tiles &copy; Esri",
-  });
+  const esriImagery = L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    {
+      maxZoom: 18,
+      attribution: "Tiles &copy; Esri",
+    }
+  );
 
   cartoVoyager.addTo(map);
   L.control.layers(
@@ -365,23 +374,44 @@ async function initMap() {
     const response = await fetch(STATIONS_COORDS_PATH, { cache: "no-cache" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const coords = await response.json();
+
     const network = drawNetwork(map, coords);
     const panel = document.querySelector(".linee-lista");
     const cards = Array.from(document.querySelectorAll(".linea-card[data-linea]"));
 
-    const setActiveCard = (linea) => {
+    const selectLine = (linea) => {
+      if (!linea) return;
       cards.forEach((card) => {
         const isActive = card.dataset.linea === linea;
         card.classList.toggle("is-active", isActive);
         card.setAttribute("aria-expanded", isActive ? "true" : "false");
       });
+      setActiveLine(linea, network);
     };
 
-    const populateStations = (card, line) => {
+    const collapseAllDetails = () => {
+      cards.forEach((card) => {
+        card.classList.remove("is-expanded");
+        card.classList.remove("is-hidden");
+        const btn = card.querySelector(".btn-linea");
+        if (btn) btn.textContent = "Apri dettagli";
+      });
+    };
+
+    const expandCard = (card) => {
+      const line = network.linesById.get(card.dataset.linea);
+      collapseAllDetails();
+      cards.forEach((other) => {
+        if (other !== card) other.classList.add("is-hidden");
+      });
+      card.classList.add("is-expanded");
+
+      const btn = card.querySelector(".btn-linea");
+      if (btn) btn.textContent = "Chiudi dettagli";
+
       const container = card.querySelector("[data-linea-stazioni]");
-      if (!container || !line) {
-        return;
-      }
+      if (!container || !line) return;
+
       const items = line.stations
         .map(
           (station, index) => `
@@ -392,47 +422,14 @@ async function initMap() {
           `
         )
         .join("");
+
       container.innerHTML = `
         <h4>Fermate (${line.stations.length})</h4>
         <ul class="linea-stazioni-list">${items}</ul>
       `;
     };
 
-    const collapseAllDetails = () => {
-      cards.forEach((card) => {
-        card.classList.remove("is-expanded");
-        card.classList.remove("is-hidden");
-        const btn = card.querySelector(".btn-linea");
-        if (btn) {
-          btn.textContent = "Apri dettagli";
-        }
-      });
-    };
-
-    const expandCard = (card) => {
-      const line = network.linesById.get(card.dataset.linea);
-      collapseAllDetails();
-      cards.forEach((other) => {
-        if (other !== card) {
-          other.classList.add("is-hidden");
-        }
-      });
-      card.classList.add("is-expanded");
-      const btn = card.querySelector(".btn-linea");
-      if (btn) {
-        btn.textContent = "Chiudi dettagli";
-      }
-      populateStations(card, line);
-    };
-
-    const handleSelect = (linea) => {
-      setActiveCard(linea);
-      setActiveLine(linea, network);
-    };
-
-    if (cards.length) {
-      handleSelect(cards[0].dataset.linea);
-    }
+    if (cards.length) selectLine(cards[0].dataset.linea);
 
     // Gestione click nel pannello (stazioni e dettagli).
     panel?.addEventListener("click", (event) => {
@@ -446,31 +443,27 @@ async function initMap() {
         }
         return;
       }
+
       const button = event.target.closest(".btn-linea");
       if (button) {
         const card = button.closest(".linea-card");
         if (card) {
-          if (card.classList.contains("is-expanded")) {
-            collapseAllDetails();
-          } else {
-            expandCard(card);
-          }
+          if (card.classList.contains("is-expanded")) collapseAllDetails();
+          else expandCard(card);
         }
         return;
       }
+
       const card = event.target.closest(".linea-card");
-      if (card?.dataset.linea) {
-        handleSelect(card.dataset.linea);
-      }
+      if (card?.dataset.linea) selectLine(card.dataset.linea);
     });
+
     panel?.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        const card = event.target.closest(".linea-card");
-        if (card?.dataset.linea) {
-          event.preventDefault();
-          handleSelect(card.dataset.linea);
-        }
-      }
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const card = event.target.closest(".linea-card");
+      if (!card?.dataset.linea) return;
+      event.preventDefault();
+      selectLine(card.dataset.linea);
     });
   } catch (error) {
     console.error("Impossibile caricare le coordinate delle stazioni:", error);
