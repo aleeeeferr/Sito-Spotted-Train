@@ -17,14 +17,18 @@ Disclaimer: this project is **not affiliated** with EAV, Circumvesuviana or Unic
 ## TL;DR — Quick Start
 
 ```bash
-docker compose -f docker/docker-compose.dev.yml up -d
+# if you already have .env, skip the copy
+cp .env.example .env
+npm run generate-configs
+docker compose -f docker/docker-compose.dev.yml up -d --build
 ```
 
 - Site: http://localhost:8080
 - API: http://localhost:4000/healthz
 - Mongo Express (optional): http://localhost:8081 (admin/admin)
 
-Note: some pages (e.g. **Avvisi**) require `frontend/js/firebase-config.js` (generated from `.env`).
+Note: some pages require the generated files `frontend/js/firebase-config.js`
+and `frontend/js/app-config.js` (from `.env`).
 
 ---
 
@@ -141,20 +145,37 @@ It is the "pass" after login: if you have the token, the API recognizes you.
 
 ## Quick Start (Docker)
 
-1. Open a terminal in the project folder
-2. Start containers:
+1. Download/clone the project folder and open a terminal inside it.
+
+2. (If missing) copy the env file:
 
 ```bash
-docker compose -f docker/docker-compose.dev.yml up -d
+cp .env.example .env
 ```
 
-3. Open the site:  
+3. Generate config files (Firebase keys + frontend endpoints):
+
+```bash
+npm run generate-configs
+```
+
+This command creates:
+- `frontend/js/firebase-config.js` → **Firebase keys** used by the frontend.
+- `frontend/js/app-config.js` → **frontend endpoints** (tracking/fares).
+
+4. Start containers:
+
+```bash
+docker compose -f docker/docker-compose.dev.yml up -d --build
+```
+
+5. Open the site:  
    http://localhost:8080
 
-4. (Optional) Mongo Express:  
+6. (Optional) Mongo Express:  
    http://localhost:8081
 
-5. (Optional) API health:  
+7. (Optional) API health:  
    http://localhost:4000/healthz
 
 ---
@@ -167,6 +188,8 @@ docker compose -f docker/docker-compose.dev.yml up -d
 | api | Node/Express | 4000 |
 | mongo | MongoDB | 27017 |
 | mongo-express | Mongo UI | 8081 |
+
+Note: `mongo-express` listens on `8081` (forced in compose).
 
 ---
 
@@ -183,13 +206,23 @@ Note: dev/demo only.
 
 Frontend reads config from:
 - `frontend/js/firebase-config.js` (generated locally)
+- `frontend/js/app-config.js` (frontend endpoints, generated locally)
 
 If the file is missing or empty, some pages (e.g. **Avvisi**) will fail.
 
 ### Setup
 1. Copy `.env.example` to `.env` and fill the values.
-2. Generate the config file:
-   `node scripts/generate-firebase-config.js`
+2. Generate the config files with a single command:
+   `npm run generate-configs`
+
+### Frontend endpoint config
+If you want only the endpoint config:
+`node scripts/generate-app-config.js`
+
+Useful vars:
+- `TRAINS_ENDPOINT`
+- `UNICO_API_ENDPOINT`
+- `UNICO_PREFETCH_ENDPOINT`
 
 ---
 
@@ -217,10 +250,14 @@ Entry point: root `package.json`, server code in `frontend/js/index.js`.
 
 ### Environment variables (from docker-compose)
 - `MONGODB_URI` → `mongodb://mongo:27017/spottedtrain`
+- `TELEINDICATORI_URL` → teleindicator endpoint (optional override)
+- `TELEINDICATORI_REFERER` → teleindicator referer (optional override)
 - `JWT_SECRET` → JWT secret (demo)
 - `INITIAL_CREDIT` → starting credit (default: `300`)
 - `HOST` → `0.0.0.0`
 - `PORT` → `4000`
+
+If you run the API outside Docker, use `localhost` in `MONGODB_URI`.
 
 ### Main endpoints
 - `POST /api/auth/login`

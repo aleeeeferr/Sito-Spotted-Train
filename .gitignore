@@ -25,6 +25,7 @@ coverage/
 # SDK e config locali (non versionare)
 .gcloud/
 frontend/js/firebase-config.js
+frontend/js/app-config.js
 
 # Dati locali Docker
 mongo-data/

@@ -5,7 +5,8 @@
   "description": "API server for Spotted Train demo",
   "main": "frontend/js/index.js",
   "scripts": {
-    "start": "node frontend/js/index.js"
+    "start": "node frontend/js/index.js",
+    "generate-configs": "node scripts/generate-firebase-config.js && node scripts/generate-app-config.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

@@ -1,9 +1,13 @@
 import { TARIFFS } from "./tariffs.js";
 import { apiFetch, getToken } from "./user-dashboard.js";
 
-const API_ENDPOINT = "https://example.com/unico";
-const PREFETCH_ENDPOINT = "https://example.com/unico";
+const API_ENDPOINT = window.UNICO_API_ENDPOINT || "";
+const PREFETCH_ENDPOINT = window.UNICO_PREFETCH_ENDPOINT || "";
 const LAST_TICKET_KEY = "spotted-last-ticket";
+
+if (!API_ENDPOINT || !PREFETCH_ENDPOINT) {
+    throw new Error("Endpoint Unico Campania mancanti. Esegui npm run generate-configs.");
+}
 
 function normalizeName(value) {
     return value

@@ -6,8 +6,10 @@ import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/
 import { fetchStorage } from "./storageProxy.js";
 import { stationIdsByName, stationNameMapping, lineStations } from "../data/stations.js";
 
-const TRAINS_ENDPOINT =
-  window.TRAINS_ENDPOINT || window.TRAINS_API_BASE || "http://127.0.0.1:4000/api/trains";
+const TRAINS_ENDPOINT = window.TRAINS_ENDPOINT || window.TRAINS_API_BASE || "";
+if (!TRAINS_ENDPOINT) {
+  throw new Error("TRAINS_ENDPOINT mancante. Esegui npm run generate-configs.");
+}
 
 const firebaseConfig = window.FIREBASE_CONFIG;
 if (!firebaseConfig) {

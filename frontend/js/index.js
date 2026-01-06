@@ -12,6 +12,8 @@ const HOST = process.env.HOST || "0.0.0.0";
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/spotted";
 const JWT_SECRET = process.env.JWT_SECRET || "spotted-dev-secret";
 const INITIAL_CREDIT = Number(process.env.INITIAL_CREDIT || 300);
+const TELEINDICATORI_URL = process.env.TELEINDICATORI_URL || "";
+const TELEINDICATORI_REFERER = process.env.TELEINDICATORI_REFERER || "";
 const app = express();
 
 app.use(cors());
@@ -161,19 +163,22 @@ function parseEAVHTML(html) {
 
 // Chiamata al servizio teleindicatori EAV.
 async function fetchTeleindicatori(stazione, tipo) {
+  if (!TELEINDICATORI_URL) {
+    throw new Error("TELEINDICATORI_URL mancante");
+  }
   const params = new URLSearchParams();
   if (stazione) params.append("stazione", stazione);
   params.append("tipo", tipo);
 
   const response = await fetchImpl(
-    "https://example.com/teleindicatori/ws_getData.php",
+    TELEINDICATORI_URL,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Safari/537.36",
-        Referer: "https://example.com/teleindicatori/",
+        ...(TELEINDICATORI_REFERER ? { Referer: TELEINDICATORI_REFERER } : {}),
       },
       body: params.toString(),
     }
